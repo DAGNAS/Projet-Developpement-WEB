@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: math, sans-serif;
+    font-weight: bold;
+    background: #1cb2ec;
+    color: #333;
+    line-height: 1.6;
+    padding-bottom: 30px;
+}
+
+/* LOGO */
+.logo {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.logo img {
+    width: 1500px;
+    max-width: 95%;
+    height: auto;
+    border-radius: 60px;
+}
+
+/* CONTAINER POUR POSITIONNEMENT */
+.container {
+    position: relative;
+    display: inline-block;
+}
+
+/* CARRÉ */
+.carre {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 100px;
+    height: 100px;
+    background: red;
+    border-radius: 12px;
+    z-index: 10;
+}
+
+/* NAV */
+nav {
+    text-align: center;
+    margin: 20px 0;
+}
+
+nav a {
+    color: #0056d6;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* TITRES */
+h1 {
+    text-align: center;
+    color: #0056d6;
+    margin: 25px 0 15px 0;
+    font-size: 2rem;
+}
+
+h2 {
+    text-align: center;
+    color: #222;
+    margin: 20px 0 10px 0;
+    font-size: 1.5rem;
+}
+
+h3 {
+    text-align: center;
+    color: #333;
+    margin: 15px 0;
+    font-size: 1.3rem;
+    text-decoration: underline;
+}
+
+h4 {
+    text-align: center;
+    margin: 10px 0;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    font-style: italic;
+    padding: 12px 0;
+    background-color: #bd56fa;
+    color: white;
+    margin-top: 40px;
+}
