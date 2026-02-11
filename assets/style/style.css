@@ -86,10 +86,11 @@ header {
 
 .login h2 {
     margin-bottom: 30px;
-    font-size: 2.5rem;
+    font-size: 60px;
 }
 
 .cards {
+    height: 250px;
     display: flex;
     justify-content: space-around;
     gap: 20px;
@@ -110,7 +111,6 @@ header {
     white-space: nowrap;
 
     padding: 1em 1em;
-    height: 3em;
     line-height: 1;
 
     background: #020424;
