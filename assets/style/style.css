@@ -7,7 +7,7 @@
 
 body {
     background-image: url("../images/menu/body/background.png");
-    background-size: contain;
+    background-size:100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
