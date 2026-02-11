@@ -37,15 +37,20 @@ header {
 .header-btn {
     width: 300px;
     height: auto;
-    background: transparent;
+
     border: 2px solid orange;
-    color: orange;
-    padding: 10px 80px;
     border-radius: 30px;
     border-width: 1px;
-    cursor: pointer;
-    font-size: 30px;
+
+    padding: 10px 80px;
     margin-right: 40px;
+
+    background: transparent;
+    
+    cursor: pointer;
+    color: orange;
+    font-size: 30px;
+    
 }
 
 /* HERO */
@@ -64,7 +69,7 @@ header {
 }
 
 .hero h1 {
-    font-size: 3rem;
+    font-size: 70px;
 }
 
 /* LOGIN */
