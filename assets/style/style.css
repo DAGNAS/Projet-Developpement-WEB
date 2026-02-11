@@ -6,7 +6,12 @@
 }
 
 body {
-    background: #010529;
+    background-image: url("../images/menu/body/background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+
     color: white;
 }
 
