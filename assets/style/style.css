@@ -18,14 +18,25 @@ header {
     padding: 20px 40px;
 }
 
+.logo-image{
+    width: 500px;
+    height: auto;
+}
+
+.header-icone{
+    width: 150px;
+    height: auto;
+}
+
 .header-btn {
     width: 300px;
-    height: 70px;
+    height: auto;
     background: transparent;
     border: 2px solid orange;
     color: orange;
-    padding: 10px 40px;
+    padding: 10px 80px;
     border-radius: 30px;
+    border-width: 1px;
     cursor: pointer;
     font-size: 30px;
     margin-right: 40px;
@@ -122,13 +133,12 @@ header {
 }
 
 /* FOOTER */
-footer {
-    border-top: 2px solid orange;
-    margin: 80px;
-    padding-top: 30px;
-    text-align: center;
-}
-
-footer h2 {
-    color: orange;
+footer{
+  background-color: black;
+  color: white;
+  font-style: italic;
+  font-size: 0.8em;
+  margin-top: 50px;
+  padding: 10px;
+  text-align: center;
 }
