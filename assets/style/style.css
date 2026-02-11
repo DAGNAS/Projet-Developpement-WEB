@@ -2,7 +2,15 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: "Zalando Sans Expanded";
+}
+
+@font-face {
+    font-family: "Zalando Sans Expanded";
+    src: url("../font/Zalando_Sans_Expanded/static/ZalandoSansExpanded-Medium.ttf")
+         format("truetype");
+    font-weight: 500;
+    font-style: normal;
 }
 
 body {
@@ -62,12 +70,14 @@ header {
 .overlay {
     height: 100%;
     display: flex;
-    align-items: center;
     padding-left: 60px;
 }
 
 .hero h1 {
-    font-size: 70px;
+    font-size: 130px;
+    text-align: center;
+    text-shadow: 10px 10px 20px rgba(0,0,0,0.8);
+    padding-top: 100px;
 }
 
 /* LOGIN */
