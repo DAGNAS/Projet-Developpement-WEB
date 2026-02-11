@@ -81,13 +81,13 @@ header {
     border-radius: 30px;
     text-align: center;
 
-    background: #4b9ad6;
+    background: #0075a2;
 
 }
 
 .login h2 {
-    margin-bottom: 30px;
-    font-size: 2.5rem;
+    margin-bottom: 100px;
+    font-size: 90px
 }
 
 .cards {
@@ -134,14 +134,22 @@ header {
 }
 
 /* ABOUT */
-.about {
+.about{
+    background: white;
+    width: 90%;
+    text-align: center;
+    margin: auto;
+    border-radius: 20px;
+}
+
+.lign {
     display: flex;
     justify-content: space-around;
     padding: 80px 60px;
 }
 
 .about-text {
-    width: 45%;
+    width: 60%;
     background: #4b9ad6;
     padding: 40px;
     border-radius: 20px;
