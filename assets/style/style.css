@@ -73,65 +73,58 @@ header {
 
 /* LOGIN */
 .login {
-    width: 1220px;
+    width: 80%;
     height: 580px;
-
+    
     border-radius: 30px;
     margin: -80px auto 60px;
     padding: 40px;
-
-    background: #0b7ea4;
+    border-radius: 30px;
     text-align: center;
+
+    background: #4b9ad6;
+
 }
 
 .login h2 {
     margin-bottom: 30px;
-    font-size: 60px;
+    font-size: 2.5rem;
 }
 
 .cards {
-    height: 250px;
     display: flex;
     justify-content: space-around;
     gap: 5px;
 }
 
 .card {
-    display: inline-flex;
-    align-items: center;
+    height: 250px;
+    width: 250px;
+
+    flex: 1;
+    display: grid;
     justify-content: center;
 
-    text-decoration:none;
-    cursor: pointer;
-    
-
-    width: 250px;
-    height: 250px;
-
-    white-space: nowrap;
-
-    padding: 1em 1em;
-    line-height: 1;
+    align-items: center;
 
     background: #020424;
     color: #ffffff;
-    border: 5px solid #fff;
     border-radius: 20px;
 
-    text-transform: lowercase;
-    font-family: Arial, sans-serif;
+    text-transform: uppercase;
     font-weight: 800;
     font-size: 2rem;
+
+    text-decoration: none;
     text-align: center;
-    box-sizing: border-box;
+
+    transition: 0.3s ease;
 
 }
 
 .card:hover{
-    
-    color: #ffff00;
+    transform: scale(1.05);
 }
-
 
 /* ABOUT */
 .about {
@@ -184,4 +177,18 @@ footer{
   margin-top: 50px;
   padding: 10px;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+
+    .cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 400px;
+        font-size: 1.5rem;
+    }
 }
