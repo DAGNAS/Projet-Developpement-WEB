@@ -7,9 +7,9 @@
 
 body {
     background-image: url("../images/menu/body/background.png");
-    background-size: cover;
-    background-position: center;
+    background-size: contain;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     min-height: 100vh;
 
     color: white;
@@ -56,7 +56,6 @@ header {
 /* HERO */
 .hero {
     height: 800px;
-    background: url("hero.jpg") center/cover no-repeat;
     position: relative;
 }
 
@@ -101,8 +100,8 @@ header {
     height: 250px;
     width: 250px;
 
-    flex: 1;
-    display: grid;
+    display: felx;
+    flex-direction: column;
     justify-content: center;
 
     align-items: center;
@@ -124,6 +123,14 @@ header {
 
 .card:hover{
     transform: scale(1.05);
+}
+
+.img{
+    display: block;
+    margin: auto;
+    margin-top: 5%;
+    height: 175px;
+    width: 175px;
 }
 
 /* ABOUT */
