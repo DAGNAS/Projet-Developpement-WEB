@@ -17,6 +17,7 @@ body {
 
 /* HEADER */
 header {
+    background: #010529;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -88,38 +89,12 @@ header {
 }
 
 .card {
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    cursor: pointer;
-    justify-content: center;
-
-    width: fit-content;
-    white-space: nowrap;
-
-    padding: 1em 1em;
-    height: 3em;
-    line-height: 1;
-
     background: #020424;
-    color: #e700ff;
-    border: 5px solid #fff;
+    padding: 30px;
     border-radius: 20px;
-
+    width: 150px;
     text-transform: lowercase;
-    font-family: Arial, sans-serif;
-    font-weight: 800;
-    font-size: 2rem;
-    text-align: center;
-    box-sizing: border-box;
-
 }
-
-.card:hover{
-    background-color: red;
-    color: #ffff00;
-}
-
 
 /* ABOUT */
 .about {
