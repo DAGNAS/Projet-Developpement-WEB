@@ -43,14 +43,14 @@ header {
 }
 
 .header-btn {
-    width: 300px;
+    width: 275px;
     height: auto;
 
     border: 2px solid orange;
     border-radius: 30px;
     border-width: 1px;
 
-    padding: 10px 80px;
+    padding: 10px auto;
     margin-right: 40px;
 
     background: transparent;
@@ -58,6 +58,7 @@ header {
     cursor: pointer;
     color: orange;
     font-size: 30px;
+    text-align: center;
 
 }
 
