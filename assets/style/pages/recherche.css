@@ -1,0 +1,124 @@
+/* --- PAGE RECHERCHE --- */
+
+.search-section {
+    text-align: center;
+    padding: 60px 20px;
+    color: white;
+}
+
+.search-section h1 {
+    font-size: 3.5rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.search-bar {
+    background: #0075a2;
+    padding: 20px;
+    border-radius: 50px;
+    display: inline-flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 1000px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 15px 25px;
+    border-radius: 30px;
+    border: none;
+    font-size: 1rem;
+}
+
+.search-btn {
+    padding: 10px 30px;
+    background: orange;
+    color: #020424;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-btn:hover {
+    background: white;
+    transform: scale(1.05);
+}
+
+/* Grille de résultats */
+.results-container {
+    width: 90%;
+    margin: 40px auto;
+}
+
+.company-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.company-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    color: #020424;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.company-card:hover {
+    transform: translateY(-10px);
+}
+
+.company-logo {
+    background: #f0f0f0;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.company-logo img {
+    height: 80px;
+    width: auto;
+}
+
+.company-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.company-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #0075a2;
+}
+
+.sector {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.location {
+    font-style: italic;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.view-btn {
+    display: block;
+    padding: 10px;
+    background: #020424;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.view-btn:hover {
+    background: orange;
+}

@@ -1,0 +1,79 @@
+/* --- PAGE CONNEXION --- */
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* Centre le formulaire verticalement */
+    padding: 20px;
+}
+
+.login-form-box {
+    background: #0075a2; /* Même bleu que la section login de l'accueil */
+    width: 100%;
+    max-width: 500px;
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+.login-form-box h2 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 15px;
+    border: none;
+    font-size: 1rem;
+    background: #f4f4f4;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 30px;
+    border: 2px solid orange;
+    background: transparent;
+    color: orange;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background: orange;
+    color: #020424;
+}
+
+.form-footer {
+    margin-top: 25px;
+}
+
+.form-footer a {
+    color: #ffeb3b; /* Jaune rappelant le footer */
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.form-footer p {
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
