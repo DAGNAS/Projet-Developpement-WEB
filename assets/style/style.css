@@ -29,7 +29,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
+    padding: 10px 40px 5px 40px;
 }
 
 .logo-image{
@@ -44,7 +44,7 @@ header {
 
 .header-btn {
     width: 275px;
-    height: auto;
+    height: 80px;
 
     border: 2px solid orange;
     border-radius: 30px;
@@ -60,11 +60,12 @@ header {
     font-size: 30px;
     text-align: center;
 
+    text-decoration: none;
 }
 
 /* HERO */
 .hero {
-    height: 800px;
+    height: 600px;
     position: relative;
 }
 
@@ -75,7 +76,7 @@ header {
 }
 
 .hero h1 {
-    font-size: 130px;
+    font-size: 110px;
     text-align: center;
     text-shadow: 10px 10px 20px rgba(0,0,0,0.8);
     padding-top: 100px;
@@ -84,11 +85,11 @@ header {
 /* LOGIN */
 .login {
     width: 80%;
-    height: 580px;
+    height: auto;
 
     border-radius: 30px;
-    margin: -80px auto 60px;
-    padding: 40px;
+    margin: auto;
+    padding-top: 40px;
     text-align: center;
 
     background: #0075a2;
@@ -104,46 +105,49 @@ header {
     display: flex;
     justify-content: space-around;
     gap: 5px;
-    margin: auto 50px;
+    margin: 10px;
+    padding-bottom: 15px;
+
 }
 
 .card {
-    height: 250px;
-    width: 250px;
-
+    height: 250px; /* Force une hauteur fixe */
+    width: 250px;  /* Force une largeur fixe */
     display: flex;
     flex-direction: column;
     justify-content: center;
-
     align-items: center;
-
     background: #020424;
     color: #ffffff;
     border-radius: 30px;
-
     text-transform: uppercase;
     font-weight: 800;
-    font-size: 2rem;
-
+    font-size: 1.5rem; /* Ajusté pour éviter les débordements */
     text-decoration: none;
     text-align: center;
-
     transition: 0.3s ease;
-
+    flex-shrink: 0; /* Empêche la carte de rétrécir si l'écran est petit */
 }
 
 .card:hover{
-    transform: scale(1.05);
+    animation: pulse 0.5s ease-in-out;
+    margin-top: -10px;
 }
 
-.img{
-    display: contents;
-    margin: auto;
-    text-align: center;
-    margin: auto;
-    margin-top: 5%;
-    height: 175px;
-    width: 175px;
+.img {
+    /* REMPLACER display: contents par ceci : */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 150px; /* Zone fixe pour l'image */
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.img img {
+    max-height: 100px; /* Limite la taille de l'image elle-même */
+    width: auto;
 }
 
 /* ABOUT */
@@ -285,4 +289,87 @@ footer a:hover {
         max-width: 400px;
         font-size: 1.5rem;
     }
+}
+
+
+
+
+/* --- PAGE CONNEXION --- */
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* Centre le formulaire verticalement */
+    padding: 20px;
+}
+
+.login-form-box {
+    background: #0075a2; /* Même bleu que la section login de l'accueil */
+    width: 100%;
+    max-width: 500px;
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+.login-form-box h2 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 15px;
+    border: none;
+    font-size: 1rem;
+    background: #f4f4f4;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 30px;
+    border: 2px solid orange;
+    background: transparent;
+    color: orange;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background: orange;
+    color: #020424;
+}
+
+.form-footer {
+    margin-top: 25px;
+}
+
+.form-footer a {
+    color: #ffeb3b; /* Jaune rappelant le footer */
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.form-footer p {
+    margin-top: 10px;
+    font-size: 0.9rem;
 }

@@ -1,10 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Connexion - Job's Horizon</title>
+        <link rel="stylesheet" href="../../assets/style/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
 
-</body>
+    <body>
+        <header>
+            <img class="logo-image" src="../../assets/images/menu/header/Logo-header.png" alt="Logo">
+            <img class="header-icone" src="../../assets/images/menu/header/header-icone-1.png" alt="icone 1">
+            <img class="header-icone" src="../../assets/images/menu/header/header-icone-2.png" alt="icone 2">
+            <img class="header-icone" src="../../assets/images/menu/header/header-icone-3.png" alt="icone 3">
+            <a class="header-btn" href="../../homepage.html">-Menu-principale</a>
+        </header>
+
+        <section class="login-container">
+            <div class="login-form-box">
+                <h2>Connexion pilote</h2>
+                <form action="votre_script_authentification.php" method="POST">
+                    <div class="input-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="mail">Email</label>
+                        <input type="email" id="mail" name="mail" placeholder="Votre email" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" id="password" name="password" placeholder="••••••••" required>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Se connecter</button>
+                    
+                    <div class="form-footer">
+                        <a href="#">Mot de passe oublié / Pas encore de compte</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 - All rights reserved.</p>
+
+            <div class="footer">
+                <div class="bloc">
+                    <h3>Partenaires</h3>
+                    <ul class="partenaires">
+                        <li><a href="#">CESI, La Rochelle</a></li>
+                    </ul>
+                </div>
+
+                <div class="bloc">
+                    <h3>Contacts</h3>
+                    <a href="#" class="res">
+                        <img src="../../assets/images/menu/footer/A.png" alt="Logo">
+                        8 Rue Isabelle Autissier, Lagord
+                    </a>
+                    <a href="#" class="res">
+                        <img src="../../assets/images/menu/footer/S.png" alt="Logo">
+                        05 00 00 00 00
+                    </a>
+                    <a href="#" class="res">
+                        <img src="../../assets/images/menu/footer/E.png" alt="Logo">
+                        paul.jack@gmail.com
+                    </a>
+                    </a>
+                    <a href="#" class="res">
+                        <p>‍👨‍💼 Kaëlig CLENET</p>
+                    </a>
+                </div>
+
+                <div class="bloc">
+                    <h3>Réseaux</h3>
+                    <ul class="reseaux">
+                        <li>
+                            <a href="#" class="res">
+                                <img src="../../assets/images/menu/footer/I.png" alt="Logo">
+                                Instagram
+                            </a>
+                            <a href="#" class="res">
+                                <img src="../../assets/images/menu/footer/X.png" alt="Logo">
+                                Twitter
+                            </a>
+                            <a href="#" class="res">
+                                <img src="../../assets/images/menu/footer/T.png" alt="Logo">
+                                TikTok
+                            </a>
+                            <a href="#" class="res">
+                                <img src="../../assets/images/menu/footer/Y.png" alt="Logo">
+                                Youtube
+                            </a>
+                            <a href="#" class="res">
+                                <img src="../../assets/images/menu/footer/L.png" alt="Logo">
+                                CESI, La Rochelle
+                            </a>
+                            <a href="#" class="res">
+                                <img src="../../assets/images/menu/footer/F.png" alt="Logo">
+                                Facebook
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bloc">
+                    <h3>Mentions légales</h3>
+                    <ul class="mentions">
+                        <li><a href="#">Tu es à moi !</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </body>
 </html>
