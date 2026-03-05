@@ -23,7 +23,9 @@
     height: auto;
 
     border-radius: 30px;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 200px;
     padding-top: 40px;
     text-align: center;
 
@@ -105,4 +107,101 @@
     text-align: center;
     margin: auto;
     border-radius: 20px;
+}
+
+/* --- SECTION STATISTIQUES AMÉLIORÉE --- */
+.stat-dashboard {
+    background: white;
+    width: 90%;
+    margin: 60px auto;
+    padding: 60px 40px;
+    border-radius: 30px;
+    color: #020424;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.stat-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.stat-header h2 {
+    font-size: 3.5rem;
+    color: #0075a2;
+    margin-bottom: 15px;
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 30px;
+    background: #f8f9fa;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.stat-item.highlight {
+    background: #0075a2;
+    color: white;
+}
+
+.stat-value {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: orange;
+    margin-bottom: 10px;
+}
+
+.stat-item.highlight .stat-value {
+    color: #fff;
+}
+
+.stat-label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Barre de progression */
+.stat-footer {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.progress-container span {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.progress-bar {
+    background: #e9ecef;
+    border-radius: 50px;
+    height: 50px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, #0075a2, orange);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20px;
+    color: white;
+    font-weight: bold;
+    border-radius: 50px;
 }
