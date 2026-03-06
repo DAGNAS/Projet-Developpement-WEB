@@ -1,12 +1,72 @@
+<?php
+
+$champs_nom = 
+'<div class="input-group"> 
+    <label for="nom">Nom</label>
+    <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+</div>';
+
+$champs_pilote = 
+'<div class="input-group">
+    <label for="pilote">Votre Pilote</label>
+    <input type="text" id="pilote" name="pilote" placeholder="Votre pilote" required>
+</div>';
+
+$champs_mail = 
+'<div class="input-group">
+    <label for="mail">Adresse e-mail</label>
+    <input type="email" id="mail" name="mail" placeholder="votre@email.com" required>
+</div>';
+
+$champs_password1 = 
+'<div class="input-group">
+    <label for="password1">Mot de passe n°1</label>
+    <input type="password" id="password1" name="password1" placeholder="••••••••" required>
+</div>';
+
+$champs_password2 = 
+'<div class="input-group">
+    <label for="password2">Mot de passe n°2</label>
+    <input type="password" id="password2" name="password2" placeholder="••••••••" required>
+</div>';
+
+$error_msg = '';
+
+
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    $user = $_GET["user"];
+
+    if ($user == "admin") {
+        $list_champs = ["nom" => $champs_nom, "password1" => $champs_password1, "password2" => $champs_password2];
+    }
+    if ($user == "entreprise") {
+        $list_champs = ["nom" => $champs_nom, "mail" => $champs_mail, "password" => $champs_password1];
+    }
+    if ($user == "pilote") {
+        $list_champs = ["nom" => $champs_nom, "mail" => $champs_mail, "password" => $champs_password1];
+    }
+    if ($user == "etudiant") {
+        $list_champs = ["nom" => $champs_nom, "pilote" => $champs_pilote, "password" => $champs_password1];
+    }
+
+    if (isset($_GET["error"])) {
+        $error_msg = "Identifiants incorrects. Veuillez réessayer.";
+    }
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>Recherche d'Entreprise - Job's Horizon</title>
+        <title>Connexion - Job's Horizon</title>
         <link rel="stylesheet" href="assets/style/global/base.css">
         <link rel="stylesheet" href="assets/style/global/layout.css">
         <link rel="stylesheet" href="assets/style/global/components.css">
-        <link rel="stylesheet" href="assets/style/pages/recherche.css">
+        <link rel="stylesheet" href="assets/style/pages/login-page.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
@@ -16,72 +76,27 @@
             <img class="header-icone" src="assets/images/menu/header/header-icone-1.png" alt="icone 1">
             <img class="header-icone" src="assets/images/menu/header/header-icone-2.png" alt="icone 2">
             <img class="header-icone" src="assets/images/menu/header/header-icone-3.png" alt="icone 3">
-
-
-            <input type="checkbox" id="side-menu-check" style="display: none;">
-            <label for="side-menu-check" class="menu-opener">
-                <a class="header-btn">Mes Infos</a>
-            </label>
-
-            <nav class="sidebar">
-                <label for="side-menu-check" class="close-btn">×</label>
-                <div class="sidebar-links">
-                    <a href="#">Mes Candidatures</a>
-                    <a href="#">Ma Wishlist</a>
-                    <a href="recherche.html">Recherche</a> 
-                    <a href="#">Mon Profil</a>
-                    <hr style="border: 1px solid #0075a2; margin: 20px 0;">
-                    <a href="homepage.html" style="color: orange; font-weight: bold;">Déconnexion</a>
-                </div>
-            </nav>
+            <a class="header-btn" href="homepage.html">Menu</a>
         </header>
 
-        <section class="search-section">
-            <h1>Trouvez votre future entreprise</h1>
-            <div class="search-bar">
-                <input type="text" placeholder="Nom de l'entreprise, secteur...">
-                <input type="text" placeholder="Localisation (ex: La Rochelle)">
-                <button class="search-btn">Rechercher</button>
-            </div>
-        </section>
+        <section class="login-container">
+            <div class="login-form-box">
+                <h2><?php echo 'Connexion ' . $user; ?></h2>
+                <form action="verif.php?user=<?php echo $user; ?>" method="POST">
 
-        <section class="results-container">
-            <div class="company-grid">
-                <div class="company-card">
-                    <div class="company-logo">
-                        <img src="assets/images/menu/body/enterprise-icone.png" alt="Logo Entreprise">
-                    </div>
-                    <div class="company-info">
-                        <h3>Nom de l'Entreprise</h3>
-                        <p class="sector">Secteur : Informatique</p>
-                        <p class="location">📍 La Rochelle</p>
-                        <a href="#" class="view-btn">Voir les offres</a>
-                    </div>
-                </div>
+                    <?php foreach ($list_champs as $champ) {
+                        echo $champ;
+                    } 
+                    if (!empty($error_msg)) {
+                        echo '<p class="error-message">' . $error_msg . '</p>';
+                    } ?>
 
-                <div class="company-card">
-                    <div class="company-logo">
-                        <img src="assets/images/menu/body/enterprise-icone.png" alt="Logo Entreprise">
+                    <button type="submit" class="submit-btn">Se connecter</button>
+                    
+                    <div class="form-footer">
+                        <a href="#">Mot de passe oublié / Pas encore de compte</a>
                     </div>
-                    <div class="company-info">
-                        <h3>Tech Solutions</h3>
-                        <p class="sector">Secteur : Développement Web</p>
-                        <p class="location">📍 Lagord</p>
-                        <a href="#" class="view-btn">Voir les offres</a>
-                    </div>
-                </div>
-
-                <div class="company-card">
-                    <div class="company-logo">
-                        <img src="assets/images/menu/body/enterprise-icone.png" alt="Logo Entreprise">
-                    </div>
-                    <div class="company-info">
-                        <h3>Build It</h3>
-                        <p class="sector">Secteur : BTP / Génie Civil</p>
-                        <p class="location">📍 Aytré</p>
-                        <a href="#" class="view-btn">Voir les offres</a>
-                    </div>
-                </div>
+                </form>
             </div>
         </section>
 
@@ -151,7 +166,7 @@
                 <div class="bloc">
                     <h3>Mentions légales</h3>
                     <ul class="mentions">
-                        <li><a href="#">Tu es à moi !</a></li>
+                        <li><a href="mention-legales.html">Mentions légales</a></li>
                     </ul>
                 </div>
             </div>

@@ -77,3 +77,9 @@
     margin-top: 10px;
     font-size: 0.9rem;
 }
+
+.error-message {
+    color: red;
+    margin-top: 15px;
+    font-size: 0.9rem;
+}

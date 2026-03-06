@@ -28,6 +28,10 @@ header {
     padding: 10px auto;
     margin-right: 40px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     background: transparent;
 
     cursor: pointer;
@@ -36,6 +40,7 @@ header {
     text-align: center;
 
     text-decoration: none;
+    
 }
 
 /* FOOTER */
@@ -106,15 +111,6 @@ footer a:hover {
 
 
 /* --- SIDEBAR --- */
-.menu-opener {
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.menu-opener:hover {
-    filter: brightness(1.2);
-}
-
 .sidebar {
     position: fixed;
     top: 0;
