@@ -7,7 +7,6 @@
 .overlay {
     height: 100%;
     display: flex;
-    padding-left: 60px;
 }
 
 .hero h1 {

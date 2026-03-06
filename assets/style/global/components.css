@@ -1,6 +1,6 @@
 .card {
-    height: 250px; /* Force une hauteur fixe */
-    width: 250px;  /* Force une largeur fixe */
+    width: 23%;
+    aspect-ratio: 1 / 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,22 +13,20 @@
     font-size: 1.5rem; /* Ajusté pour éviter les débordements */
     text-decoration: none;
     text-align: center;
-    transition: 0.3s ease;
     flex-shrink: 0; /* Empêche la carte de rétrécir si l'écran est petit */
 }
 
 .card:hover{
-    animation: pulse 0.5s ease-in-out;
-    margin-top: -10px;
+    transform: translateY(-10px);
+    animation: pulse 1s ease-in-out;
 }
 
 .img {
-    /* REMPLACER display: contents par ceci : */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 150px; /* Zone fixe pour l'image */
+    height: 150px;
     width: 100%;
     margin-bottom: 10px;
 }
