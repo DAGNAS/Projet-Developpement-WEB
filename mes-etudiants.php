@@ -5,16 +5,15 @@ include "users.php";
 ?>
 
 
-
 <!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>Recherche d'Entreprise - Job's Horizon</title>
+        <title>Mon Compte - Job's Horizon</title>
         <link rel="stylesheet" href="assets/style/global/base.css">
         <link rel="stylesheet" href="assets/style/global/layout.css">
         <link rel="stylesheet" href="assets/style/global/components.css">
-        <link rel="stylesheet" href="assets/style/pages/recherche.css">
+        <link rel="stylesheet" href="assets/style/pages/mon-compte.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
@@ -46,55 +45,6 @@ include "users.php";
                 </div>
             </nav>
         </header>
-
-        <section class="search-section">
-            <h1>Trouvez votre future entreprise</h1>
-            <div class="search-bar">
-                <input type="text" placeholder="Nom de l'entreprise, secteur...">
-                <input type="text" placeholder="Localisation (ex: La Rochelle)">
-                <button class="search-btn">Rechercher</button>
-            </div>
-        </section>
-
-        <section class="results-container">
-            <div class="company-grid">
-                <div class="company-card">
-                    <div class="company-logo">
-                        <img src="assets/images/menu/body/enterprise-icone.png" alt="Logo Entreprise">
-                    </div>
-                    <div class="company-info">
-                        <h3>Nom de l'Entreprise</h3>
-                        <p class="sector">Secteur : Informatique</p>
-                        <p class="location">📍 La Rochelle</p>
-                        <a href="#" class="view-btn">Voir les offres</a>
-                    </div>
-                </div>
-
-                <div class="company-card">
-                    <div class="company-logo">
-                        <img src="assets/images/menu/body/enterprise-icone.png" alt="Logo Entreprise">
-                    </div>
-                    <div class="company-info">
-                        <h3>Tech Solutions</h3>
-                        <p class="sector">Secteur : Développement Web</p>
-                        <p class="location">📍 Lagord</p>
-                        <a href="#" class="view-btn">Voir les offres</a>
-                    </div>
-                </div>
-
-                <div class="company-card">
-                    <div class="company-logo">
-                        <img src="assets/images/menu/body/enterprise-icone.png" alt="Logo Entreprise">
-                    </div>
-                    <div class="company-info">
-                        <h3>Build It</h3>
-                        <p class="sector">Secteur : BTP / Génie Civil</p>
-                        <p class="location">📍 Aytré</p>
-                        <a href="#" class="view-btn">Voir les offres</a>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <footer>
             <p>© 2026 - All rights reserved.</p>
