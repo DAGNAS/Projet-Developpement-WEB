@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         <link rel="stylesheet" href="assets/style/global/base.css">
         <link rel="stylesheet" href="assets/style/global/layout.css">
         <link rel="stylesheet" href="assets/style/global/components.css">
-        <link rel="stylesheet" href="assets/style/pages/login-page.css">
+        <link rel="stylesheet" href="assets/style/pages/connexion.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 

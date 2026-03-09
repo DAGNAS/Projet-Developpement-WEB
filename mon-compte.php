@@ -46,6 +46,16 @@ include "users.php";
             </nav>
         </header>
 
+        <section>
+            <h1>Mon Compte</h1>
+            <p>Bienvenue sur votre compte, ici vous pouvez gérer vos informations personnelles, consulter vos offres d'emploi, suivre vos candidatures et bien plus encore. Explorez les différentes sections pour découvrir toutes les fonctionnalités disponibles pour vous.</p>
+        </section>
+
+        <section>
+            
+        </section>
+
+
         <footer>
             <p>© 2026 - All rights reserved.</p>
 
