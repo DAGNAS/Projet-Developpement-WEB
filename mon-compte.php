@@ -46,14 +46,54 @@ include "users.php";
             </nav>
         </header>
 
-        <section>
-            <h1>Mon Compte</h1>
-            <p>Bienvenue sur votre compte, ici vous pouvez gérer vos informations personnelles, consulter vos offres d'emploi, suivre vos candidatures et bien plus encore. Explorez les différentes sections pour découvrir toutes les fonctionnalités disponibles pour vous.</p>
-        </section>
+        <main class="account-container">
+            <section class="profile-header">
+                <h1>Mon Profil</h1>
+                <p>Bienvenue dans votre espace personnel, gérez vos informations et vos préférences.</p>
+            </section>
 
-        <section>
-            
-        </section>
+            <div class="profile-grid">
+                <div class="profile-card">
+                    <div class="card-header">
+                        <img src="assets/images/menu/body/student-icone.png" alt="Icone Profil">
+                        <h2>Informations Personnelles</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="info-group">
+                            <label>Nom complet</label>
+                            <p>Marc Dupont</p> </div>
+                        <div class="info-group">
+                            <label>Adresse Mail</label>
+                            <p>votre@email.com</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Rôle</label>
+                            <span class="badge"><?php echo ucfirst($_GET['user'] ?? 'Utilisateur'); ?></span>
+                        </div>
+                        <button class="edit-btn">Modifier mes infos</button>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="card-header">
+                        <img src="assets/images/menu/header/header-icone-2.png" alt="Icone Activité">
+                        <h2>Mon Activité</h2>
+                    </div>
+                    <div class="card-content activity">
+                        <div class="stat-mini">
+                            <span class="number">12</span>
+                            <span class="label">Candidatures</span>
+                        </div>
+                        <div class="stat-mini">
+                            <span class="number">5</span>
+                            <span class="label">Entreprises favorites</span>
+                        </div>
+                        <hr>
+                        <p class="last-login">Dernière connexion : Aujourd'hui à 10:45</p>
+                    </div>
+                </div>
+            </div>
+        </main>
 
 
         <footer>
