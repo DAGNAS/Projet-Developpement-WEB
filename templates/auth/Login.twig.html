@@ -1,0 +1,30 @@
+{% extends "HomeBase.twig.html" %}
+
+
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="assets/style/pages/Login.css">
+{% endblock %}
+
+
+{% block content %}
+<section class="login-container">
+    <div class="login-form-box">
+        <h2>Connexion {{ type_user }}</h2>
+        <form action="?uri=submit_login" method="POST">
+            {% for champ in champs %}
+                <div class="input-group">
+                    <label for="{{ champ.name }}">{{ champ.name }}</label>
+                    <input type="{{ champ.type }}" name="{{ champ.name }}" placeholder="{{ champ.placeholder }}" required>
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="submit-btn">Se connecter</button>
+            
+            <div class="form-footer">
+                <a href="#">Mot de passe oublié / Pas encore de compte</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

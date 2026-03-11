@@ -1,5 +1,5 @@
 .card {
-    width: 23%;
+    width: 330px;
     aspect-ratio: 1 / 1;
     display: flex;
     flex-direction: column;
@@ -14,6 +14,8 @@
     text-decoration: none;
     text-align: center;
     flex-shrink: 0; /* Empêche la carte de rétrécir si l'écran est petit */
+    border: none; 
+    cursor: pointer;
 }
 
 .card:hover{

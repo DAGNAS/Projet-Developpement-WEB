@@ -1,0 +1,124 @@
+{% extends "HomeBase.twig.html" %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="overlay">
+        <h1>Recherchez votre stage, alternance, entreprise</h1>
+    </div>
+</section>
+
+<section class="login" id="login-box">
+    <h2>Connectez-vous</h2>
+    <div class="cards">
+        <form action="?uri=login" method="post">
+            <input type="hidden" name="login" value="admin">
+            <button type="submit" class="card">
+                <div class="img"><img src="assets/images/menu/body/admin-icone.png" alt="admin-icone">ADMIN</div>
+            </button>
+        </form>
+        
+        <form action="?uri=login" method="post">
+            <input type="hidden" name="login" value="company">
+            <button type="submit" class="card">
+                <div class="img"><img src="assets/images/menu/body/enterprise-icone.png" alt="enterprise-icone">ENTREPRISE</div>
+            </button>
+        </form>
+
+        <form action="?uri=login" method="post">
+            <input type="hidden" name="login" value="pilote">
+            <button type="submit" class="card">
+                <div class="img"><img src="assets/images/menu/body/teacher-icone.png" alt="teacher-icone">PILOTE</div>
+            </button>
+        </form>
+
+        <form action="?uri=login" method="post">
+            <input type="hidden" name="login" value="student">
+            <button type="submit" class="card">
+                <div class="img"><img src="assets/images/menu/body/student-icone.png" alt="student-icone">ÉTUDIANT</div>
+            </button>
+        </form>
+    </div>
+</section>
+
+<section class="stat-dashboard">
+    <div class="stat-header">
+        <h2>Job's Horizon en chiffres</h2>
+        <p>Notre plateforme accompagne la réussite de milliers d'étudiants et d'entreprises chaque année.</p>
+    </div>
+
+    <div class="stat-grid">
+        <div class="stat-item">
+            <div class="stat-value" data-target="1500">1500+</div>
+            <div class="stat-label">Offres de stages</div>
+        </div>
+        <div class="stat-item highlight">
+            <div class="stat-value" data-target="99">99%</div>
+            <div class="stat-label">Taux de satisfaction</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" data-target="450">450</div>
+            <div class="stat-label">Entreprises partenaires</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" data-target="12">12</div>
+            <div class="stat-label">Secteurs d'activité</div>
+        </div>
+    </div>
+
+    <div class="stat-footer">
+        <div class="progress-container">
+            <span>Étudiants ayant trouvé une alternance</span>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 85%;">85%</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about">
+    <div class="lign">
+        <div class="about-text">
+            <h2>Pourquoi choisir notre site ?</h2>
+            <p>
+                nfoj oipsj poih poih sopdh puh pdsiuohfp  
+                ihspohep mlsji moo opj pioopji opj oijpopji  
+                op sdgu bbe s dfe g d sf e fz er ze fjd lj j sbdj  
+                jhbfojijhbsdin pihps p ihsf giufdhgiuh sdfiuhighip  
+                ipufdhu siuhfiduhgi ouhsdioh foiug soiuhfgoi  
+                uhdfosiuhf oiuhdfsoiuhfoigu s huspuh pihsu peiu
+            </p>
+        </div>
+
+        <div class="stat-circle">
+            <div class="circle">
+                <span>99%</span>
+                <p>d’étudiant ont trouvé<br>leur stage de leur rêve</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="lign">
+        <div class="stat-circle">
+            <div class="circle">
+                <span>99%</span>
+                <p>d’étudiant ont trouvé<br>leur stage de leur rêve</p>
+            </div>
+        </div>
+
+        <div class="about-text">
+            <h2>Qui sommes nous ?</h2>
+            <p>
+                nfoj oipsj poih poih sopdh puh pdsiuohfp  
+                ihspohep mlsji moo opj pioopji opj oijpopji  
+                op sdgu bbe s dfe g d sf e fz er ze fjd lj j sbdj  
+                jhbfojijhbsdin pihps p ihsf giufdhgiuh sdfiuhighip  
+                ipufdhu siuhfiduhgi ouhsdioh foiug soiuhfgoi  
+                uhdfosiuhf oiuhdfsoiuhfoigu s huspuh pihsu peiu
+            </p>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

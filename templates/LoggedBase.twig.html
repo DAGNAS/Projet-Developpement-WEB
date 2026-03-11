@@ -1,0 +1,31 @@
+{% extends "HomeBase.twig.html" %}
+
+
+{% block header %}
+<header>
+    <img class="logo-image" src="assets/images/menu/header/Logo-header.png" alt="Logo">
+    <img class="header-icone" src="assets/images/menu/header/header-icone-1.png" alt="icone 1">
+    <img class="header-icone" src="assets/images/menu/header/header-icone-2.png" alt="icone 2">
+    <img class="header-icone" src="assets/images/menu/header/header-icone-3.png" alt="icone 3">
+
+
+    <input type="checkbox" id="side-menu-check" style="display: none;">
+    <label for="side-menu-check" class="header-btn">
+        <a >Mes Infos</a>
+    </label>
+
+    <nav class="sidebar">
+        <label for="side-menu-check" class="close-btn">×</label>
+        <div class="sidebar-links">
+            {% for i in 0..(liste_page|length - 1) %}
+                <a href="{{ liste_page[i] }}">{{ liste_nom_page[i] }}</a>
+            {% endfor %}
+            <hr style="border: 1px solid #0075a2; margin: 20px 0;">
+            <a href="homepage.html" style="color: orange; font-weight: bold;">Déconnexion</a>
+        </div>
+    </nav>
+</header>
+{% endblock %}
+
+{% block content %}
+{% endblock %}

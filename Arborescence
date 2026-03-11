@@ -1,0 +1,28 @@
+/Job-Horizon
+├── /assets (ou static)      # Images, fonts, CSS, JS, etc.
+├── /src
+│   ├── /Core                # Le coeur du système
+│   │   └── Database.php     # Connexion PDO
+│   ├── /Controllers         # Les serveurs
+│   │   ├── Controller.php          # Classe de base pour les contrôleurs
+│   │   ├── AuthController.php      # Gère Login, Logout et Session
+│   │   ├── StudentController.php   # Gère les pages de l'étudiant
+│   │   ├── PilotController.php     # Gère les pages du pilote
+│   │   ├── AdminController.php     # Gère l'administration
+│   │   └── CompanyController.php   # Gère les pages entreprise
+│   └── /Models              # Les données
+│       ├── Model.php               # Classe de base pour les modèles
+│       ├── UserModel.php           # Infos communes (ID, nom, mail, rôle)
+│       ├── OfferModel.php          # Tout sur les stages et la recherche
+│       ├── ApplicationModel.php    # Candidatures + Wishlist
+│       └── StatModel.php           # Les chiffres pour la homepage
+├── /templates               # Twig templates
+│   ├── base.twig.html       # La structure commune (Header/Footer)
+│   ├── /auth                # connexion.twig.html
+│   ├── /student             # mes-candidatures, wishlist
+│   ├── /common              # recherche, homepage, mentions-legales, mon-compte
+│   │   /pilote              # mes-etudiants
+│   └── /admin               # info-systeme
+├── /vendor             # Les dépendances (Twig, etc.)
+├── index.php           # Le Routeur (le seul fichier accessible au début)
+└── .htaccess           # Pour rediriger proprement vers index.php
