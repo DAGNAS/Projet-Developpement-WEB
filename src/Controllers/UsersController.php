@@ -59,8 +59,7 @@ class UsersController extends Controller {
     }
 
     public function LegalMentionPage() {
-        $nav = $this->Dashboard();
-        echo $this->templateEngine->render('common/LegalMention.twig.html', $nav);
+        echo $this->templateEngine->render('common/LegalMention.twig.html');
     }
 
     public function Logout() {
