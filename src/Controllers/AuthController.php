@@ -14,6 +14,10 @@ class AuthController extends Controller {
         echo $this->templateEngine->render('common/HomePage.twig.html');
     }
 
+    public function LegalMentionPage() {
+        echo $this->templateEngine->render('common/LegalMention.twig.html');
+    }
+
     public function LoginPage() {
         if(!isset($_POST['login'])) {
             header('Location: ?uri=/');

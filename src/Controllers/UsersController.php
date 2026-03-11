@@ -32,6 +32,42 @@ class UsersController extends Controller {
         $nav = $this->Dashboard();
         echo $this->templateEngine->render('common/MyAccount.twig.html', $nav);
     }
+
+    public function MyWishListPage() {
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('student/MyWishlist.twig.html', $nav);
+    }
+
+    public function MyApplicationsPage() {
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('student/MyApplications.twig.html', $nav);
+    }
+
+    public function MyStudentPage() {
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('pilote/MyStudent.twig.html', $nav);
+    }
+
+    public function MyPostPage() {
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('company/MyPost.twig.html', $nav);
+    }
+
+    public function SystemInfoPage() {
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('admin/SystemInfo.twig.html', $nav);
+    }
+
+    public function LegalMentionPage() {
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('common/LegalMention.twig.html', $nav);
+    }
+
+    public function Logout() {
+        session_start();
+        session_destroy();
+        header('Location: index.php?uri=/');
+    }
 }
 
 ?>

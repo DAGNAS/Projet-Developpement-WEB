@@ -1,51 +1,33 @@
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <title>Mentions Légales - Job's Horizon</title>
-        <link rel="stylesheet" href="assets/style/global/base.css">
-        <link rel="stylesheet" href="assets/style/global/layout.css">
-        <link rel="stylesheet" href="assets/style/pages/mention-legale.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+{% extends "LoggedBase.twig.html" %}
 
-    <body>
-        <header>
-            <img class="logo-image" src="assets/images/menu/header/Logo-header.png" alt="Logo">
-            <img class="header-icone" src="assets/images/menu/header/header-icone-1.png" alt="icone 1">
-            <img class="header-icone" src="assets/images/menu/header/header-icone-2.png" alt="icone 2">
-            <img class="header-icone" src="assets/images/menu/header/header-icone-3.png" alt="icone 3">
-            <a class="header-btn" href="homepage.html">Menu</a>
-        </header>
+{% block stylesheets %}
+    <link rel="stylesheet" href="assets/style/pages/LegalMention.css">
+{% endblock %}
 
-        <section class="legal-container">
-            <h1>Mentions Légales</h1>
-            
-            <div class="legal-section">
-                <h2>1. Éditeur du site</h2>
-                <p>Le site <strong>Job's Horizon</strong> est édité par l'équipe de développement du CESI La Rochelle.</p>
-                <p>Responsable de la publication : Kaëlig CLENET.</p>
-                <p>Adresse : 8 Rue Isabelle Autissier, 17140 Lagord.</p>
-            </div>
+{% block content %}
+<section class="legal-container">
+    <h1>Mentions Légales</h1>
+    
+    <div class="legal-section">
+        <h2>1. Éditeur du site</h2>
+        <p>Le site <strong>Job's Horizon</strong> est édité par l'équipe de développement du CESI La Rochelle.</p>
+        <p>Responsable de la publication : Kaëlig CLENET.</p>
+        <p>Adresse : 8 Rue Isabelle Autissier, 17140 Lagord.</p>
+    </div>
 
-            <div class="legal-section">
-                <h2>2. Hébergement</h2>
-                <p>Ce site est hébergé localement dans le cadre d'un projet pédagogique (Environnement WAMP/XAMPP).</p>
-            </div>
+    <div class="legal-section">
+        <h2>2. Hébergement</h2>
+        <p>Ce site est hébergé localement dans le cadre d'un projet pédagogique (Environnement WAMP/XAMPP).</p>
+    </div>
 
-            <div class="legal-section">
-                <h2>3. Propriété intellectuelle</h2>
-                <p>L'ensemble de ce site relève de la législation française et internationale sur le droit d'auteur et la propriété intellectuelle. Tous les droits de reproduction sont réservés.</p>
-            </div>
+    <div class="legal-section">
+        <h2>3. Propriété intellectuelle</h2>
+        <p>L'ensemble de ce site relève de la législation française et internationale sur le droit d'auteur et la propriété intellectuelle. Tous les droits de reproduction sont réservés.</p>
+    </div>
 
-            <div class="legal-section">
-                <h2>4. Protection des données (RGPD)</h2>
-                <p>Conformément à la loi, vous disposez d'un droit d'accès, de modification et de suppression des données vous concernant. Les données collectées via le formulaire de connexion ne sont utilisées que pour la gestion de votre session utilisateur.</p>
-            </div>
-        </section>
-
-        <footer>
-            <p>© 2026 - All rights reserved.</p>
-        </footer>
-    </body>
-</html>
+    <div class="legal-section">
+        <h2>4. Protection des données (RGPD)</h2>
+        <p>Conformément à la loi, vous disposez d'un droit d'accès, de modification et de suppression des données vous concernant. Les données collectées via le formulaire de connexion ne sont utilisées que pour la gestion de votre session utilisateur.</p>
+    </div>
+</section>
+{% endblock %}

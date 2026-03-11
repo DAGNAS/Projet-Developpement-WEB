@@ -8,18 +8,18 @@ class UsersModel extends Model {
     public function getNavLinks($role) {
         $links = [
         'admin' => [
-            ['nom' => 'Gérer Utilisateurs', 'lien' => '?uri=admin/users'],
-            ['nom' => 'Stats Système', 'lien' => '?uri=admin/stats']
+            ['nom' => 'Recherche', 'lien' => '?uri=search'],
+            ['nom' => 'Stats Système', 'lien' => '?uri=system']
         ],
         'company' => [
             ['nom' => 'Recherche', 'lien' => '?uri=search'],
-            ['nom' => 'Mes Offres', 'lien' => '?uri=company/offers'],
-            ['nom' => 'Mon Compte', 'lien' => '?uri=company/profile']
+            ['nom' => 'Mes Offres', 'lien' => '?uri=my-posts'],
+            ['nom' => 'Mon Compte', 'lien' => '?uri=profile']
         ],
         'pilote' => [
             ['nom' => 'Recherche', 'lien' => '?uri=search'],
-            ['nom' => 'Mes Étudiants', 'lien' => '?uri/pilote/students'],
-            ['nom' => 'Mon Compte', 'lien' => '?uri=pilote/profile']
+            ['nom' => 'Mes Étudiants', 'lien' => '?uri=my-students'],
+            ['nom' => 'Mon Compte', 'lien' => '?uri=profile']
         ],
         'student' => [
             ['nom' => 'Recherche', 'lien' => '?uri=search'],

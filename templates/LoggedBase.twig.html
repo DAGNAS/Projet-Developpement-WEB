@@ -21,7 +21,9 @@
                 <a href="{{ liste_page[i] }}">{{ liste_nom_page[i] }}</a>
             {% endfor %}
             <hr style="border: 1px solid #0075a2; margin: 20px 0;">
-            <a href="homepage.html" style="color: orange; font-weight: bold;">Déconnexion</a>
+            <form action="?uri=logout" method="post">
+                <button type="submit" style="background: none; border: none; color: orange; font-weight: bold; cursor: pointer;">Déconnexion</button>
+            </form>
         </div>
     </nav>
 </header>

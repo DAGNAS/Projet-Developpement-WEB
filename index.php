@@ -19,7 +19,7 @@ $AuthController = new AuthController($twig);
 $UsersController = new UsersController($twig);
 
 switch ($uri) {
-    // GLOBAL
+    // AUTH
     case '/':
         $AuthController->HomePage();
         break;
@@ -34,9 +34,29 @@ switch ($uri) {
     case 'search':
         $UsersController->SearchPage();
         break;
-    
     case 'profile':
         $UsersController->MyAccountPage();
+        break;
+    case 'wishlist':
+        $UsersController->MyWishListPage();
+        break;
+    case 'applications':
+        $UsersController->MyApplicationsPage();
+        break;
+    case 'my-students':
+        $UsersController->MyStudentPage();
+        break;
+    case 'my-posts':
+        $UsersController->MyPostPage();
+        break;
+    case 'system':
+        $UsersController->SystemInfoPage();
+        break;
+    case 'legal-mentions':
+        $UsersController->LegalMentionPage();
+        break;
+    case 'logout':
+        $UsersController->Logout();
         break;
 
     default:
