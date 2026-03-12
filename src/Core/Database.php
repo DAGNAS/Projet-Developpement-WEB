@@ -5,4 +5,8 @@ namespace App\Models;
  */
 interface Database {
     
+    public function getAllCompany();
+    
 }
+
+?>
