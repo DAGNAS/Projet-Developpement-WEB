@@ -18,42 +18,20 @@
 </section>
 
 <section class="results-container">
-    <div class="company-grid">
-        <div class="company-card">
-            <div class="company-logo">
-                <img src="assets/images/menu/body/enterprise-icone.png" alt="Logo Entreprise">
-            </div>
-            <div class="company-info">
-                <h3>Nom de l'Entreprise</h3>
-                <p class="sector">Secteur : Informatique</p>
-                <p class="location">📍 La Rochelle</p>
-                <a href="#" class="view-btn">Voir les offres</a>
-            </div>
-        </div>
-
-        <div class="company-card">
-            <div class="company-logo">
-                <img src="assets/images/menu/body/enterprise-icone.png" alt="Logo Entreprise">
-            </div>
-            <div class="company-info">
-                <h3>Tech Solutions</h3>
-                <p class="sector">Secteur : Développement Web</p>
-                <p class="location">📍 Lagord</p>
-                <a href="#" class="view-btn">Voir les offres</a>
+    {% for company in companies %}
+        <div class="company-grid">
+            <div class="company-card">
+                <div class="company-logo">
+                    <img src="assets/images/menu/body/enterprise-icone.png" alt="Logo Entreprise">
+                </div>
+                <div class="company-info">
+                    <h3>{{ company.nom }}</h3>
+                    <p class="sector">Secteur : {{ company.secteur }}</p>
+                    <p class="location">📍 {{ company.localisation }}</p>
+                    <a href="#" class="view-btn">Voir les offres</a>
+                </div>
             </div>
         </div>
-
-        <div class="company-card">
-            <div class="company-logo">
-                <img src="assets/images/menu/body/enterprise-icone.png" alt="Logo Entreprise">
-            </div>
-            <div class="company-info">
-                <h3>Build It</h3>
-                <p class="sector">Secteur : BTP / Génie Civil</p>
-                <p class="location">📍 Aytré</p>
-                <a href="#" class="view-btn">Voir les offres</a>
-            </div>
-        </div>
-    </div>
+    {% endfor %}
 </section>
 {% endblock %}

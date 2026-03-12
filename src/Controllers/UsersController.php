@@ -3,12 +3,13 @@
 namespace App\Controllers;
 
 use App\Models\UsersModel;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Models\SearchModel;
 
 class UsersController extends Controller {
 
     public function __construct($templateEngine) {
-        $this->model = new UsersModel();
+        $this->UsersModel = new UsersModel();
+        $this->SearchModel = new SearchModel();
         $this->templateEngine = $templateEngine;
     }
 
@@ -16,46 +17,43 @@ class UsersController extends Controller {
         session_start();
         $user = $_SESSION['user_role'];
 
-        $navLinks = $this->model->getNavLinks($user);
-        return [
-            'liste_page' => array_column($navLinks, 'lien'),
-            'liste_nom_page' => array_column($navLinks, 'nom'),
-        ];
+        return $this->UsersModel->getNavLinks($user);
     }
 
     public function SearchPage() {
         $nav = $this->Dashboard();
-        echo $this->templateEngine->render('common/Search.twig.html', $nav);
+        $companies = $this->SearchModel->ListAllCompany();
+        echo $this->templateEngine->render('common/Search.twig.html', ['nav' => $nav, 'companies' => $companies]);
     }
     
     public function MyAccountPage() {
         $nav = $this->Dashboard();
-        echo $this->templateEngine->render('common/MyAccount.twig.html', $nav);
+        echo $this->templateEngine->render('common/MyAccount.twig.html', ['nav' => $nav]);
     }
 
     public function MyWishListPage() {
         $nav = $this->Dashboard();
-        echo $this->templateEngine->render('student/MyWishlist.twig.html', $nav);
+        echo $this->templateEngine->render('student/MyWishlist.twig.html', ['nav' => $nav]);
     }
 
     public function MyApplicationsPage() {
         $nav = $this->Dashboard();
-        echo $this->templateEngine->render('student/MyApplications.twig.html', $nav);
+        echo $this->templateEngine->render('student/MyApplications.twig.html', ['nav' => $nav]);
     }
 
     public function MyStudentPage() {
         $nav = $this->Dashboard();
-        echo $this->templateEngine->render('pilote/MyStudent.twig.html', $nav);
+        echo $this->templateEngine->render('pilote/MyStudent.twig.html', ['nav' => $nav]);
     }
 
     public function MyPostPage() {
         $nav = $this->Dashboard();
-        echo $this->templateEngine->render('company/MyPost.twig.html', $nav);
+        echo $this->templateEngine->render('company/MyPost.twig.html', ['nav' => $nav]);
     }
 
     public function SystemInfoPage() {
         $nav = $this->Dashboard();
-        echo $this->templateEngine->render('admin/SystemInfo.twig.html', $nav);
+        echo $this->templateEngine->render('admin/SystemInfo.twig.html', ['nav' => $nav]);
     }
 
     public function LegalMentionPage() {

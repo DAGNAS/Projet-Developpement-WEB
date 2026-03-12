@@ -17,8 +17,8 @@
     <nav class="sidebar">
         <label for="side-menu-check" class="close-btn">×</label>
         <div class="sidebar-links">
-            {% for i in 0..(liste_page|length - 1) %}
-                <a href="{{ liste_page[i] }}">{{ liste_nom_page[i] }}</a>
+            {% for item in nav %}
+                <a href="{{ item.lien }}">{{ item.nom }}</a>
             {% endfor %}
             <hr style="border: 1px solid #0075a2; margin: 20px 0;">
             <form action="?uri=logout" method="post">

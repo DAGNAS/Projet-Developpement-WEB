@@ -1,5 +1,5 @@
 <?php
-namespace App\Models;
+namespace App\Core;
 /**
  * This interface represents a database.
  */
