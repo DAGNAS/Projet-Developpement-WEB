@@ -38,9 +38,8 @@ class SQLDatabase implements Database {
      */
     public function getAllCompany()
     {
-        $stmt = $this->database->prepare("SELECT * FROM company");
-        $stmt->execute();
-        $liste = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->database->query("SELECT * FROM company");
+        $liste = $stmt->fetchAll();
         return $liste;
     }
 
