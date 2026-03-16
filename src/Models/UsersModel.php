@@ -3,7 +3,18 @@
 
 namespace App\Models;
 
+use App\Core\SQLDatabase;
+
+
 class UsersModel extends Model {
+
+    public function __construct($database = null) {
+        if(is_null($database)) {
+            $this->database = new SQLDatabase();
+        } else {
+            $this->database = $database;
+        }
+    }
 
     public function getNavLinks($role) {
         $links = [
@@ -29,6 +40,10 @@ class UsersModel extends Model {
         ]
         ];
         return $links[$role];
+    }
+
+    public function getUserInfoByMail($userEmail) {
+        return $this->database->getUserInfoByMail($userEmail);
     }
 }
 

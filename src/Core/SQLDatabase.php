@@ -43,6 +43,12 @@ class SQLDatabase implements Database {
         return $liste;
     }
 
+    public function getUserInfoByMail($userEmail){
+        $stmt = $this->database->prepare("SELECT * FROM test_users WHERE email = :email");
+        $stmt->execute(['email' => $userEmail]);
+        return $stmt->fetch();
+    }
+
     // ATTENTION : Tu dois obligatoirement implémenter ICI toutes les fonctions 
     // qui sont listées dans ton fichier Database.php (ex: find, save, delete...)
     // Sinon tu auras une erreur "Class contains abstract methods"

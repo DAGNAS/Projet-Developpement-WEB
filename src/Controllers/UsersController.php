@@ -28,7 +28,8 @@ class UsersController extends Controller {
     
     public function MyAccountPage() {
         $nav = $this->Dashboard();
-        echo $this->templateEngine->render('common/MyAccount.twig.html', ['nav' => $nav]);
+        $userInfo = $this->UsersModel->getUserInfoByMail($_SESSION['user_id']);
+        echo $this->templateEngine->render('common/MyAccount.twig.html', ['nav' => $nav, 'userInfo' => $userInfo]);
     }
 
     public function MyWishListPage() {

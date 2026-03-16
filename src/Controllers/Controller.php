@@ -12,6 +12,7 @@ abstract class Controller {
      */
     protected $UsersModel = null;
     protected $SearchModel = null;
+    protected $SecurityModel = null;
 
     /**
      * The template engine used by the controller.

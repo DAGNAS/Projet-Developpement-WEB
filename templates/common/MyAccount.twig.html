@@ -26,27 +26,27 @@
 
                 <div class="info-row">
                     <span class="info-label">Nom complet</span>
-                    <span class="info-value">Jean Marc</span>
+                    <span class="info-value">{{ userInfo.prenom }} {{ userInfo.nom }}</span>
                 </div>
 
                 <div class="info-row">
                     <span class="info-label">Adresse email</span>
-                    <span class="info-value">{{ user.email }}</span>
+                    <span class="info-value">{{ userInfo.email }}</span>
                 </div>
 
                 <div class="info-row">
                     <span class="info-label">Titre</span>
-                    <span class="info-value role-badge">{{ user.role }}</span>
+                    <span class="info-value role-badge">{{ userInfo.role }}</span>
                 </div>
 
                 <div class="info-row">
                     <span class="info-label">Centre</span>
-                    <span class="info-value">{{ user.campus }}</span>
+                    <span class="info-value">{{ userInfo.ville }}</span>
                 </div>
 
                 <div class="info-row">
                     <span class="info-label">Date de création du compte</span>
-                    <span class="info-value">{{ user.created_at|date("d/m/Y") }}</span>
+                    <span class="info-value">{{ userInfo.created_at|date("d/m/Y") }}</span>
                 </div>
 
             </div>
