@@ -15,6 +15,8 @@ if (isset($_GET['uri'])) {
     $uri = '/';
 }
 
+
+
 $AuthController = new AuthController($twig);
 $UsersController = new UsersController($twig);
 

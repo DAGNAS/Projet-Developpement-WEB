@@ -38,7 +38,7 @@ class SQLDatabase implements Database {
      */
     public function getAllCompany()
     {
-        $stmt = $this->database->query("SELECT * FROM company");
+        $stmt = $this->database->query("SELECT * FROM entreprise");
         $liste = $stmt->fetchAll();
         return $liste;
     }

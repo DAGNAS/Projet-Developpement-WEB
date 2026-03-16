@@ -1,140 +1,203 @@
-/* --- LAYOUT DU COMPTE --- */
 .account-container {
     max-width: 1100px;
-    margin: 50px auto;
+    margin: 0 auto;
     padding: 20px;
-    min-height: 60vh;
 }
 
-.profile-header {
-    text-align: center;
-    margin-bottom: 40px;
-    color: white;
+/* HEADER */
+
+.account-header {
+    margin-bottom: 30px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 20px;
 }
 
-.profile-header h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    color: orange;
+.account-header h1 {
+    margin-bottom: 5px;
 }
 
-/* --- GRILLE DES CARTES --- */
-.profile-grid {
+/* GRID */
+
+.account-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 30px;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 25px;
 }
 
-.profile-card {
-    background: white;
-    border-radius: 25px;
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease;
+/* CARD */
+
+.account-card {
+    background: #0075a2;
+    color: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
-.profile-card:hover {
-    transform: translateY(-5px);
-}
+/* HEADER CARD */
 
 .card-header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 15px;
     margin-bottom: 20px;
-}
-
-.card-header img {
-    width: 50px;
-    height: 50px;
 }
 
 .card-header h2 {
-    color: #0075a2;
-    font-size: 1.5rem;
+    margin: 0;
 }
 
-/* --- CONTENU DES INFOS --- */
-.info-group {
-    margin-bottom: 15px;
+/* INFO UTILISATEUR */
+
+.account-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-.info-group label {
-    display: block;
-    color: #666;
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 8px;
+}
+
+.info-label {
     font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.info-value {
     font-weight: bold;
-    text-transform: uppercase;
 }
 
-.info-group p {
-    font-size: 1.2rem;
-    color: #020424;
-    font-weight: 500;
-}
+/* BADGE ROLE */
 
-.badge {
-    display: inline-block;
-    background: #0075a2;
-    color: white;
-    padding: 5px 15px;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    margin-top: 5px;
-}
-
-.edit-btn {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    border: 2px solid #0075a2;
-    background: transparent;
+.role-badge {
+    background: white;
     color: #0075a2;
-    border-radius: 10px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
     font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
 }
 
-.edit-btn:hover {
-    background: #0075a2;
-    color: white;
-}
+/* ACTIONS */
 
-/* --- STATS MINI --- */
-.activity {
-    text-align: center;
-}
-
-.stat-mini {
-    display: inline-block;
-    width: 45%;
-    margin-bottom: 20px;
-}
-
-.stat-mini .number {
-    display: block;
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: orange;
-}
-
-.stat-mini .label {
-    color: #666;
-    font-size: 0.9rem;
-}
-
-.last-login {
+.card-actions {
     margin-top: 20px;
-    font-style: italic;
-    color: #888;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .profile-grid {
+/* BOUTONS */
+
+.btn-primary {
+    background: white;
+    color: #0075a2;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background: #f2f2f2;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+/* STATS */
+
+.stats-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.stat-box {
+    padding: 15px;
+    background: #f8fbff;
+    border-radius: 10px;
+    text-align: center;
+    color: #333;
+}
+
+.stat-number {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #0075a2;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+}
+
+/* ACTIVITÉ */
+
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.activity-item {
+    background: rgba(255,255,255,0.15);
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.activity-date {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.no-activity {
+    opacity: 0.8;
+}
+
+/* SECURITE */
+
+.security-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.security-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status-enabled {
+    background: #d4edda;
+    color: #155724;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+
+    .account-grid {
         grid-template-columns: 1fr;
     }
+
+    .info-row {
+        flex-direction: column;
+        gap: 5px;
+    }
+
 }

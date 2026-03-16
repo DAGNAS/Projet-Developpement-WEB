@@ -1,56 +1,147 @@
 {% extends "LoggedBase.twig.html" %}
 
-
-
 {% block stylesheets %}
-    <link rel="stylesheet" href="assets/style/pages/MyAccount.css">
+<link rel="stylesheet" href="assets/style/pages/MyAccount.css">
 {% endblock %}
 
 {% block content %}
-<section class="profile-header">
-    <h1>Mon Profil</h1>
-    <p>Bienvenue dans votre espace personnel, gérez vos informations et vos préférences.</p>
-</section>
 
-<div class="profile-grid">
-    <div class="profile-card">
-        <div class="card-header">
-            <img src="assets/images/menu/body/student-icone.png" alt="Icone Profil">
-            <h2>Informations Personnelles</h2>
-        </div>
-        <div class="card-content">
-            <div class="info-group">
-                <label>Nom complet</label>
-                <p>Marc Dupont</p> </div>
-            <div class="info-group">
-                <label>Adresse Mail</label>
-                <p>votre@email.com</p>
+<div class="account-container">
+
+    <header class="account-header">
+        <h1>Mon Compte</h1>
+        <p>Consultez et gérez vos informations personnelles.</p>
+    </header>
+
+    <div class="account-grid">
+
+        {# ---------- INFORMATIONS UTILISATEUR ---------- #}
+
+        <section class="account-card">
+            <div class="card-header">
+                <h2>Informations personnelles</h2>
             </div>
-            <div class="info-group">
-                <label>Rôle</label>
-                <span class="badge"><?php echo ucfirst($_GET['user'] ?? 'Utilisateur'); ?></span>
+
+            <div class="account-info">
+
+                <div class="info-row">
+                    <span class="info-label">Nom complet</span>
+                    <span class="info-value">Jean Marc</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">Adresse email</span>
+                    <span class="info-value">{{ user.email }}</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">Titre</span>
+                    <span class="info-value role-badge">{{ user.role }}</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">Centre</span>
+                    <span class="info-value">{{ user.campus }}</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">Date de création du compte</span>
+                    <span class="info-value">{{ user.created_at|date("d/m/Y") }}</span>
+                </div>
+
             </div>
-            <button class="edit-btn">Modifier mes infos</button>
-        </div>
+
+            <div class="card-actions">
+                <button class="btn-primary">Modifier mes informations</button>
+            </div>
+        </section>
+
+
+        {# ---------- STATISTIQUES ---------- #}
+
+        <section class="account-card">
+
+            <div class="card-header">
+                <h2>Mes statistiques</h2>
+            </div>
+
+            <div class="stats-grid">
+
+                <div class="stat-box">
+                    <div class="stat-number">{{ stats.applications }}</div>
+                    <div class="stat-label">Candidatures envoyées</div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-number">{{ stats.favorites }}</div>
+                    <div class="stat-label">Entreprises favorites</div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-number">{{ stats.saved_offers }}</div>
+                    <div class="stat-label">Offres enregistrées</div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        {# ---------- ACTIVITÉ ---------- #}
+
+        <section class="account-card">
+
+            <div class="card-header">
+                <h2>Activité récente</h2>
+            </div>
+
+            <div class="activity-list">
+
+                {% for activity in activities %}
+                <div class="activity-item">
+                    <span class="activity-text">{{ activity.message }}</span>
+                    <span class="activity-date">{{ activity.date|date("d/m/Y H:i") }}</span>
+                </div>
+                {% else %}
+                <p class="no-activity">Aucune activité récente.</p>
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+
+        {# ---------- SECURITE ---------- #}
+
+        <section class="account-card">
+
+            <div class="card-header">
+                <h2>Sécurité</h2>
+            </div>
+
+            <div class="security-options">
+
+                <div class="security-item">
+                    <span>Mot de passe</span>
+                    <button class="btn-secondary">Changer le mot de passe</button>
+                </div>
+
+                <div class="security-item">
+                    <span>Dernière connexion</span>
+                    <span class="info-value">{{ user.last_login|date("d/m/Y H:i") }}</span>
+                </div>
+
+                <div class="security-item">
+                    <span>Notifications par email</span>
+                    <span class="status-enabled">Activées</span>
+                </div>
+
+            </div>
+
+        </section>
+
     </div>
 
-    <div class="profile-card">
-        <div class="card-header">
-            <img src="assets/images/menu/header/header-icone-2.png" alt="Icone Activité">
-            <h2>Mon Activité</h2>
-        </div>
-        <div class="card-content activity">
-            <div class="stat-mini">
-                <span class="number">12</span>
-                <span class="label">Candidatures</span>
-            </div>
-            <div class="stat-mini">
-                <span class="number">5</span>
-                <span class="label">Entreprises favorites</span>
-            </div>
-            <hr>
-            <p class="last-login">Dernière connexion : Aujourd'hui à 10:45</p>
-        </div>
-    </div>
 </div>
+
 {% endblock %}
