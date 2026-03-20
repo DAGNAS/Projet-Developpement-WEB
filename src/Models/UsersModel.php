@@ -45,6 +45,10 @@ class UsersModel extends Model {
     public function getUserInfoByMail($userEmail) {
         return $this->database->getUserInfoByMail($userEmail);
     }
+
+    public function updateUserInfo($data) {
+        $this->database->updateUserInfo($data);
+    }
 }
 
 ?>

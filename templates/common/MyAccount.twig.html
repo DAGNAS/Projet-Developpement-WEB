@@ -18,43 +18,71 @@
         {# ---------- INFORMATIONS UTILISATEUR ---------- #}
 
         <section class="account-card">
-            <div class="card-header">
-                <h2>Informations personnelles</h2>
-            </div>
+    <div class="card-header">
+        <h2>Informations personnelles</h2>
+    </div>
 
-            <div class="account-info">
+    {# Si on est en mode édition, on ouvre UN SEUL formulaire pour toute la section #}
+    {% if editInfo %}
+    <form action="?uri=profile/info_update" method="post">
+    {% endif %}
 
-                <div class="info-row">
-                    <span class="info-label">Nom complet</span>
-                    <span class="info-value">{{ userInfo.prenom }} {{ userInfo.nom }}</span>
-                </div>
+    <div class="account-info">
+        {# --- NOM COMPLET --- #}
+        <div class="info-row">
+            <span class="info-label">Prénom & Nom</span>
+            {% if not editInfo %}
+                <span class="info-value">{{ userInfo.prenom }} {{ userInfo.nom }}</span>
+            {% else %}
+                <span class="info-value">
+                    <input type="text" name="prenom" value="{{ userInfo.prenom }}">
+                    <input type="text" name="nom" value="{{ userInfo.nom }}">
+                </span>
+            {% endif %}
+        </div>
 
-                <div class="info-row">
-                    <span class="info-label">Adresse email</span>
-                    <span class="info-value">{{ userInfo.email }}</span>
-                </div>
+        {# --- EMAIL --- #}
+        <div class="info-row">
+            <span class="info-label">Adresse email</span>
+            <span class="info-value">{{ userInfo.email }}</span>
+        </div>
 
-                <div class="info-row">
-                    <span class="info-label">Titre</span>
-                    <span class="info-value role-badge">{{ userInfo.role }}</span>
-                </div>
+        {# --- ROLE (Statique) --- #}
+        <div class="info-row">
+            <span class="info-label">Titre</span>
+            <span class="info-value role-badge">{{ userInfo.role }}</span>
+        </div>
 
-                <div class="info-row">
-                    <span class="info-label">Centre</span>
-                    <span class="info-value">{{ userInfo.ville }}</span>
-                </div>
+        {# --- CENTRE / VILLE --- #}
+        <div class="info-row">
+            <span class="info-label">Centre</span>
+            {% if not editInfo %}
+                <span class="info-value">{{ userInfo.ville }}</span>
+            {% else %}
+                <span class="info-value"><input type="text" name="ville" value="{{ userInfo.ville }}"></span>
+            {% endif %}
+        </div>
 
-                <div class="info-row">
-                    <span class="info-label">Date de création du compte</span>
-                    <span class="info-value">{{ userInfo.created_at|date("d/m/Y") }}</span>
-                </div>
-
-            </div>
-
-            <div class="card-actions">
-                <button class="btn-primary">Modifier mes informations</button>
-            </div>
-        </section>
+        {# --- DATE CREATION --- #}
+        <div class="info-row">
+            <span class="info-label">Date de création du compte</span>
+            <span class="info-value">{{ userInfo.created_at|date("d/m/Y") }}</span>
+        </div>
+    </div>
+    
+    {# --- ACTIONS (BOUTONS) --- #}
+    <div class="card-actions">
+        {% if not editInfo %}
+            <form action="?uri=profile/info_edit" method="post" style="display:inline;">
+                <button class="btn-primary" type="submit">Modifier mes informations</button>
+            </form>
+        {% else %}
+            <button class="btn-primary" type="submit">Enregistrer mes informations</button>
+            <a href="?uri=profile" class="btn-secondary">Annuler</a>
+            </form>
+        {% endif %}
+    </div>
+</section>
 
 
         {# ---------- STATISTIQUES ---------- #}

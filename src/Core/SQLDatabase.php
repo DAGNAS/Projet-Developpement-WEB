@@ -14,15 +14,17 @@ class SQLDatabase implements Database {
     private $database;
 
     public function __construct() {
-        // Paramètres de connexion
-        $host = '127.0.0.1';
-        $dbname = 'jobshorizonbdd';
-        $user = 'root';
-        $pass = '';
-        $port = 3307;
+        
+        $env = parse_ini_file(".env");
     
         try {
-            $this->database = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4", $user, $pass);
+            $this->database = new PDO("mysql:
+                        host=".$env["host"].";
+                        port=".$env['port'].";
+                        dbname=".$env['dbname'].";
+                        charset=utf8mb4", 
+                        
+                        $env["user"], $env["pass"]);
             
             // Activer les exceptions et le mode de retour en tableau associatif par défaut
             $this->database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -47,6 +49,17 @@ class SQLDatabase implements Database {
         $stmt = $this->database->prepare("SELECT * FROM test_users WHERE email = :email");
         $stmt->execute(['email' => $userEmail]);
         return $stmt->fetch();
+    }
+
+    public function updateUserInfo($data) {
+
+        $stmt = $this->database->prepare("UPDATE test_users SET nom = :nom, prenom = :prenom, ville = :ville WHERE email = :email");
+        $stmt->execute([
+            'nom' => $data['nom'],
+            'prenom' => $data['prenom'],
+            'ville' => $data['ville'],
+            'email' => $data['mail']
+        ]);
     }
 
     // ATTENTION : Tu dois obligatoirement implémenter ICI toutes les fonctions 

@@ -26,10 +26,38 @@ class UsersController extends Controller {
         echo $this->templateEngine->render('common/Search.twig.html', ['nav' => $nav, 'companies' => $companies]);
     }
     
-    public function MyAccountPage() {
+    public function MyAccountPage($editInfo = false, $editPassword = false) {
         $nav = $this->Dashboard();
         $userInfo = $this->UsersModel->getUserInfoByMail($_SESSION['user_id']);
-        echo $this->templateEngine->render('common/MyAccount.twig.html', ['nav' => $nav, 'userInfo' => $userInfo]);
+        echo $this->templateEngine->render('common/MyAccount.twig.html', ['nav' => $nav, 'userInfo' => $userInfo, 'editInfo' => $editInfo, 'editPassword' => $editPassword]);
+    }
+
+    public function EditInfo() {
+        $this->MyAccountPage(true, false);
+    }
+
+    public function UpdateInfo() {
+        session_start();
+        $data = [
+            'mail'  => $_SESSION['user_id'],
+            'nom'    => $_POST['nom'],
+            'prenom' => $_POST['prenom'],
+            'ville'  => $_POST['ville']
+        ];
+
+        $this->UsersModel->updateUserInfo($data);   
+        $this->MyAccountPage();
+
+    }
+
+    public function EditPassword() {
+
+        $this->MyAccountPage(false, true);
+    }
+
+    public function UpdatePassword() {
+
+        $this->MyAccountPage();
     }
 
     public function MyWishListPage() {

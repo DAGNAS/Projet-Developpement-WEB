@@ -21,7 +21,7 @@ $AuthController = new AuthController($twig);
 $UsersController = new UsersController($twig);
 
 switch ($uri) {
-    // AUTH
+    // CONNEXION
     case '/':
         $AuthController->HomePage();
         break;
@@ -36,9 +36,14 @@ switch ($uri) {
     case 'search':
         $UsersController->SearchPage();
         break;
-    case 'profile':
-        $UsersController->MyAccountPage();
-        break;
+    
+    // --- ROUTES PROFIL --- //
+    case 'profile':                 $UsersController->MyAccountPage(); break;
+    case 'profile/info_edit':       $UsersController->EditInfo(); break;
+    case 'profile/info_update':     $UsersController->UpdateInfo(); break;
+    case 'profile/password_edit':   $UsersController->EditPassword(); break;
+    case 'profile/password_update': $UsersController->UpdatePassword(); break;
+
     case 'wishlist':
         $UsersController->MyWishListPage();
         break;
