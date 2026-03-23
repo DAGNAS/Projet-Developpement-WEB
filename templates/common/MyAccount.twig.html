@@ -18,71 +18,42 @@
         {# ---------- INFORMATIONS UTILISATEUR ---------- #}
 
         <section class="account-card">
-    <div class="card-header">
-        <h2>Informations personnelles</h2>
-    </div>
+            <div class="card-header">
+                <h2>Informations personnelles</h2>
+            </div>
 
-    {# Si on est en mode édition, on ouvre UN SEUL formulaire pour toute la section #}
-    {% if editInfo %}
-    <form action="?uri=profile/info_update" method="post">
-    {% endif %}
+            <div class="account-info">
+                {# --- NOM COMPLET --- #}
+                <div class="info-row">
+                    <span class="info-label">Prénom & Nom</span>
+                    <span class="info-value">{{ userInfo.prenom }} {{ userInfo.nom }}</span>
+                </div>
 
-    <div class="account-info">
-        {# --- NOM COMPLET --- #}
-        <div class="info-row">
-            <span class="info-label">Prénom & Nom</span>
-            {% if not editInfo %}
-                <span class="info-value">{{ userInfo.prenom }} {{ userInfo.nom }}</span>
-            {% else %}
-                <span class="info-value">
-                    <input type="text" name="prenom" value="{{ userInfo.prenom }}">
-                    <input type="text" name="nom" value="{{ userInfo.nom }}">
-                </span>
-            {% endif %}
-        </div>
+                {# --- EMAIL --- #}
+                <div class="info-row">
+                    <span class="info-label">Adresse email</span>
+                    <span class="info-value">{{ userInfo.email }}</span>
+                </div>
 
-        {# --- EMAIL --- #}
-        <div class="info-row">
-            <span class="info-label">Adresse email</span>
-            <span class="info-value">{{ userInfo.email }}</span>
-        </div>
+                {# --- ROLE (Statique) --- #}
+                <div class="info-row">
+                    <span class="info-label">Titre</span>
+                    <span class="info-value role-badge">{{ userInfo.role }}</span>
+                </div>
 
-        {# --- ROLE (Statique) --- #}
-        <div class="info-row">
-            <span class="info-label">Titre</span>
-            <span class="info-value role-badge">{{ userInfo.role }}</span>
-        </div>
+                {# --- CENTRE / VILLE --- #}
+                <div class="info-row">
+                    <span class="info-label">Centre</span>
+                    <span class="info-value">{{ userInfo.ville }}</span>
+                </div>
 
-        {# --- CENTRE / VILLE --- #}
-        <div class="info-row">
-            <span class="info-label">Centre</span>
-            {% if not editInfo %}
-                <span class="info-value">{{ userInfo.ville }}</span>
-            {% else %}
-                <span class="info-value"><input type="text" name="ville" value="{{ userInfo.ville }}"></span>
-            {% endif %}
-        </div>
-
-        {# --- DATE CREATION --- #}
-        <div class="info-row">
-            <span class="info-label">Date de création du compte</span>
-            <span class="info-value">{{ userInfo.created_at|date("d/m/Y") }}</span>
-        </div>
-    </div>
-    
-    {# --- ACTIONS (BOUTONS) --- #}
-    <div class="card-actions">
-        {% if not editInfo %}
-            <form action="?uri=profile/info_edit" method="post" style="display:inline;">
-                <button class="btn-primary" type="submit">Modifier mes informations</button>
-            </form>
-        {% else %}
-            <button class="btn-primary" type="submit">Enregistrer mes informations</button>
-            <a href="?uri=profile" class="btn-secondary">Annuler</a>
-            </form>
-        {% endif %}
-    </div>
-</section>
+                {# --- DATE CREATION --- #}
+                <div class="info-row">
+                    <span class="info-label">Date de création du compte</span>
+                    <span class="info-value">{{ userInfo.created_at|date("d/m/Y") }}</span>
+                </div>
+            </div>
+        </section>
 
 
         {# ---------- STATISTIQUES ---------- #}
@@ -148,11 +119,27 @@
             </div>
 
             <div class="security-options">
+                {% if passwordMessage %}
+                    <div class="alert alert-{{ passwordMessage.type }}">
+                        {{ passwordMessage.text }}
+                    </div>
+                {% endif %}
 
-                <div class="security-item">
-                    <span>Mot de passe</span>
-                    <button class="btn-secondary">Changer le mot de passe</button>
-                </div>
+                {% if editPassword %}
+                    {# MODE ÉDITION : On affiche le formulaire pour changer le MDP #}
+                    <form action="?uri=profile" method="post" class="password-form">
+                        <input type="password" name="new_password" placeholder="Nouveau mot de passe" required>
+                        <input type="password" name="confirm_password" placeholder="Confirmer le mot de passe" required>
+                        
+                        <div class="password-actions">
+                            <button type="submit" class="btn-primary">Enregistrer</button>
+                            <a href="?uri=profile" class="btn-secondary">Annuler</a>
+                        </div>
+                    </form>
+                {% else %}
+                    {# MODE LECTURE : On affiche juste le bouton pour passer en édition #}
+                    <a href="?uri=profile&action=editPassword" class="btn-secondary">Changer le mot de passe</a>
+                {% endif %}
 
                 <div class="security-item">
                     <span>Dernière connexion</span>

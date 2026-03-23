@@ -42,12 +42,14 @@ class UsersModel extends Model {
         return $links[$role];
     }
 
-    public function getUserInfoByMail($userEmail) {
+    public function getUserInfo($userEmail) {
         return $this->database->getUserInfoByMail($userEmail);
     }
 
-    public function updateUserInfo($data) {
-        $this->database->updateUserInfo($data);
+    public function updatePassword($data){
+        // Hachage du mot de passe pour la sécurité
+        $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
+        $this->database->updatePassword($data['email'], $hashedPassword);
     }
 }
 

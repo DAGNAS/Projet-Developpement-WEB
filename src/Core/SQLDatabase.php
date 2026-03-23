@@ -51,18 +51,11 @@ class SQLDatabase implements Database {
         return $stmt->fetch();
     }
 
-    public function updateUserInfo($data) {
-
-        $stmt = $this->database->prepare("UPDATE test_users SET nom = :nom, prenom = :prenom, ville = :ville WHERE email = :email");
-        $stmt->execute([
-            'nom' => $data['nom'],
-            'prenom' => $data['prenom'],
-            'ville' => $data['ville'],
-            'email' => $data['mail']
+    public function updatePassword($email, $hash) {
+        $stmt = $this->database->prepare("UPDATE test_users SET password = :pass WHERE email = :email");
+        return $stmt->execute([
+            'pass'  => $hash,
+            'email' => $email
         ]);
     }
-
-    // ATTENTION : Tu dois obligatoirement implémenter ICI toutes les fonctions 
-    // qui sont listées dans ton fichier Database.php (ex: find, save, delete...)
-    // Sinon tu auras une erreur "Class contains abstract methods"
 }

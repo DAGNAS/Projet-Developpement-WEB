@@ -1,4 +1,5 @@
 <?php
+session_start();
 require "vendor/autoload.php";
 
 use App\Controllers\AuthController;
@@ -38,11 +39,13 @@ switch ($uri) {
         break;
     
     // --- ROUTES PROFIL --- //
-    case 'profile':                 $UsersController->MyAccountPage(); break;
-    case 'profile/info_edit':       $UsersController->EditInfo(); break;
-    case 'profile/info_update':     $UsersController->UpdateInfo(); break;
-    case 'profile/password_edit':   $UsersController->EditPassword(); break;
-    case 'profile/password_update': $UsersController->UpdatePassword(); break;
+    case 'profile':                 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $UsersController->UpdatePassword();
+        } else {
+            $UsersController->MyAccountPage();
+        }
+        break;
 
     case 'wishlist':
         $UsersController->MyWishListPage();

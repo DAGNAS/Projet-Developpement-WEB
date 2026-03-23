@@ -14,9 +14,7 @@ class UsersController extends Controller {
     }
 
     public function Dashboard() {
-        session_start();
         $user = $_SESSION['user_role'];
-
         return $this->UsersModel->getNavLinks($user);
     }
 
@@ -26,38 +24,38 @@ class UsersController extends Controller {
         echo $this->templateEngine->render('common/Search.twig.html', ['nav' => $nav, 'companies' => $companies]);
     }
     
-    public function MyAccountPage($editInfo = false, $editPassword = false) {
-        $nav = $this->Dashboard();
-        $userInfo = $this->UsersModel->getUserInfoByMail($_SESSION['user_id']);
-        echo $this->templateEngine->render('common/MyAccount.twig.html', ['nav' => $nav, 'userInfo' => $userInfo, 'editInfo' => $editInfo, 'editPassword' => $editPassword]);
-    }
+    public function MyAccountPage() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
-    public function EditInfo() {
-        $this->MyAccountPage(true, false);
-    }
-
-    public function UpdateInfo() {
-        session_start();
-        $data = [
-            'mail'  => $_SESSION['user_id'],
-            'nom'    => $_POST['nom'],
-            'prenom' => $_POST['prenom'],
-            'ville'  => $_POST['ville']
-        ];
-
-        $this->UsersModel->updateUserInfo($data);   
-        $this->MyAccountPage();
-
-    }
-
-    public function EditPassword() {
-
-        $this->MyAccountPage(false, true);
+        $action = $_GET['action'] ?? null;
+        echo $this->templateEngine->render('common/MyAccount.twig.html', [
+            'nav'          => $this->Dashboard(),
+            'userInfo'     => $this->UsersModel->getUserInfo($_SESSION['user_id']),
+            'editPassword' => ($action === 'editPassword'), // Vrai si ?action=editPassword
+            'stats'        => ['applications' => 5, 'favorites' => 1, 'saved_offers' => 2],
+            'activities'   => []
+        ]);
     }
 
     public function UpdatePassword() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
-        $this->MyAccountPage();
+        if (
+            isset($_POST['new_password'], $_POST['confirm_password'], $_SESSION['user_id']) &&
+            $_POST['new_password'] === $_POST['confirm_password']
+        ) {
+            $this->UsersModel->updatePassword([
+                'email' => $_SESSION['user_id'],
+                'password' => $_POST['new_password']
+            ]);
+        }
+
+        header('Location: ?uri=profile');
+        exit;
     }
 
     public function MyWishListPage() {
@@ -90,7 +88,9 @@ class UsersController extends Controller {
     }
 
     public function Logout() {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         session_destroy();
         header('Location: index.php?uri=/');
     }

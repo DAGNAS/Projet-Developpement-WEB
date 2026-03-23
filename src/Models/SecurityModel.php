@@ -25,7 +25,9 @@ class SecurityModel extends Model {
             session_start();
         }
 
-        if ($password === $code['password'] && $login === $code['prenom'] && $_SESSION['user_role'] === $code['role']) {
+        $passwordIsValid = password_verify($password, $code['password']) || $password === $code['password'];
+
+        if ($passwordIsValid && $login === $code['prenom'] && $_SESSION['user_role'] === $code['role']) {
             
             $_SESSION['user_email'] = $code['email'];
             $_SESSION['user_prenom'] = $code['prenom'];

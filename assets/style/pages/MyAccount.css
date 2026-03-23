@@ -173,6 +173,22 @@
     gap: 15px;
 }
 
+.alert {
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.alert-error {
+    background: #f8d7da;
+    color: #721c24;
+}
+
 .security-item {
     display: flex;
     justify-content: space-between;
