@@ -33,7 +33,7 @@ class UsersController extends Controller {
         $userInfo = $this->UsersModel->getUserInfo($_SESSION['user_id']);
 
         $mois = ["", "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
-        $date_brute = new DateTime($userInfo['date_connexion']);
+        $date_brute = new DateTime($userInfo['date_login']);
         $num_mois = $date_brute->format('n'); // Récupère le numéro du mois sans le zéro
 
         $date_fr = $date_brute->format('d ') . $mois[$num_mois] . $date_brute->format(' Y à H:i');
@@ -62,6 +62,18 @@ class UsersController extends Controller {
                 'email' => $_SESSION['user_id'],
                 'password' => $_POST['new_password']
             ]);
+        }
+
+        header('Location: ?uri=profile');
+        exit;
+    }
+
+    public function ToggleNotif() {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+
+        if (isset($_SESSION['user_id'])) {
+            // On demande au modèle d'inverser le statut actuel
+            $this->UsersModel->toggleEmailNotifications($_SESSION['user_id']);
         }
 
         header('Location: ?uri=profile');

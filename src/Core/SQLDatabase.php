@@ -19,7 +19,7 @@ class SQLDatabase implements Database {
     
         try {
             $this->database = new PDO("mysql:
-                        host=".$env["host"].";
+                        host=".$env['host'].";
                         port=".$env['port'].";
                         dbname=".$env['dbname'].";
                         charset=utf8mb4", 
@@ -61,6 +61,13 @@ class SQLDatabase implements Database {
 
     public function SaveTimeLastConnexion($email) {
         $stmt = $this->database->prepare("UPDATE test_users SET date_login = NOW() WHERE email = :email");
+        $stmt->execute([
+            'email'         => $email
+        ]);
+    }
+
+    public function toggleEmailNotifications($email) {
+        $stmt = $this->database->prepare("UPDATE test_users SET email_notif = NOT email_notif WHERE email = :email");
         $stmt->execute([
             'email'         => $email
         ]);

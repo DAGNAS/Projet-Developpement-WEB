@@ -55,6 +55,10 @@ class UsersModel extends Model {
     public function SaveTimeLastConnexion($email) {
         $this->database->SaveTimeLastConnexion($email);
     }
+
+    public function toggleEmailNotifications($email){
+        $this->database->toggleEmailNotifications($email);
+    }
 }
 
 ?>

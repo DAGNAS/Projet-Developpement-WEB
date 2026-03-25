@@ -148,11 +148,15 @@
 
                 <div class="security-item">
                     <span>Notifications par email</span>
-                    {% if userInfo.email_notif %}
-                    <span class="status-enabled">Activées</span>
-                    {% else %}
-                    <span class="status-enabled" style="color: crimson; background-color: brown;">Désactivées</span>
-                    {% endif %}
+                    
+                    <form action="?uri=profile/toggle_notif" method="POST" id="notif-form">
+                        <label class="switch">
+                            <input type="checkbox" name="email_notif" 
+                                {% if userInfo.email_notif %}checked{% endif %} 
+                                onChange="this.form.submit()">
+                            <span class="slider round"></span>
+                        </label>
+                    </form>
                 </div>
 
             </div>

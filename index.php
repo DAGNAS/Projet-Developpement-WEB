@@ -51,6 +51,9 @@ switch ($uri) {
             $UsersController->MyAccountPage();
         }
         break;
+    
+    case 'profile/toggle_notif':
+         $UsersController->ToggleNotif();
 
     case 'wishlist':
         $UsersController->MyWishListPage();
