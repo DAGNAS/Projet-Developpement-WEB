@@ -60,7 +60,7 @@ class SQLDatabase implements Database {
     }
 
     public function SaveTimeLastConnexion($email) {
-        $stmt = $this->database->prepare("UPDATE test_users SET date_connexion = NOW() WHERE email = :email");
+        $stmt = $this->database->prepare("UPDATE test_users SET date_login = NOW() WHERE email = :email");
         $stmt->execute([
             'email'         => $email
         ]);

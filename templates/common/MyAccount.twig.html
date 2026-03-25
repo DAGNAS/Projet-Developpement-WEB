@@ -148,7 +148,11 @@
 
                 <div class="security-item">
                     <span>Notifications par email</span>
+                    {% if userInfo.email_notif %}
                     <span class="status-enabled">Activées</span>
+                    {% else %}
+                    <span class="status-enabled" style="color: crimson; background-color: brown;">Désactivées</span>
+                    {% endif %}
                 </div>
 
             </div>

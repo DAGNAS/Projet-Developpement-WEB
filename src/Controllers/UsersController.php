@@ -42,10 +42,10 @@ class UsersController extends Controller {
         echo $this->templateEngine->render('common/MyAccount.twig.html', [
             'nav'          => $this->Dashboard(),
             'userInfo'     => $userInfo,
-            'last_login_fr'  => $date_fr,
             'editPassword' => ($action === 'editPassword'), // Vrai si ?action=editPassword
             'stats'        => ['applications' => 5, 'favorites' => 1, 'saved_offers' => 2],
-            'activities'   => []
+            'activities'   => [],
+            'last_login_fr'  => $date_fr
         ]);
     }
 
