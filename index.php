@@ -1,5 +1,10 @@
 <?php
-session_start();
+session_start([
+'cookie_httponly' => true, // Protection contre le vol de session via JS (XSS)
+'cookie_secure' => false, // Mettre à 'true' si vous utilisez HTTPS
+'cookie_samesite' => 'Strict', // Protection contre les attaques CSRF
+]);
+
 require "vendor/autoload.php";
 
 use App\Controllers\AuthController;
