@@ -26,7 +26,6 @@ class AuthController extends Controller {
 
         $user = $_POST['login'];
 
-        session_start();
         $_SESSION['user_role'] = $user;
 
         $champs = [

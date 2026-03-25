@@ -51,6 +51,10 @@ class UsersModel extends Model {
         $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
         $this->database->updatePassword($data['email'], $hashedPassword);
     }
+
+    public function SaveTimeLastConnexion($email) {
+        $this->database->SaveTimeLastConnexion($email);
+    }
 }
 
 ?>

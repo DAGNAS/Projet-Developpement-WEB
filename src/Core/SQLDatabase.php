@@ -53,9 +53,16 @@ class SQLDatabase implements Database {
 
     public function updatePassword($email, $hash) {
         $stmt = $this->database->prepare("UPDATE test_users SET password = :pass WHERE email = :email");
-        return $stmt->execute([
+        $stmt->execute([
             'pass'  => $hash,
             'email' => $email
+        ]);
+    }
+
+    public function SaveTimeLastConnexion($email) {
+        $stmt = $this->database->prepare("UPDATE test_users SET date_connexion = NOW() WHERE email = :email");
+        $stmt->execute([
+            'email'         => $email
         ]);
     }
 }

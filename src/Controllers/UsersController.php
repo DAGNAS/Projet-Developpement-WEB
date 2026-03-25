@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\UsersModel;
 use App\Models\SearchModel;
+use DateTime;
 
 class UsersController extends Controller {
 
@@ -29,10 +30,19 @@ class UsersController extends Controller {
             session_start();
         }
 
+        $userInfo = $this->UsersModel->getUserInfo($_SESSION['user_id']);
+
+        $mois = ["", "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+        $date_brute = new DateTime($userInfo['date_connexion']);
+        $num_mois = $date_brute->format('n'); // Récupère le numéro du mois sans le zéro
+
+        $date_fr = $date_brute->format('d ') . $mois[$num_mois] . $date_brute->format(' Y à H:i');
+
         $action = $_GET['action'] ?? null;
         echo $this->templateEngine->render('common/MyAccount.twig.html', [
             'nav'          => $this->Dashboard(),
-            'userInfo'     => $this->UsersModel->getUserInfo($_SESSION['user_id']),
+            'userInfo'     => $userInfo,
+            'last_login_fr'  => $date_fr,
             'editPassword' => ($action === 'editPassword'), // Vrai si ?action=editPassword
             'stats'        => ['applications' => 5, 'favorites' => 1, 'saved_offers' => 2],
             'activities'   => []
@@ -91,6 +101,8 @@ class UsersController extends Controller {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
+        
+        $this->UsersModel->SaveTimeLastConnexion($_SESSION['user_id']);
         session_destroy();
         header('Location: index.php?uri=/');
     }
