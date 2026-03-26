@@ -83,7 +83,6 @@ header {
     transform: scale(1.2);
 }
 
-
 @media (max-width: 1050px) {
 
     .header-center {
@@ -118,15 +117,16 @@ header {
 }
 
 
-
 footer {
     padding: 20px 80px;
     margin-top: 30px;
-    background: #010529;
     width: 100%;
+
     border-top: 6px solid orange;
     border-top-left-radius: 60px;
     border-top-right-radius: 60px;
+
+    background: #010529;
     color: orange;
 }
 
@@ -148,6 +148,7 @@ footer {
 footer h3 {
     font-size: 50px;
     margin-bottom: 12px;
+
     color: orange;
     text-align: left;
 }
@@ -161,6 +162,7 @@ footer ul {
 footer a {
     text-decoration: none;
     color: #ffffff;
+
     font-size: 22px;
     transition: all 0.3s ease;
     margin-bottom: 16px;
@@ -169,12 +171,14 @@ footer a {
 .res {
     display: flex;
     align-items: center;
+
     gap: 12px;
 }
 
 .res img {
     width: 32px;
     height: 32px;
+
     object-fit: contain;
     transition: transform 0.3s ease;
 }
