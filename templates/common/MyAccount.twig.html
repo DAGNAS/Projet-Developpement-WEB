@@ -44,9 +44,50 @@
                 <span class="number">12</span>
                 <span class="label">Candidatures</span>
             </div>
-            <div class="stat-mini">
-                <span class="number">5</span>
-                <span class="label">Entreprises favorites</span>
+
+            <div class="security-options">
+                {% if passwordMessage %}
+                    <div class="alert alert-{{ passwordMessage.type }}">
+                        {{ passwordMessage.text }}
+                    </div>
+                {% endif %}
+
+                {% if editPassword %}
+                    {# MODE ÉDITION : On affiche le formulaire pour changer le MDP #}
+                    <form action="?uri=profile" method="post" class="password-form">
+                        <input type="password" name="new_password" placeholder="Nouveau mot de passe" required>
+                        <input type="password" name="confirm_password" placeholder="Confirmer le mot de passe" required>
+                        
+                        <div class="password-actions">
+                            <button type="submit" class="btn-primary">Enregistrer</button>
+                            <a href="?uri=profile" class="btn-secondary">Annuler</a>
+                        </div>
+                    </form>
+                {% else %}
+                    {# MODE LECTURE : On affiche juste le bouton pour passer en édition #}
+                    <a href="?uri=profile&action=editPassword" class="btn-secondary">Changer le mot de passe</a>
+                {% endif %}
+
+
+
+                <div class="security-item">
+                    <span>Dernière connexion</span>
+                    <span class="info-value">{{ last_login_fr }}</span>
+                </div>
+
+                <div class="security-item">
+                    <span>Notifications par email</span>
+                    
+                    <form action="?uri=profile/toggle_notif" method="POST" id="notif-form">
+                        <label class="switch">
+                            <input type="checkbox" name="email_notif" 
+                                {% if userInfo.email_notif %}checked{% endif %} 
+                                onChange="this.form.submit()">
+                            <span class="slider round"></span>
+                        </label>
+                    </form>
+                </div>
+
             </div>
             <hr>
             <p class="last-login">Dernière connexion : Aujourd'hui à 10:45</p>
