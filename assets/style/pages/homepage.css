@@ -3,13 +3,6 @@
 *::after {
     box-sizing: border-box;
 }
-/*
-* {
-    outline: 2px solid red;
-    outline-offset: -1px;
-
-}
-*/
 
 html, body {
     overflow-x: hidden;
@@ -111,6 +104,16 @@ html, body {
     margin-bottom: 10px;
 }
 
+@media (max-width: 1527px) {
+    .cards {
+        gap: clamp(15px, 3vw, 30px);
+    }
+
+    .cards > * {
+        width: clamp(120px, 40vw, 295px);
+    }
+}
+
 @media (max-width: 1020px) {
     .cards {
         grid-template-columns: repeat(2, 1fr);
@@ -168,11 +171,13 @@ html, body {
     width: clamp(160px, 28vw, 250px);
     height: clamp(160px, 28vw, 250px);
     border-radius: 50%;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+
     color: #ffffff;
     padding: 10px;
 }
