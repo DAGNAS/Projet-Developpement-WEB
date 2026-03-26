@@ -1,95 +1,139 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <title>Job's Horizon</title>
-        <link rel="stylesheet" href="assets/style/global/base.css">
-        <link rel="stylesheet" href="assets/style/global/layout.css">
-        <link rel="stylesheet" href="assets/style/global/components.css">
-        {% block stylesheets %} <link rel="stylesheet" href="assets/style/pages/homepage.css"> {% endblock %}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Job's Horizon</title>
 
-    <body>
-        {% block header %}
-        <header>
-            <img class="logo-image" src="assets/images/menu/header/Logo-header.png" alt="Logo">
-            <img class="header-icone" src="assets/images/menu/header/header-icone-1.png" alt="icone 1">
-            <img class="header-icone" src="assets/images/menu/header/header-icone-2.png" alt="icone 2">
-            <img class="header-icone" src="assets/images/menu/header/header-icone-3.png" alt="icone 3">
-            <a class="header-btn" href="index.php?uri=/">Menu</a>
-        </header>
-        {% endblock %}
+    <!-- Styles globaux -->
+    <link rel="stylesheet" href="assets/style/global/base.css">
+    <link rel="stylesheet" href="assets/style/global/layout.css">
+    <link rel="stylesheet" href="assets/style/global/components.css">
 
-        {% block content %}
-        {% endblock %}
+    <!-- Styles page spécifique -->
+    {% block stylesheets %}
+    <link rel="stylesheet" href="assets/style/pages/homepage.css">
+    {% endblock %}
 
-        <footer>
-            <p>© 2026 - All rights reserved.</p>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-            <div class="footer">
-                <div class="bloc">
-                    <h3>Partenaires</h3>
-                    <ul class="partenaires">
-                        <li><a href="https://www.cesi.fr/">CESI, La Rochelle</a></li>
-                    </ul>
-                </div>
+    <!-- Font Awesome pour icônes contact -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+{% block header %}
+<header>
+    <div class="header-left">
+        <img class="logo-image" src="assets/images/menu/header/Logo-header.png" alt="Logo">
+    </div>
 
-                <div class="bloc">
-                    <h3>Contacts</h3>
-                    <a href="https://www.google.com/maps/place/CESI+La+Rochelle/@46.167943,-1.150123,17z/data=!3m1!4b1!4m5!3m4!8l!9b1!12b1?hl=fr" class="res">
-                        <img src="assets/images/menu/footer/A.png" alt="Logo">
-                        8 Rue Isabelle Autissier, Lagord
+    <div class="header-center">
+        <img class="header-icone" src="assets/images/menu/header/header-icone-1.png" alt="icone 1">
+        <img class="header-icone" src="assets/images/menu/header/header-icone-2.png" alt="icone 2">
+        <img class="header-icone" src="assets/images/menu/header/header-icone-3.png" alt="icone 3">
+    </div>
+
+    <div class="header-right">
+        <a class="header-btn" href="index.php?uri=/">Menu</a>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+<footer>
+    <div class="footer-container">
+
+        <!-- Réseaux sociaux -->
+        <div class="bloc">
+            <h3>Réseaux</h3>
+            <ul class="reseaux">
+                <li>
+                    <a href="https://www.instagram.com/" class="res">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" width="24">
+                        Instagram
                     </a>
-                    <a href="tel:0500000000" class="res">
-                        <img src="assets/images/menu/footer/S.png" alt="Logo">
-                        05 00 00 00 00
+                </li>
+                <li>
+                    <a href="https://twitter.com/" class="res">
+                        <img src="https://img.icons8.com/fluency/48/000000/twitter.png" width="24">
+                        Twitter
                     </a>
-                    <a href="mailto:paul.jack@gmail.com" class="res">
-                        <img src="assets/images/menu/footer/E.png" alt="Logo">
-                        paul.jack@gmail.com
+                </li>
+                <li>
+                    <a href="https://www.tiktok.com/" class="res">
+                        <img src="https://img.icons8.com/fluency/48/000000/tiktok.png" width="24">
+                        TikTok
                     </a>
-                </div>
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/" class="res">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" width="24">
+                        YouTube
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.linkedin.com/school/cesi-la-rochelle/" class="res">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" width="24">
+                        CESI La Rochelle
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.facebook.com/cesila.rochelle" class="res">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" width="24">
+                        Facebook
+                    </a>
+                </li>
+            </ul>
+        </div>
 
-                <div class="bloc">
-                    <h3>Réseaux</h3>
-                    <ul class="reseaux">
-                        <li>
-                            <a href="https://www.instagram.com/" class="res">
-                                <img src="assets/images/menu/footer/I.png" alt="Logo">
-                                Instagram
-                            </a>
-                            <a href="https://twitter.com/" class="res">
-                                <img src="assets/images/menu/footer/X.png" alt="Logo">
-                                Twitter
-                            </a>
-                            <a href="https://www.tiktok.com/" class="res">
-                                <img src="assets/images/menu/footer/T.png" alt="Logo">
-                                TikTok
-                            </a>
-                            <a href="https://www.youtube.com/" class="res">
-                                <img src="assets/images/menu/footer/Y.png" alt="Logo">
-                                Youtube
-                            </a>
-                            <a href="https://www.linkedin.com/school/cesi-la-rochelle/" class="res">
-                                <img src="assets/images/menu/footer/L.png" alt="Logo">
-                                CESI, La Rochelle
-                            </a>
-                            <a href="https://www.facebook.com/cesila.rochelle" class="res">
-                                <img src="assets/images/menu/footer/F.png" alt="Logo">
-                                Facebook
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+        <!-- Contacts -->
+        <div class="bloc">
+            <h3>Contacts</h3>
 
-                <div class="bloc">
-                    <h3>Mentions légales</h3>
-                    <ul class="mentions">
-                        <li><a href="index.php?uri=legal-mentions">Mentions légales</a></li>
-                    </ul>
-                </div>
-            </div>
-        </footer>
-    </body>
+            <a href="https://www.google.com/maps/place/CESI+La+Rochelle/@46.167943,-1.150123,17z" class="res">
+                <img src="https://img.icons8.com/fluency/48/000000/marker.png" width="24">
+                8 Rue Isabelle Autissier, Lagord
+            </a>
+
+            <a href="tel:0500000000" class="res">
+                <img src="https://img.icons8.com/fluency/48/000000/phone.png" width="24">
+                05 19 08 63 50
+            </a>
+
+            <a href="mailto:paul.jack@gmail.com" class="res">
+                <img src="https://img.icons8.com/fluency/48/000000/new-post.png" width="24">
+                @Contacts
+            </a>
+        </div>
+
+        <!-- Partenaires -->
+        <div class="bloc">
+            <h3>Partenaires</h3>
+            <ul class="partenaires">
+                <li>
+                    <a href="https://www.cesi.fr/">CESI, La Rochelle</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Mentions légales -->
+        <div class="bloc">
+            <h3 class="mentions-title">
+                <span>Mentions légales</span>
+            </h3>
+            <ul class="mentions">
+                <li>
+                    <a href="index.php?uri=legal-mentions" class="mentions-link">
+                        <span>Mentions légales</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <p class="footer-bottom">© 2026 - All rights reserved.</p>
+</footer>
+</body>
 </html>
