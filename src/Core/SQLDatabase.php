@@ -15,7 +15,7 @@ class SQLDatabase implements Database {
 
     public function __construct() {
         
-        $env = parse_ini_file(".env");
+        $env = parse_ini_file(__DIR__ . "/../../.env", false, INI_SCANNER_RAW);
     
         try {
             $this->database = new PDO("mysql:
@@ -40,7 +40,7 @@ class SQLDatabase implements Database {
      */
     public function getAllCompany()
     {
-        $stmt = $this->database->query("SELECT * FROM entreprise");
+        $stmt = $this->database->query("SELECT * FROM company");
         $liste = $stmt->fetchAll();
         return $liste;
     }
