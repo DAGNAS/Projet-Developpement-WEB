@@ -20,6 +20,13 @@ class UsersController extends Controller {
     }
 
     public function SearchPage() {
+        
+        $page = $_GET['page'] ?? 1;
+    $page = (int)$page;
+
+    $limit = 10;
+    $offset = ($page - 1) * $limit;
+    
         $nav = $this->Dashboard();
         $companies = $this->SearchModel->ListAllCompany();
         echo $this->templateEngine->render('common/Search.twig.html', ['nav' => $nav, 'companies' => $companies]);
