@@ -125,3 +125,39 @@
 .view-btn:hover {
     background: orange;
 }
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 30px 0;
+}
+
+.pagination a {
+    padding: 10px 15px;
+    background-color: #0b1a3c; /* bleu foncé */
+    color: #ffa500; /* orange */
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #ffa500;
+    color: #0b1a3c;
+}
+
+.pagination a.active {
+    background-color: #ffa500;
+    color: #0b1a3c;
+}
+.pagination a.active {
+    background-color: #ffa500; /* orange */
+    color: #0b1a3c; /* bleu foncé */
+    font-weight: bold;
+}
+.pagination a.active {
+    background-color: #ffa500; /* orange */
+    color: #0b1a3c; /* bleu foncé */
+    font-weight: bold;
+}
