@@ -24,7 +24,8 @@ html, body {
 
 .hero {
     position: relative;
-    padding-bottom: clamp(200px, 6vw, 200px);
+    padding-top: 50px;
+    padding-bottom: 100px;
 }
 
 .hero h1 {
@@ -32,7 +33,6 @@ html, body {
     text-align: center;
     color: #ffffff;
     text-shadow: 10px 10px 20px #0a0c2c;
-    padding-top: clamp(24px, 8vw, 100px);
     margin: 40px;
 
 }
@@ -42,7 +42,7 @@ html, body {
     height: min(90%, 90%);
     border-radius: 40px;
     margin: 0 auto 150px auto;
-    padding: 40px clamp(20px, 2vw, 24px);
+    padding: 40px 20px 20px 20px;
     text-align: center;
     background: #0075a2;
     overflow: clip;
@@ -61,37 +61,46 @@ html, body {
 
 .cards {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 5px;
     width: 100%;
-    padding: 20px 0;
-    place-items: center;
+    padding: 5px;
+    box-sizing: border-box;
 }
 
-.cards > * {
+
+.cards > form {
+    width: 100%;
+    display: flex;
+}
+
+.card {
+    width: 100%;
     aspect-ratio: 1 / 1;
-    width: 295px;
 
-    background: #0320d5;
-    border-radius: 20px;
-    padding: 0;
-
+    background: #020424;
     color: #ffffff;
+
+    border-radius: 20px;
+    border: none;
+
+    cursor: pointer;
+
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    text-align: center;
+    align-items: center;
 
-    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+
     transition: transform .2s ease, box-shadow .2s ease;
-    text-decoration: none;
-    flex-shrink: 0;
-    border: none;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
 }
 
-.cards > *:hover {
-    transform: translateY(-4px);
+.card:hover {
+    transform: translateY(-5px);
     box-shadow: 0 10px 24px rgba(0,0,0,0.3);
 }
 

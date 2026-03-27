@@ -7,9 +7,13 @@
 /* HEADER */
 
 .account-header {
-    margin-bottom: 30px;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 20px;
+    background: #0075a2;
+    color: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .account-header h1 {
