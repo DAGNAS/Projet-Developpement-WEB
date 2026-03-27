@@ -14,7 +14,7 @@ class SQLDatabase implements Database {
 
     public function __construct() {
         
-        $env = parse_ini_file(__DIR__ . "/../../.env", false, INI_SCANNER_RAW);
+        $env = parse_ini_file(".env");
     
         try {
             $this->database = new PDO("mysql:
