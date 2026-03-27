@@ -22,6 +22,8 @@ header {
     border-bottom-right-radius: clamp(25px, 4vw, 60px);
 
     overflow: hidden;
+
+    margin-bottom: 50px;
 }
 
 .header-left img.logo-image {
@@ -128,6 +130,7 @@ footer {
     border-top-left-radius: 60px;
     border-top-right-radius: 60px;
     color: orange;
+    margin-top: 50px;
 }
 
 .footer-container {
