@@ -2,7 +2,6 @@
 
 namespace App\Core;
 
-// 1. IMPORT des classes natives PHP (indispensable quand on a un namespace)
 use PDO;
 use PDOException;
 
@@ -35,12 +34,9 @@ class SQLDatabase implements Database {
         }
     }
 
-    /**
-     * Exemple de méthode pour récupérer la connexion dans tes Models
-     */
     public function getAllCompany()
     {
-        $stmt = $this->database->query("SELECT * FROM company");
+        $stmt = $this->database->query("SELECT * FROM entreprise");
         $liste = $stmt->fetchAll();
         return $liste;
     }
