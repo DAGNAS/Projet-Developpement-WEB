@@ -6,6 +6,8 @@ namespace App\Core;
 interface Database {
     
     public function getAllCompany();
+
+    public function getUserInfoByMail($userEmail);
     
 }
 

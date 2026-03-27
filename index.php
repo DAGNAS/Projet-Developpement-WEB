@@ -1,5 +1,17 @@
 <?php
+
+
+
+
+session_start([
+'cookie_httponly' => true, // Protection contre le vol de session via JS (XSS)
+'cookie_secure' => false, // Mettre à 'true' si vous utilisez HTTPS
+'cookie_samesite' => 'Strict', // Protection contre les attaques CSRF
+]);
+
 require "vendor/autoload.php";
+
+
 
 use App\Controllers\AuthController;
 use App\Controllers\UsersController;
@@ -15,11 +27,13 @@ if (isset($_GET['uri'])) {
     $uri = '/';
 }
 
+
+
 $AuthController = new AuthController($twig);
 $UsersController = new UsersController($twig);
 
 switch ($uri) {
-    // AUTH
+    // CONNEXION
     case '/':
         $AuthController->HomePage();
         break;
@@ -34,9 +48,19 @@ switch ($uri) {
     case 'search':
         $UsersController->SearchPage();
         break;
-    case 'profile':
-        $UsersController->MyAccountPage();
+    
+    // --- ROUTES PROFIL --- //
+    case 'profile':                 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $UsersController->UpdatePassword();
+        } else {
+            $UsersController->MyAccountPage();
+        }
         break;
+    
+    case 'profile/toggle_notif':
+         $UsersController->ToggleNotif();
+
     case 'wishlist':
         $UsersController->MyWishListPage();
         break;

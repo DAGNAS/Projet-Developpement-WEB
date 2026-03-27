@@ -3,7 +3,18 @@
 
 namespace App\Models;
 
+use App\Core\SQLDatabase;
+
+
 class UsersModel extends Model {
+
+    public function __construct($database = null) {
+        if(is_null($database)) {
+            $this->database = new SQLDatabase();
+        } else {
+            $this->database = $database;
+        }
+    }
 
     public function getNavLinks($role) {
         $links = [
@@ -29,6 +40,24 @@ class UsersModel extends Model {
         ]
         ];
         return $links[$role];
+    }
+
+    public function getUserInfo($userEmail) {
+        return $this->database->getUserInfoByMail($userEmail);
+    }
+
+    public function updatePassword($data){
+        // Hachage du mot de passe pour la sécurité
+        $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
+        $this->database->updatePassword($data['email'], $hashedPassword);
+    }
+
+    public function SaveTimeLastConnexion($email) {
+        $this->database->SaveTimeLastConnexion($email);
+    }
+
+    public function toggleEmailNotifications($email){
+        $this->database->toggleEmailNotifications($email);
     }
 }
 
