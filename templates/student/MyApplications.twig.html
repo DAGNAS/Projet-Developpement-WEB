@@ -1,1 +1,51 @@
 {% extends "LoggedBase.twig.html" %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="assets/style/pages/MyApplications.css">
+{% endblock %}
+
+{% block content %}
+<div class="app-container">
+    <div class="account-header">
+        <h1 class="page-title">Mes Candidatures</h1>
+    </div>
+
+    <div class="app-grid">
+        <div class="column col-accepted">
+            <div class="col-header">✅ Acceptées</div>
+            <div class="card">
+                <img src="assets/images/company_logo.png" alt="logo">
+                <div class="card-info">
+                    <h3>Développeur Web</h3>
+                    <p>Google</p>
+                    <span class="badge badge-success">Offre Reçue</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="column col-pending">
+            <div class="col-header">⏳ En Attente</div>
+            <div class="card">
+                <img src="assets/images/company_logo.png" alt="logo">
+                <div class="card-info">
+                    <h3>Stage Design</h3>
+                    <p>Apple</p>
+                    <span class="badge badge-warning">En examen</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="column col-rejected">
+            <div class="col-header">❌ Refusées</div>
+            <div class="card">
+                <img src="assets/images/company_logo.png" alt="logo">
+                <div class="card-info">
+                    <h3>Analyste Data</h3>
+                    <p>Meta</p>
+                    <span class="badge badge-danger">Refusé</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
