@@ -86,14 +86,15 @@ Pour notre cas présent, l'architecture que nous avons établie a été choisie 
 ## Templates :
 
 
-## Vendor :
-
-
 ## Javascript :
 L'utiliastion de Javascript joue un rôle essentiel dans le développement de notre site web, puisqu'il permet d'ajouter de l'interraction et d'améliorer l'expérience utilisateur lors de sa navigation.
 
 Dans la gestion de notre plateforme, ce langage est souvent utilisé afin de gérer efficacement la vérification des information saisues dans les formulaires avant leur envoi comme un fichier, l’adresse email, le mot de passe ou les champs obligatoires. Cela permet d'éviter les erreurs et améliore la fiabilité des données récupérées et ainsi transmise par la suite.
 
 Il peut également être utilisé pour rendre le font-end plus dynamique avec la possibilité d'afficher ou de masquer des éléments sans même recharger la page.
+
+
+## Vendor :
+
 
 
