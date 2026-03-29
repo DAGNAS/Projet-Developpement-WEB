@@ -28,14 +28,6 @@ Notre groupe projet se compose de quatre personnes :
 - Mohamed SALL, développeur
 - Swan DAGNAS, Scrum Master, développeur
 
-## Base de données :
-
-
-## Schémas MCD :
-
-
-## Schéma MLD :
-
 
 ## Matrice des permissions :
 La matrice des permissions est également un élément important dans la gestion du développement de notre site web, car elle permet de définir les actions que peuvent effectuer les différents utilisateurs durant leur navigation. Elle garantit ainsi un accès réservé et contrôlé, tout en s’assurant que chaque utilisateur possède uniquement les fonctionnalités dont il a besoin.
@@ -51,14 +43,16 @@ Le tableau suivant répertorie les actions pouvant être réalisées par chacun 
 <img width="1705" height="732" alt="image" src="https://github.com/user-attachments/assets/b2a186f4-febd-4e3d-92a5-f92c0040a096" />
 
 
+## Étudiant :
 
-## Javascript :
-L'utiliastion de Javascript joue un rôle essentiel dans le développement de notre site web, puisqu'il permet d'ajouter de l'interraction et d'améliorer l'expérience utilisateur lors de sa navigation.
 
-Dans la gestion de notre plateforme, ce langage est souvent utilisé afin de gérer efficacement la vérification des information saisues dans les formulaires avant leur envoi comme un fichier, l’adresse email, le mot de passe ou les champs obligatoires. Cela permet d'éviter les erreurs et améliore la fiabilité des données récupérées et ainsi transmise par la suite.
+## Pilote :
 
-Il peut également être utilisé pour rendre le font-end plus dynamique avec la possibilité d'afficher ou de masquer des éléments sans même recharger la page.
 
+## Entreprise :
+
+
+## Administrateur :
 
 
 ## Architecture :
@@ -69,5 +63,37 @@ De plus, cette organisation simplifie grandement la correction de problèmes ain
 Pour notre cas présent, l'architecture que nous avons établie a été choisie en fonction du travail réalisé en amont et le résultat est le suivant :
 
 <img width="812" height="772" alt="image" src="https://github.com/user-attachments/assets/fab215a8-46e7-4d01-a87e-7cacdfd463fb" />
+
+
+## Base de données :
+
+
+## Schémas MCD :
+
+
+## Schéma MLD :
+
+
+## Assets :
+
+
+## Controllers :
+
+
+## Models :
+
+
+## Templates :
+
+
+## Vendor :
+
+
+## Javascript :
+L'utiliastion de Javascript joue un rôle essentiel dans le développement de notre site web, puisqu'il permet d'ajouter de l'interraction et d'améliorer l'expérience utilisateur lors de sa navigation.
+
+Dans la gestion de notre plateforme, ce langage est souvent utilisé afin de gérer efficacement la vérification des information saisues dans les formulaires avant leur envoi comme un fichier, l’adresse email, le mot de passe ou les champs obligatoires. Cela permet d'éviter les erreurs et améliore la fiabilité des données récupérées et ainsi transmise par la suite.
+
+Il peut également être utilisé pour rendre le font-end plus dynamique avec la possibilité d'afficher ou de masquer des éléments sans même recharger la page.
 
 
