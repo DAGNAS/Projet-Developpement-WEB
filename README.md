@@ -15,18 +15,18 @@ Pour atteindre cette finalité, plusieurs objectifs intermédiaires doivent êtr
 
 - Création et gestion d’une base de données permettant de stocker les informations sur les entreprises, les offres de stage et les utilisateurs.
 - Centralisation et simplification de l’accès aux offres de stage afin de faciliter la recherche pour les étudiants.
-- Gestion de différents profils utilisateurs (administrateur, pilote de promotion, étudiant) avec des droits d’accès adaptés.
-- Respect du cahier des charges et prise en compte des éventuelles demandes ou évolutions du client.
+- Gestion de différents profils utilisateurs avec des droits d’accès adaptés.
+- Respect du cahier des charges ainsi que la prise en compte des éventuelles demandes ou évolutions du client.
 - Mise en place d’un système de gestion et de suivi des candidatures.
 - Développement d’une plateforme web complète, structurée et sécurisée permettant une utilisation simple et efficace.
 
 
 ## Effectif :
 Notre groupe projet se compose de quatre personnes :
-- Kaëlig CLENET, chef de projet, développeur
+- Kaëlig CLENET, Product Owner, développeur
 - Anthony MOIZANT, développeur
 - Mohamed SALL, développeur
-- Swan DAGNAS, gestionnaire, développeur
+- Swan DAGNAS, Scrum Master, développeur
 
 ## Base de données :
 
