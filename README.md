@@ -19,8 +19,7 @@ Dans le cadre de notre formation nous devons réaliser un stage en entreprise en
 
 
 ## Effectif :
-<span style="text-decoration: underline;">Notre groupe projet se compose de quatre personnes :</span>
-- Kaëlig CLENET, chef de projet, développeur
+<u>Notre groupe projet se compose de quatre personnes :</u>- Kaëlig CLENET, chef de projet, développeur
 - Anthony MOIZANT, développeur
 - Mohamed SALL, développeur
 - Swan DAGNAS, gestionnaire, développeur
