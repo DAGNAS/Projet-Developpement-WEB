@@ -131,6 +131,14 @@ Dans cette partie de l’architecture de notre programme, nous retrouvons :
 - Le dossier "images" regroupant les images brutes utilisées pour la page de référence.
 - Le dossier "style" incluant tous les fichiers CSS, à la fois pour le style global ainsi que pour les autres pages.
 
+## Le modèle MVC :
+Le modèle MVC (Model-View-Controller) est un concept clé en développement web, qui permet de structurer un site ou une application en trois parties distinctes :
+- Le model : modèle
+- La view : vue
+- Le controller : contrôleur
+
+L’utilisation de cette architecture nous permet de mieux visualiser l’organisation du programme ains que  d’améliorer l’efficacité du développement de notre plateforme, en séparant clairement les tâches selon des besoins.
+
 ## Controllers :
 Les contrôleurs sont responsables de la gestion des requêtes de l'utilisateur ainsi que des réponses convenues. ils s'agissent comme des intermédiaires entre les mdoèles et les vues en créant un lien logique.
 - Le modèle : Il permet de gérer les données ainsi que la logique métier (Exemple : Récupérer des informations provenant d'une BDD).
@@ -144,7 +152,8 @@ Dans un cas concret, lors de l'authentification d'un utilisateur :
 
 
 ## Models :
-
+Les modèles ou models représentent la structure des données ainsi que la logique métier de la plateforme.
+- 
 
 ## Templates :
 
