@@ -102,19 +102,34 @@ De plus, cette méthode de connexion nécessite certains paramètres d’authent
 - Password
 - Port
 
-Ces paramètres sont donc stockés dans un fichier ".env", qui contient une liste de ces paramètres d'hautentification. Lorsqu’une nouvelle connexion est créée, PDO récupère automatiquement ces informations depuis ce fichier afin d’établir la connexion à la base de données. Cette méthode permet ainsi de sécuriser l'ensemble des informations sensibles tout en facilitant la connexion à notre base de données.
+Ces paramètres sont donc stockés dans un fichier ".env", qui contient une liste de ces paramètres d'hautentification. Lorsqu’une nouvelle connexion est créée, PDO récupère automatiquement ces informations depuis ce fichier afin d’établir la connexion à la base de données. De plus, avec le fichier ".gitignore" nous pouvons lors d'un commit restreindre certains fichiers qui ne doivent pas être envoyé comme ici le ".env" mais aussi lui même. Cette méthode permet ainsi de sécuriser l'ensemble des informations sensibles tout en facilitant la connexion à notre base de données.
+
+Le fichier ".gitignore" qui restreint les accès :
+
+<img width="230" height="270" alt="image" src="https://github.com/user-attachments/assets/b0f24644-6505-45c6-a10d-676642837a6e" />
 
 
 
+## Schéma MCD :
+Le Modèle Conceptuel de Données (MCD) est un diagramme qui représente de manière abstraite et structurée les entités, leurs attributs ainsi que les relations qui existent entre elles dans une base de données. Il permet de formaliser l’organisation des données, de limiter les redondances et de préparer la transition vers un modèle logique ou relationnel pouvant être implémenté dans un Système de Gestion de Base de Données (SGBD).
 
-## Schémas MCD :
+Le diagramme suivant va nous permettre ensuite de créer le Modèle Logique des Données (MLD) pour notre base de données :
+
+<img width="4710" height="3459" alt="mermaid-diagram-2026-03-30-212922" src="https://github.com/user-attachments/assets/c2400219-63aa-4f50-a54f-9941dbca2b97" />
 
 
 ## Schéma MLD :
+Le Modèle Logique des Données (MLD) constitue une étape intermédiaire dans le processus de modélisation des nos données. Il permet de transformer le Modèle Conceptuel des Données (MCD) en un schéma adapté à l’implémentation dans une base de données relationnelle. Ce schéma reprend les informations définies dans le MCD tout en y ajoutant des éléments techniques tels que les clés primaires, les clés étrangères et les relations entre les tables. Le MLD sert ainsi de base à la mise en œuvre physique de la base de données et facilite la compréhension de la structure des données ainsi que des liens entre les différentes entités.
 
+Le schéma suivant est ce lui de notre futur base de données :
+
+<img width="5646" height="4516" alt="mermaid-diagram-2026-03-30-201940" src="https://github.com/user-attachments/assets/6f0836cb-08f4-4aba-b5ca-5c4d1a4a55eb" />
 
 ## Assets :
-
+Dans cette partie de l’architecture de notre programme, nous retrouvons :
+- Le dossier "font" contenant le thème de police Zanlando_Sans_Expanded.
+- Le dossier "images" regroupant les images brutes utilisées pour la page de référence.
+- Le dossier "style" incluant tous les fichiers CSS, à la fois pour le style global ainsi que pour les autres pages.
 
 ## Controllers :
 
@@ -128,10 +143,15 @@ Ces paramètres sont donc stockés dans un fichier ".env", qui contient une list
 ## Javascript :
 L'utiliastion de Javascript joue un rôle essentiel dans le développement de notre site web, puisqu'il permet d'ajouter de l'interraction et d'améliorer l'expérience utilisateur lors de sa navigation.
 
-Dans la gestion de notre plateforme, ce langage est souvent utilisé afin de gérer efficacement la vérification des information saisues dans les formulaires avant leur envoi comme un fichier, l’adresse email, le mot de passe ou les champs obligatoires. Cela permet d'éviter les erreurs et améliore la fiabilité des données récupérées et ainsi transmise par la suite.
+Dans la gestion de notre plateforme, ce langage est souvent utilisé afin de gérer efficacement la vérification des information saisies dans les formulaires avant leur envoi comme un fichier, l’adresse email, le mot de passe ou les champs obligatoires. Cela permet d'éviter les erreurs et améliore la fiabilité des données récupérées et ainsi transmise par la suite.
 
 Il peut également être utilisé pour rendre le font-end plus dynamique avec la possibilité d'afficher ou de masquer des éléments sans même recharger la page.
 
+Pour Job's Horizon nous avons principalement utilisé ce langage sur :
+- Les formulaires de connexions ainsi que pour postuler à une offre
+- La gestion de boutons permettant de naviguer plus facilement
+- La gestion de la wish-list et des notifications
+- Le système d'avis d'entreprise
 
 ## Vendor :
 
