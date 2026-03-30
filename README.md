@@ -139,24 +139,28 @@ Le modèle MVC (Model-View-Controller) est un concept clé en développement web
 
 L’utilisation de cette architecture nous permet de mieux visualiser l’organisation du programme ains que  d’améliorer l’efficacité du développement de notre plateforme, en séparant clairement les tâches selon des besoins.
 
+## Models :
+Les models représentent la structure des données ainsi que la logique métier de la plateforme. 
+- Ils intérragissent avec la base de données pour récupérer, créer, modifier ou supprimer des informations.
+- Ils peuvent effectuer des calculs ou du traitement sur ces données.
+- Ils ne s'occupent pas de l'affchage mais prépare seulement les informations que les controllers pourront envoyer aux views. 
+
+
+## Views ou tempaltes :
+Les views représentent l'affichage des informations à l'utilisateur. Pour simplifier, Elle permet d'afficher correctements les donées à l'utilisateur par le biais du graphisme 
+- Elles reçoivent les données préparées par le controller et affiches les bons éléments en fonction.
+- Elles permettent alors d'adapter l'interface de l'utilisateur selon son type (étudiant, pilote, ...) ou ses choix réalisés.
+- Elles gèrent seulement l'affichage des informations demandées.
+
 ## Controllers :
-Les contrôleurs sont responsables de la gestion des requêtes de l'utilisateur ainsi que des réponses convenues. ils s'agissent comme des intermédiaires entre les mdoèles et les vues en créant un lien logique.
+Les controllers sont responsables de la gestion des requêtes de l'utilisateur ainsi que des réponses convenues. ils s'agissent comme des intermédiaires entre les mdodels et les views en créant un lien logique.
 - Le modèle : Il permet de gérer les données ainsi que la logique métier (Exemple : Récupérer des informations provenant d'une BDD).
 - La vue : Elle permet d'afficher correctements les donées à l'utilisateur par le biais du graphisme (Exemple : HTML, templates, ...).
 
 Dans un cas concret, lors de l'authentification d'un utilisateur :
 1. L’utilisateur sélectionne son type de profil et renseigne ses informations personnelles (email, mot de passe, ...).
 2. Une fois le formulaire envoyé, le contrôleur chargé de la connexion récupère ces données et vérifie via la base de données si elles sont correctes.
-3. Si elle le sont, alors le contrôleur redirige l'utilisateur vers la page appropriée de son profil, avec les information corresdantes affichées.
-
-
-
-## Models :
-Les modèles ou models représentent la structure des données ainsi que la logique métier de la plateforme.
-- 
-
-## Templates :
-
+3. Si elle le sont, alors le contrôleur redirige l'utilisateur vers la page appropriée de son profil grâce à la view avec les informations corresdantes affichées.
 
 ## Javascript :
 L'utiliastion de Javascript joue un rôle essentiel dans le développement de notre site web, puisqu'il permet d'ajouter de l'interraction et d'améliorer l'expérience utilisateur lors de sa navigation.
@@ -172,6 +176,7 @@ Pour Job's Horizon nous avons principalement utilisé ce langage sur :
 - Le système d'avis d'entreprise
 
 ## Vendor :
+Le répertoire "vendor" contient les bibliothèques ainsi que les dépendances externes que Job's Horizon à besoin pour son fonctionnement.
 
-
+<img width="109" height="194" alt="image" src="https://github.com/user-attachments/assets/576e3e61-0df3-4b55-b43a-c73ef47578ce" />
 
