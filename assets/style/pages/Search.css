@@ -125,17 +125,25 @@
 .view-btn:hover {
     background: orange;
 }
-.pagination {
+.pagination-container {
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    flex-direction: column;
+    align-items: center;
     margin: 30px 0;
 }
 
+.pagination {
+    display: flex;
+    gap: 10px;
+     justify-content: center; /* 👈 centre les boutons */
+    align-items: center;
+    margin-bottom: 10px;
+}
+
 .pagination a {
-    padding: 10px 15px;
-    background-color: #0b1a3c; /* bleu foncé */
-    color: #ffa500; /* orange */
+    padding: 10px 14px;
+    background-color: #0b1a3c;
+    color: #ffa500;
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
@@ -151,13 +159,37 @@
     background-color: #ffa500;
     color: #0b1a3c;
 }
-.pagination a.active {
-    background-color: #ffa500; /* orange */
-    color: #0b1a3c; /* bleu foncé */
-    font-weight: bold;
+.pagination-jump {
+    display: flex;
+     justify-content: center; /* 👈 centre les boutons */
+    align-items: center;
+    gap: 8px;
 }
-.pagination a.active {
-    background-color: #ffa500; /* orange */
-    color: #0b1a3c; /* bleu foncé */
-    font-weight: bold;
+
+.pagination-jump input {
+    width: 70px;
+    padding: 6px;
+    border-radius: 6px;
+    
+    background-color: #0b1a3c; /* bleu du site */
+    color: #ffa500; /* texte orange */
+
+    border: 2px solid #ffa500;
+    outline: none;
+}
+
+.pagination-jump button {
+    padding: 6px 12px;
+    background-color: #ffa500;
+    color: #0b1a3c;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.pagination-jump input::placeholder {
+    color: #ffa500;
+    opacity: 0.7;
+}
+.pagination-jump input:focus {
+    box-shadow: 0 0 5px #ffa500;
 }
