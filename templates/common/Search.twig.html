@@ -8,6 +8,7 @@
 
 
 {% block content %}
+
 <section class="search-section">
     <h1>Trouvez votre future entreprise</h1>
     <div class="search-bar">
@@ -34,4 +35,13 @@
         </div>
     {% endfor %}
 </section>
+<div class="pagination">
+    {% for i in 1..totalPages %}
+        <a href="?uri=search&page={{ i }}"
+           class="{% if i == page %}active{% endif %}">
+            {{ i }}
+        </a>
+    {% endfor %}
+</div>
 {% endblock %}
+

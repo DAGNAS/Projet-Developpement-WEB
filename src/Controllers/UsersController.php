@@ -22,9 +22,20 @@ class UsersController extends Controller {
     }
 
     public function SearchPage() {
+        
+        $page = $_GET['page'] ?? 1;
+    $page = (int)$page;
+
+    $limit = 8;
+    $offset = ($page - 1) * $limit;
+
+     $total = $this->SearchModel->countCompanies();
+    $totalPages = ceil($total / $limit);
+    
         $nav = $this->Dashboard();
-        $companies = $this->SearchModel->ListAllCompany();
-        echo $this->templateEngine->render('common/Search.twig.html', ['nav' => $nav, 'companies' => $companies]);
+        $companies = $this->SearchModel->getCompaniesPaginated($limit, $offset);
+        echo $this->templateEngine->render('common/Search.twig.html', ['nav' => $nav, 'companies' => $companies, 'page' => $page,
+        'totalPages' => $totalPages]);
     }
     
     public function MyAccountPage() {
