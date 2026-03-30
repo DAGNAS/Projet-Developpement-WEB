@@ -33,8 +33,8 @@ class UsersController extends Controller {
         $totalPages = ceil($total / $limit);
     
         $nav = $this->Dashboard();
-        $companies = $this->SearchModel->getAllJobApplicationPaginated($limit, $offset);
-        echo $this->templateEngine->render('common/Search.twig.html', ['nav' => $nav, 'companies' => $companies, 'page' => $page,
+        $JobApplication = $this->SearchModel->getAllJobApplicationPaginated($limit, $offset);
+        echo $this->templateEngine->render('common/Search.twig.html', ['nav' => $nav, 'JobApplication' => $JobApplication, 'page' => $page,
         'totalPages' => $totalPages]);
     }
     

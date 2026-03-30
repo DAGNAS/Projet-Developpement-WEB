@@ -19,16 +19,16 @@
 </section>
 
 <section class="results-container">
-    {% for company in companies %}
+    {% for application in JobApplications %}
         <div class="company-grid">
             <div class="company-card">
                 <div class="company-logo">
                     <img src="assets/images/menu/body/enterprise-icone.png" alt="Logo Entreprise">
                 </div>
                 <div class="company-info">
-                    <h3>{{ company.nom }}</h3>
+                    <h3>{{ application.title }}</h3>
                     <p class="sector">Secteur : {{ company.secteur }}</p>
-                    <p class="location">📍 {{ company.localisation }}</p>
+                    <p class="location">📍 {{ application.location }}</p>
                     <a href="#" class="view-btn">Voir les offres</a>
                 </div>
             </div>
