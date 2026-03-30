@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UsersModel;
+use App\Models\JobApplicationModel;
 use App\Models\SearchModel;
 use DateTime;
 
@@ -10,6 +11,7 @@ class UsersController extends Controller {
 
     public function __construct($templateEngine) {
         $this->UsersModel = new UsersModel();
+        $this->JobApplicationModel = new JobApplicationModel();
         $this->SearchModel = new SearchModel();
         $this->templateEngine = $templateEngine;
     }
@@ -96,8 +98,11 @@ class UsersController extends Controller {
     }
 
     public function MyApplicationsPage() {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+
         $nav = $this->Dashboard();
-        echo $this->templateEngine->render('student/MyApplications.twig.html', ['nav' => $nav]);
+        $application = $this->JobApplicationModel->GetAllApplicationByMail($_SESSION['user_id']);
+        echo $this->templateEngine->render('student/MyApplications.twig.html', ['nav' => $nav, 'application' => $application]);
     }
 
     public function MyStudentPage() {

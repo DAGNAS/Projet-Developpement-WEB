@@ -11,6 +11,7 @@ abstract class Controller {
      * @var Model null
      */
     protected $UsersModel = null;
+    protected $JobApplicationModel = null;
     protected $SearchModel = null;
     protected $SecurityModel = null;
 
