@@ -132,6 +132,15 @@ Dans cette partie de l’architecture de notre programme, nous retrouvons :
 - Le dossier "style" incluant tous les fichiers CSS, à la fois pour le style global ainsi que pour les autres pages.
 
 ## Controllers :
+Les contrôleurs sont responsables de la gestion des requêtes de l'utilisateur ainsi que des réponses convenues. ils s'agissent comme des intermédiaires entre les mdoèles et les vues en créant un lien logique.
+- Le modèle : Il permet de gérer les données ainsi que la logique métier (Exemple : Récupérer des informations provenant d'une BDD).
+- La vue : Elle permet d'afficher correctements les donées à l'utilisateur par le biais du graphisme (Exemple : HTML, templates, ...).
+
+Dans un cas concret, lors de l'authentification d'un utilisateur :
+1. L’utilisateur sélectionne son type de profil et renseigne ses informations personnelles (email, mot de passe, ...).
+2. Une fois le formulaire envoyé, le contrôleur chargé de la connexion récupère ces données et vérifie via la base de données si elles sont correctes.
+3. Si elle le sont, alors le contrôleur redirige l'utilisateur vers la page appropriée de son profil, avec les information corresdantes affichées.
+
 
 
 ## Models :
