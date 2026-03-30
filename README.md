@@ -20,14 +20,12 @@ Pour atteindre cette finalité, plusieurs objectifs intermédiaires doivent êtr
 - Mise en place d’un système de gestion et de suivi des candidatures.
 - Développement d’une plateforme web complète, structurée et sécurisée permettant une utilisation simple et efficace.
 
-
 ## Effectif :
 Notre groupe projet se compose de quatre personnes :
 - Kaëlig CLENET, Product Owner, développeur
 - Anthony MOIZANT, développeur
 - Mohamed SALL, développeur
 - Swan DAGNAS, Scrum Master, développeur
-
 
 ## Matrice des permissions :
 La matrice des permissions est également un élément important dans la gestion du développement de notre site web, car elle permet de définir les actions que peuvent effectuer les différents utilisateurs durant leur navigation. Elle garantit ainsi un accès réservé et contrôlé, tout en s’assurant que chaque utilisateur possède uniquement les fonctionnalités dont il a besoin.
@@ -38,22 +36,43 @@ De ce fait, nous avons quatre profils distincts :
 - Entreprise
 - Administrateur
 
-Le tableau suivant répertorie les actions pouvant être réalisées par chacun des utilisateurs :
+
+## Étudiant :
+L'étudiant peut par exemple :
+- Rechercher et afficher des offres
+- Modifier ertaines informations de son compte
+- Évaluer les entreprises
+- Gérer sa wish-list
+
+## Pilote :
+Au contraire, le pilote dispose également de permissions mais celles-ci peuvent être différentes :
+- Rechercher et afficher un compte étudiant
+- Supprimer un compte étudiant
+- Afficher la liste des offres auxquelles les élèves du pilote ont postulé
+- Créer un compte étudiant
+
+## Entreprise :
+L'entreprise, quant à elle, peut :
+- Créer une entreprise
+- Créer une offre de stage
+- modofier une entreprise avec certaines limites
+- Consulter les statisques des offres
+
+## Administrateur :
+L’administrateur dispose de pratiquement tous les droits, à l’exception de trois permissions spécifiques liées à l’entreprise. Cependant, puisqu'il peut changer de profil à sa guise afin de tester l’intégralité de l’environnement, il peut alors accéder à ces permissions indirectement, mais pas directement depuis son profil administrateur personnel.
+
+
+Les permissions que nous venons de présenter sont exhaustiveset elles ne représentent pas l’ensemble de toutes celles qui sont possibles pour chaque profile.
+
+C'est pourquoi le tableau suivant répertorie toutes les actions pouvant être réalisées par chacun des utilisateurs :
 
 <img width="1705" height="732" alt="image" src="https://github.com/user-attachments/assets/b2a186f4-febd-4e3d-92a5-f92c0040a096" />
 
+Les réponses « Oui mais à échelle réduite » permettent de nuancer certaines permissions qui peuvent ne pas être totalement libres. Elles indiquent qu’une action est possible, mais avec certaines limitations ou restrictions.
 
-## Étudiant :
+Par exemple, un étudiant peut modifier son compte, mais uniquement dans certaines limites. Il pourra par exemple modifier des informations comme son CV ou encore son mot de passe mais le changement du prénom ou du nom peut être restreint afin d’éviter des erreurs ou des modifications contraignantes.
 
-
-## Pilote :
-
-
-## Entreprise :
-
-
-## Administrateur :
-
+Ce système de permissions nous permet de garder un certain contrôle sur les informations sensibles tout en laissant aux utilisateurs une certaine autonomie dans leur choix.
 
 ## Architecture :
 Une bonne architecture est primordiale puisqu'elle permet d'organiser avec rigueur le projet tout en facilitant son développement, sa maintenance ainsi que son évolution future. Cela permet aussi de structurer le code de manière visuelle, claire et précise pour toute l'équipe projet tout en gardant une logique et un plan fixe.
@@ -66,6 +85,26 @@ Pour notre cas présent, l'architecture que nous avons établie a été choisie 
 
 
 ## Base de données :
+Pour notre plateforme de recherche de stage, l'implémentation d'une base de données est obligatoire afin de stocker, organiser et gérer les informations nécessaires au bon fonctionnement de celle-ci.
+Pour ce faire, nous utilisons une base de données en localhost grâce à "PhpMyAdmin", que nous avons déjà utilisé dans un prosit précédent. Cet outil nous permet de créer, gérer et administrer facilement notre base de données MySQL.
+La génération de nos données sont réaliser principalement avec le site internet "MOCKAROO", qui permet de créer rapidement des données fictives pour nos différentes tables. Ces données sont ensuite importées dans notre base de données afin de simuler un environnement réel ainsi que de tester les fonctionnalités de la plateforme.
+
+Lien vers MOCKAROO : https://mockaroo.com/
+
+<img width="629" height="410" alt="image" src="https://github.com/user-attachments/assets/921b2648-bb6f-415a-8a2d-f185a1672b47" />
+
+Pour connecter notre base de données locale à notre site web, nous utilisons PDO. Il s'agit d'une extension de PHP permettant d’établir une connexion sécurisée et flexible avec différentes bases de données, notamment MySQL.
+
+De plus, cette méthode de connexion nécessite certains paramètres d’authentification. Pour des raisons de sécurité, ces informations ne doivent en aucun cas apparaître dans le dépôt GitHub du projet.
+- Host
+- BDDname
+- User
+- Password
+- Port
+
+Ces paramètres sont donc stockés dans un fichier ".env", qui contient une liste de ces paramètres d'hautentification. Lorsqu’une nouvelle connexion est créée, PDO récupère automatiquement ces informations depuis ce fichier afin d’établir la connexion à la base de données. Cette méthode permet ainsi de sécuriser l'ensemble des informations sensibles tout en facilitant la connexion à notre base de données.
+
+
 
 
 ## Schémas MCD :
