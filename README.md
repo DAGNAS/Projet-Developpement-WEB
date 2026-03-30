@@ -81,7 +81,7 @@ De plus, cette organisation simplifie grandement la correction de problèmes ain
 
 Pour notre cas présent, l'architecture que nous avons établie a été choisie en fonction du travail réalisé en amont et le résultat est le suivant :
 
-<img width="812" height="772" alt="image" src="https://github.com/user-attachments/assets/fab215a8-46e7-4d01-a87e-7cacdfd463fb" />
+<img width="526" height="500" alt="image" src="https://github.com/user-attachments/assets/fab215a8-46e7-4d01-a87e-7cacdfd463fb" />
 
 
 ## Base de données :
