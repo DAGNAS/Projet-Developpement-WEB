@@ -1,8 +1,4 @@
 <?php
-
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
 session_start([
 'cookie_httponly' => true, // Protection contre le vol de session via JS (XSS)
 'cookie_secure' => false, // Mettre à 'true' si vous utilisez HTTPS

@@ -24,16 +24,16 @@ class UsersController extends Controller {
     public function SearchPage() {
         
         $page = $_GET['page'] ?? 1;
-    $page = (int)$page;
+        $page = (int)$page;
 
-    $limit = 8;
-    $offset = ($page - 1) * $limit;
+        $limit = 8;
+        $offset = ($page - 1) * $limit;
 
-     $total = $this->SearchModel->countCompanies();
-    $totalPages = ceil($total / $limit);
+        $total = $this->SearchModel->countJobApplication();
+        $totalPages = ceil($total / $limit);
     
         $nav = $this->Dashboard();
-        $companies = $this->SearchModel->getCompaniesPaginated($limit, $offset);
+        $companies = $this->SearchModel->getAllJobApplicationPaginated($limit, $offset);
         echo $this->templateEngine->render('common/Search.twig.html', ['nav' => $nav, 'companies' => $companies, 'page' => $page,
         'totalPages' => $totalPages]);
     }
