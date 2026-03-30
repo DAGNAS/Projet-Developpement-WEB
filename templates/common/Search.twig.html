@@ -36,12 +36,38 @@
     {% endfor %}
 </section>
 <div class="pagination">
-    {% for i in 1..totalPages %}
-        <a href="?uri=search&page={{ i }}"
-           class="{% if i == page %}active{% endif %}">
-            {{ i }}
-        </a>
+
+    {# aller à la première page #}
+    {% if page > 1 %}
+        <a href="?uri=search&page=1">«</a>
+    {% endif %}
+
+    {# pages autour #}
+    {% for i in (page - 1)..(page + 1) %}
+        {% if i >= 1 and i <= totalPages %}
+            <a href="?uri=search&page={{ i }}"
+               class="{% if i == page %}active{% endif %}">
+                {{ i }}
+            </a>
+        {% endif %}
     {% endfor %}
+
+    {# aller à la dernière page #}
+    {% if page < totalPages %}
+        <a href="?uri=search&page={{ totalPages }}">»</a>
+    {% endif %}
+
 </div>
+<form method="get" class="pagination-jump">
+    <input type="hidden" name="uri" value="search">
+
+    <input type="number"
+           name="page"
+           min="1"
+           max="{{ totalPages }}"
+           placeholder="Page">
+
+    <button type="submit">Go</button>
+</form>
 {% endblock %}
 
