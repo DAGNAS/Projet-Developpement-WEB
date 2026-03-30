@@ -1,8 +1,6 @@
 <?php
 namespace App\Models;
 
-
-
 use App\Core\SQLDatabase;
 
 class SearchModel extends Model {
@@ -19,19 +17,13 @@ class SearchModel extends Model {
         return $this->database->getAllCompany();
     }
     
-   public function getCompaniesPaginated($limit, $offset) {
-    $companies = $this->database->getAllCompany();
+    public function getCompaniesPaginated($limit, $offset) {
+        $companies = $this->database->getAllCompany();
+        return array_slice($companies, $offset, $limit);
+    }
 
-    return array_slice($companies, $offset, $limit);
+    public function countCompanies() {
+        $companies = $this->database->getAllCompany();
+        return count($companies);
+    }
 }
-
-public function countCompanies() {
-    $companies = $this->database->getAllCompany();
-
-    return count($companies);
-}
-    
-
-}
-
-?>
