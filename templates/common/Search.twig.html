@@ -11,11 +11,33 @@
 
 <section class="search-section">
     <h1>Trouvez votre future entreprise</h1>
-    <div class="search-bar">
-        <input type="text" placeholder="Nom de l'entreprise, secteur...">
-        <input type="text" placeholder="Localisation (ex: La Rochelle)">
-        <button class="search-btn">Rechercher</button>
-    </div>
+    <form action="?uri=search" method="GET" class="search-bar">
+        {# On garde l'URI pour ton routeur PHP #}
+        <input type="hidden" name="uri" value="search">
+
+        <div class="search-group">
+            <i class="fas fa-search icon"></i>
+            <input type="text" name="q" placeholder="Métier, entreprise...">
+        </div>
+
+        <div class="search-group">
+            <i class="fas fa-map-marker-alt icon"></i>
+            <input type="text" name="loc" placeholder="Ville ou Code Postal">
+        </div>
+
+        <div class="search-group">
+            <i class="fas fa-briefcase icon"></i>
+            <select name="cat">
+                <option value="">Tous les secteurs</option>
+                <option value="Informatique">Informatique</option>
+                <option value="Construction">Construction</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Design">Design</option>
+            </select>
+        </div>
+
+        <button type="submit" class="search-btn">Rechercher</button>
+    </form>
 </section>
 
 <section class="results-container">
@@ -27,7 +49,7 @@
                 </div>
                 <div class="company-info">
                     <h3>{{ application.title }}</h3>
-                    <p class="sector">Secteur : </p>
+                    <p class="sector">Secteur : {{ application.sector }}</p>
                     <p class="location">📍 {{ application.location }}</p>
                     <a href="#" class="view-btn">Voir les offres</a>
                 </div>
