@@ -17,7 +17,8 @@ class UsersController extends Controller {
     }
 
     public function SearchPage() {
-        
+        if (session_status() === PHP_SESSION_NONE) session_start();    
+
         $page = $_GET['page'] ?? 1;
         $page = (int)$page;
 
@@ -26,11 +27,22 @@ class UsersController extends Controller {
 
         $total = $this->SearchModel->countJobApplication();
         $totalPages = ceil($total / $limit);
-    
+
+        $_SESSION['search_query'] = $_GET['q'] ?? $_SESSION['search_query'] ?? '';
+        $_SESSION['search_location'] = $_GET['loc'] ?? $_SESSION['search_location'] ?? '';
+        $_SESSION['search_category'] = $_GET['cat'] ?? $_SESSION['search_category'] ?? '';
+
         $nav = $this->Dashboard();
         $JobApplication = $this->SearchModel->getAllJobApplicationPaginated($limit, $offset);
-        echo $this->templateEngine->render('common/Search.twig.html', ['nav' => $nav, 'JobApplication' => $JobApplication, 'page' => $page,
-        'totalPages' => $totalPages]);
+        echo $this->templateEngine->render('common/Search.twig.html', [
+            'nav' => $nav, 
+            'JobApplication' => $JobApplication, 
+            'query' => $_SESSION['search_query'],
+            'location' => $_SESSION['search_location'],
+            'category' => $_SESSION['search_category'],
+            'page' => $page,
+            'totalPages' => $totalPages
+        ]);
     }
 
     public function MyWishListPage() {
