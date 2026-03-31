@@ -48,11 +48,11 @@ switch ($uri) {
     case 'search':
         $UsersController->SearchPage();
         break;
-    
+
     case 'view_offer':
         $UsersController->ViewOfferPage();
         break;
-    
+
     // --- ROUTES PROFIL --- //
     case 'profile':                 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -88,6 +88,12 @@ switch ($uri) {
         break;
     case 'students':
     $controller->MyStudentPage();
+        break;
+    case 'change-account':
+        $UsersController->ChangeAccountPage();
+        break;
+    case 'create-account':
+        $UsersController->CreateAccountPage();
         break;
 
     default:

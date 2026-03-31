@@ -20,7 +20,10 @@ class UsersModel extends Model {
         $links = [
         'admin' => [
             ['nom' => 'Recherche', 'lien' => '?uri=search'],
-            ['nom' => 'Stats Système', 'lien' => '?uri=system']
+            ['nom' => 'Stats Système', 'lien' => '?uri=system'],
+            ['nom' => 'Mon Compte', 'lien' => '?uri=profile'],
+            ['nom' => 'Changer de profile', 'lien' => '?uri=change-account'],
+            ['nom' => 'Créer un profile', 'lien' => '?uri=create-account']
         ],
         'company' => [
             ['nom' => 'Recherche', 'lien' => '?uri=search'],

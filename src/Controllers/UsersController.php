@@ -43,14 +43,14 @@ class UsersController extends Controller {
             $_SESSION['search_query'], $_SESSION['search_location'], $_SESSION['search_sector'], $_SESSION['search_type'],
             $limit, $offset
         );
-        
+
         $total = $personalQuery['count'];
         $totalPages = ceil($total / $limit);
 
         $nav = $this->Dashboard();
         echo $this->templateEngine->render('common/Search.twig.html', [
-            'nav' => $nav, 
-            'JobApplication' => $personalQuery['query'], 
+            'nav' => $nav,
+            'JobApplication' => $personalQuery['query'],
             'query' => $_SESSION['search_query'],
             'location' => $_SESSION['search_location'],
             'category' => $_SESSION['search_sector'],
@@ -81,7 +81,7 @@ class UsersController extends Controller {
         ]);
     }
 
-    
+
 
     public function MyPostPage() {
         $nav = $this->Dashboard();
@@ -116,6 +116,15 @@ class UsersController extends Controller {
         'nav' => $nav,
         'students' => $students
     ]);
+    }
+    public function ChangeAccountPage() {
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('admin/ChangeAccount.twig.html', ['nav' => $nav]);
+    }
+
+    public function CreateAccountPage() {
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('admin/CreateAccount.twig.html', ['nav' => $nav]);
     }
 }
 
