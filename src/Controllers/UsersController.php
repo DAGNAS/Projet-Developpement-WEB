@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UsersModel;
+use App\Models\JobApplicationModel;
 use App\Models\SearchModel;
 use DateTime;
 
@@ -10,6 +11,7 @@ class UsersController extends Controller {
 
     public function __construct($templateEngine) {
         $this->UsersModel = new UsersModel();
+        $this->JobApplicationModel = new JobApplicationModel();
         $this->SearchModel = new SearchModel();
         $this->templateEngine = $templateEngine;
     }
@@ -22,17 +24,17 @@ class UsersController extends Controller {
     public function SearchPage() {
         
         $page = $_GET['page'] ?? 1;
-    $page = (int)$page;
+        $page = (int)$page;
 
-    $limit = 8;
-    $offset = ($page - 1) * $limit;
+        $limit = 8;
+        $offset = ($page - 1) * $limit;
 
-     $total = $this->SearchModel->countCompanies();
-    $totalPages = ceil($total / $limit);
+        $total = $this->SearchModel->countJobApplication();
+        $totalPages = ceil($total / $limit);
     
         $nav = $this->Dashboard();
-        $companies = $this->SearchModel->getCompaniesPaginated($limit, $offset);
-        echo $this->templateEngine->render('common/Search.twig.html', ['nav' => $nav, 'companies' => $companies, 'page' => $page,
+        $JobApplication = $this->SearchModel->getAllJobApplicationPaginated($limit, $offset);
+        echo $this->templateEngine->render('common/Search.twig.html', ['nav' => $nav, 'JobApplication' => $JobApplication, 'page' => $page,
         'totalPages' => $totalPages]);
     }
     
@@ -107,8 +109,11 @@ class UsersController extends Controller {
     }
 
     public function MyApplicationsPage() {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+
         $nav = $this->Dashboard();
-        echo $this->templateEngine->render('student/MyApplications.twig.html', ['nav' => $nav]);
+        $application = $this->JobApplicationModel->GetAllApplicationByMail($_SESSION['user_id']);
+        echo $this->templateEngine->render('student/MyApplications.twig.html', ['nav' => $nav, 'application' => $application]);
     }
 
     public function MyStudentPage() {

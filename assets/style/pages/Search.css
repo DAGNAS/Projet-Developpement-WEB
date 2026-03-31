@@ -53,10 +53,8 @@
     margin: 40px auto;
     padding: 20px;
 
-    /* On utilise Grid sur le parent direct des cartes */
     display: grid;
-    /* Création automatique de colonnes de 300px min, 1fr max */
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(4, 1fr); 
     gap: 30px; 
 }
 
@@ -69,7 +67,8 @@
     flex-direction: column;
     transition: transform 0.3s, box-shadow 0.3s;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    height: 100%; /* Pour que toutes les cartes aient la même hauteur */
+    height: 100%;
+    width: 100%;
 }
 
 .company-card:hover {
@@ -125,6 +124,8 @@
 .view-btn:hover {
     background: orange;
 }
+
+
 .pagination-container {
     display: flex;
     flex-direction: column;
@@ -192,4 +193,16 @@
 }
 .pagination-jump input:focus {
     box-shadow: 0 0 5px #ffa500;
+}
+
+/* Pour Chrome, Safari, Edge et Opera */
+.pagination-jump input::-webkit-outer-spin-button,
+.pagination-jump input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Pour Firefox */
+.pagination-jump input[type=number] {
+  -moz-appearance: textfield;
 }

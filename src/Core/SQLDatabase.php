@@ -41,14 +41,20 @@ class SQLDatabase implements Database {
         return $liste;
     }
 
+    public function getAllJobApplication(){
+        $stmt = $this->database->query("SELECT * FROM job_offers");
+        $liste = $stmt->fetchAll();
+        return $liste;
+    }
+
     public function getUserInfoByMail($userEmail){
-        $stmt = $this->database->prepare("SELECT * FROM test_users WHERE email = :email");
+        $stmt = $this->database->prepare("SELECT * FROM users WHERE email = :email");
         $stmt->execute(['email' => $userEmail]);
         return $stmt->fetch();
     }
 
     public function updatePassword($email, $hash) {
-        $stmt = $this->database->prepare("UPDATE test_users SET password = :pass WHERE email = :email");
+        $stmt = $this->database->prepare("UPDATE users SET password = :pass WHERE email = :email");
         $stmt->execute([
             'pass'  => $hash,
             'email' => $email
@@ -56,16 +62,34 @@ class SQLDatabase implements Database {
     }
 
     public function SaveTimeLastConnexion($email) {
-        $stmt = $this->database->prepare("UPDATE test_users SET date_login = NOW() WHERE email = :email");
+        $stmt = $this->database->prepare("UPDATE users SET date_login = NOW() WHERE email = :email");
         $stmt->execute([
             'email'         => $email
         ]);
     }
 
     public function toggleEmailNotifications($email) {
-        $stmt = $this->database->prepare("UPDATE test_users SET email_notif = NOT email_notif WHERE email = :email");
+        $stmt = $this->database->prepare("UPDATE users SET email_notif = NOT email_notif WHERE email = :email");
         $stmt->execute([
             'email'         => $email
         ]);
+    }
+
+    public function GetAllApplicationByMail($email) {
+        $tmp_data = $this->getUserInfoByMail($email);
+
+        $stmt = $this->database->prepare("  SELECT  a.status, 
+                                                    a.apply_date, 
+                                                    jo.title AS job_title, 
+                                                    c.nom AS company_name,
+                                                    c.logo AS company_logo
+                                            FROM applications a
+                                            JOIN job_offers jo ON a.id_job_offer = jo.id
+                                            JOIN company c ON jo.id_company = c.id
+                                            WHERE a.id_student = :id_student;");
+        $stmt->execute([
+            'id_student'    => $tmp_data['id']
+        ]);
+        return $stmt->fetchAll();
     }
 }
