@@ -45,31 +45,31 @@ class SQLDatabase implements Database {
         return $liste;
     }
 
-    public function getUserInfoByMail($userEmail){
-        $stmt = $this->database->prepare("SELECT * FROM test_users WHERE email = :email");
-        $stmt->execute(['email' => $userEmail]);
-        return $stmt->fetch();
-    }
+public function getUserInfoByMail($userEmail){
+    $stmt = $this->database->prepare("SELECT * FROM users WHERE email = :email");
+    $stmt->execute(['email' => $userEmail]);
+    return $stmt->fetch();
+}
 
-    public function updatePassword($email, $hash) {
-        $stmt = $this->database->prepare("UPDATE test_users SET password = :pass WHERE email = :email");
-        $stmt->execute([
-            'pass'  => $hash,
-            'email' => $email
-        ]);
-    }
+public function updatePassword($email, $hash) {
+    $stmt = $this->database->prepare("UPDATE users SET password = :pass WHERE email = :email");
+    $stmt->execute([
+        'pass'  => $hash,
+        'email' => $email
+    ]);
+}
 
-    public function SaveTimeLastConnexion($email) {
-        $stmt = $this->database->prepare("UPDATE test_users SET date_login = NOW() WHERE email = :email");
-        $stmt->execute([
-            'email'         => $email
-        ]);
-    }
+public function SaveTimeLastConnexion($email) {
+    $stmt = $this->database->prepare("UPDATE users SET date_login = NOW() WHERE email = :email");
+    $stmt->execute([
+        'email' => $email
+    ]);
+}
 
-    public function toggleEmailNotifications($email) {
-        $stmt = $this->database->prepare("UPDATE test_users SET email_notif = NOT email_notif WHERE email = :email");
-        $stmt->execute([
-            'email'         => $email
-        ]);
-    }
+public function toggleEmailNotifications($email) {
+    $stmt = $this->database->prepare("UPDATE users SET email_notif = NOT email_notif WHERE email = :email");
+    $stmt->execute([
+        'email' => $email
+    ]);
+}
 }
