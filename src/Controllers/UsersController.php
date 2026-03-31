@@ -18,11 +18,18 @@ class UsersController extends Controller {
 
     public function SearchPage() {
         if (session_status() === PHP_SESSION_NONE) session_start();
-        
-        $_SESSION['search_query'] = $_GET['q'] ?? $_SESSION['search_query'] ?? '';
-        $_SESSION['search_location'] = $_GET['loc'] ?? $_SESSION['search_location'] ?? '';
-        $_SESSION['search_sector'] = $_GET['cat'] ?? $_SESSION['search_sector'] ?? '';
-        $_SESSION['search_type'] = $_GET['type'] ?? $_SESSION['search_type'] ?? '';
+
+        if (isset($_GET['reset']) && $_GET['reset'] === '1') {
+            $_SESSION['search_query'] = '';
+            $_SESSION['search_location'] = '';
+            $_SESSION['search_sector'] = '';
+            $_SESSION['search_type'] = '';
+        } else {
+            $_SESSION['search_query'] = $_GET['q'] ?? $_SESSION['search_query'] ?? '';
+            $_SESSION['search_location'] = $_GET['loc'] ?? $_SESSION['search_location'] ?? '';
+            $_SESSION['search_sector'] = $_GET['cat'] ?? $_SESSION['search_sector'] ?? '';
+            $_SESSION['search_type'] = $_GET['type'] ?? $_SESSION['search_type'] ?? '';
+        }
 
         $page = $_GET['page'] ?? 1;
         $page = (int)$page;
