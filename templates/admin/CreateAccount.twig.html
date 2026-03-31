@@ -1,10 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "LoggedBase.twig.html" %}
 
-</body>
-</html>
+{% block stylesheets %}
+<link rel="stylesheet" href="/assets/style/pages/CreateAccount.css">
+{% endblock %}
+
+{% block content %}
+<main>
+
+    <section class="formulaire" id="id_formulaire">
+
+        <h1>Création d'un nouveau compte</h1>
+
+        <div class="cards">
+
+            <div class="card" data-role="admin">
+                <img src="/assets/images/menu/body/admin-icone.png" alt="admin">
+                ADMIN
+            </div>
+
+            <div class="card" data-role="company">
+                <img src="/assets/images/menu/body/enterprise-icone.png" alt="company">
+                ENTREPRISE
+            </div>
+
+            <div class="card" data-role="pilote">
+                <img src="/assets/images/menu/body/teacher-icone.png" alt="pilote">
+                PILOTE
+            </div>
+
+            <div class="card" data-role="student">
+                <img src="/assets/images/menu/body/student-icone.png" alt="student">
+                ÉTUDIANT
+            </div>
+
+        </div>
+
+
+        <form id="User" method="POST" enctype="multipart/form-data" novalidate>
+
+            <input type="hidden" name="role" id="roleInput">
+
+            <label for="nom">Nom *</label>
+            <input type="text" id="nom" name="nom" required>
+
+            <label for="prenom">Prénom *</label>
+            <input type="text" id="prenom" name="prenom" required>
+
+            <label for="email">Courriel *</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Mot de passe *</label>
+            <input type="text" id="password" name="password" required>
+
+            <div class="role-fields" data-role="student">
+                <label for="promotion">Promotion *</label>
+                <input type="text" id="promotion" name="promotion">
+            </div>
+
+            <div class="role-fields" data-role="company">
+                <label for="company_name">Nom de l'entreprise *</label>
+                <input type="text" id="company_name" name="company_name">
+            </div>
+
+            <div class="role-fields" data-role="pilote">
+                <label for="department">Département *</label>
+                <input type="text" id="department" name="department">
+            </div>
+
+            <div id="errors"></div>
+
+            <div>(*) Champs obligatoires</div>
+
+            <button type="submit">Créer le compte</button>
+
+        </form>
+
+    </section>
+
+</main>
+
+{% block javascripts %}
+<script src="/assets/JavaScript/admin.js"></script>
+{% endblock %}
+
+{% endblock %}
