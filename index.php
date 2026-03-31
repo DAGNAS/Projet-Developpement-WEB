@@ -49,6 +49,10 @@ switch ($uri) {
         $UsersController->SearchPage();
         break;
     
+    case 'view_offer':
+        $UsersController->ViewOfferPage();
+        break;
+    
     // --- ROUTES PROFIL --- //
     case 'profile':                 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

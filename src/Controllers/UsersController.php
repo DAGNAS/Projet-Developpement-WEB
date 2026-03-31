@@ -71,6 +71,11 @@ class UsersController extends Controller {
         echo $this->templateEngine->render('student/MyApplications.twig.html', ['nav' => $nav, 'application' => $application]);
     }
 
+    public function ViewOfferPage() {
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('common/JobView.twig.html', ['nav' => $nav]);
+    }
+
     public function MyStudentPage() {
         $nav = $this->Dashboard();
         echo $this->templateEngine->render('pilote/MyStudent.twig.html', ['nav' => $nav]);

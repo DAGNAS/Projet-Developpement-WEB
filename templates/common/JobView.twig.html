@@ -1,0 +1,156 @@
+{% extends "LoggedBase.twig.html" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="assets/style/pages/JobView.css">
+{% endblock %}
+
+{% block content %}
+<section class="job-view-page">
+    <div class="job-view-shell">
+        <nav class="job-breadcrumb" aria-label="Fil dariane">
+            <a href="?uri=search">Retour aux offres</a>
+        </nav>
+
+        <section class="job-hero">
+            <div class="job-hero-main">
+                <div class="job-logo-wrap">
+                    <img
+                        src="assets/images/{{ offer.logo|default(offer.company_logo|default('menu/body/enterprise-icone.png')) }}"
+                        alt="Logo {{ offer.nom|default('Entreprise') }}"
+                        class="job-logo"
+                    >
+                </div>
+
+                <div class="job-hero-copy">
+                    <p class="job-company">{{ offer.nom|default('Entreprise partenaire') }}</p>
+                    <h1>{{ offer.title|default('Offre a consulter') }}</h1>
+                    <p class="job-intro">
+                        {{ offer.description|default('Decouvrez cette offre, ses missions et les informations utiles pour postuler.')|slice(0, 180) }}{% if offer.description is defined and offer.description|length > 180 %}...{% endif %}
+                    </p>
+
+                    <div class="job-meta-list">
+                        <span class="job-pill">
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            {{ offer.location|default('Localisation non precisee') }}
+                        </span>
+                        <span class="job-pill">
+                            <i class="fas fa-briefcase" aria-hidden="true"></i>
+                            {{ offer.type|default('Contrat a definir') }}
+                        </span>
+                        <span class="job-pill">
+                            <i class="fas fa-layer-group" aria-hidden="true"></i>
+                            {{ offer.secteur|default(offer.sector|default('Secteur non precise')) }}
+                        </span>
+                        <span class="job-pill">
+                            <i class="fas fa-clock" aria-hidden="true"></i>
+                            {% if offer.created_at is defined and offer.created_at %}
+                                Publie le {{ offer.created_at|date("d/m/Y") }}
+                            {% else %}
+                                Date non renseignee
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="job-hero-actions">
+                <form action="?uri=apply" method="POST" class="apply-form">
+                    <input type="hidden" name="id_offer" value="{{ offer.id|default('') }}">
+                    <button type="submit" class="btn-primary">Postuler maintenant</button>
+                </form>
+
+                {% if offer.site_internet is defined and offer.site_internet %}
+                    <a href="{{ offer.site_internet }}" target="_blank" rel="noreferrer" class="btn-secondary">
+                        Voir le site de l entreprise
+                    </a>
+                {% endif %}
+            </div>
+        </section>
+
+        <div class="job-layout">
+            <main class="job-main">
+                <article class="job-card">
+                    <div class="section-heading">
+                        <p class="eyebrow">Vue detaillee</p>
+                        <h2>A propos de cette offre</h2>
+                    </div>
+
+                    <div class="job-content prose">
+                        {% if offer.description is defined and offer.description %}
+                            {{ offer.description|nl2br }}
+                        {% else %}
+                            <p>Aucune description detaillee n a encore ete ajoutee pour cette offre.</p>
+                        {% endif %}
+                    </div>
+                </article>
+
+                <article class="job-card">
+                    <div class="section-heading">
+                        <p class="eyebrow">Points cles</p>
+                        <h2>Informations utiles</h2>
+                    </div>
+
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">Entreprise</span>
+                            <strong>{{ offer.nom|default('Non renseignee') }}</strong>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Lieu</span>
+                            <strong>{{ offer.location|default('Non renseigne') }}</strong>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Type</span>
+                            <strong>{{ offer.type|default('Non renseigne') }}</strong>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Secteur</span>
+                            <strong>{{ offer.secteur|default(offer.sector|default('Non renseigne')) }}</strong>
+                        </div>
+                    </div>
+                </article>
+            </main>
+
+            <aside class="job-sidebar">
+                <div class="sidebar-card sidebar-highlight">
+                    <p class="eyebrow">Candidature</p>
+                    <h3>Une offre qui te correspond ?</h3>
+                    <p>
+                        Envoie ta candidature pour que ton profil soit transmis a
+                        <strong>{{ offer.nom|default('l entreprise') }}</strong>.
+                    </p>
+                    <form action="?uri=apply" method="POST" class="sidebar-form">
+                        <input type="hidden" name="id_offer" value="{{ offer.id|default('') }}">
+                        <button type="submit" class="btn-primary">Postuler</button>
+                    </form>
+                </div>
+
+                <div class="sidebar-card">
+                    <p class="eyebrow">Entreprise</p>
+                    <h3>{{ offer.nom|default('Entreprise partenaire') }}</h3>
+                    <p class="sidebar-sector">{{ offer.secteur|default(offer.sector|default('Secteur non precise')) }}</p>
+                    <p>
+                        {% if offer.company_description is defined and offer.company_description %}
+                            {{ offer.company_description|slice(0, 260) }}{% if offer.company_description|length > 260 %}...{% endif %}
+                        {% else %}
+                            Cette entreprise n a pas encore ajoute de presentation detaillee.
+                        {% endif %}
+                    </p>
+                    {% if offer.site_internet is defined and offer.site_internet %}
+                        <a href="{{ offer.site_internet }}" target="_blank" rel="noreferrer" class="sidebar-link">
+                            Consulter le site web
+                        </a>
+                    {% endif %}
+                </div>
+
+                <div class="sidebar-card">
+                    <p class="eyebrow">Navigation</p>
+                    <h3>Continuer la recherche</h3>
+                    <p>Retourne a la liste pour comparer cette offre avec d autres opportunites.</p>
+                    <a href="?uri=search" class="sidebar-link">Revenir a la recherche</a>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+{% endblock %}
