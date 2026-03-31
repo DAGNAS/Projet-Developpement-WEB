@@ -21,4 +21,9 @@ abstract class Controller {
      * @var  \Twig\Environment null
      */
     protected $templateEngine = null;
+
+    public function Dashboard() {
+        $user = $_SESSION['user_role'];
+        return $this->UsersModel->getNavLinks($user);
+    }
 }

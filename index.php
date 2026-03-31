@@ -4,15 +4,16 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 session_start([
-'cookie_httponly' => true, // Protection contre le vol de session via JS (XSS)
-'cookie_secure' => false, // Mettre à 'true' si vous utilisez HTTPS
-'cookie_samesite' => 'Strict', // Protection contre les attaques CSRF
+'cookie_httponly' => true,
+'cookie_secure' => false,
+'cookie_samesite' => 'Strict',
 ]);
 
 require "vendor/autoload.php";
 
 use App\Controllers\AuthController;
 use App\Controllers\UsersController;
+use App\Controllers\MyAccountController;
 
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment($loader, [
@@ -29,6 +30,7 @@ if (isset($_GET['uri'])) {
 
 $AuthController = new AuthController($twig);
 $UsersController = new UsersController($twig);
+$MyAccountController = new MyAccountController($twig);
 
 switch ($uri) {
     // CONNEXION
@@ -50,14 +52,14 @@ switch ($uri) {
     // --- ROUTES PROFIL --- //
     case 'profile':                 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $UsersController->UpdatePassword();
+            $MyAccountController->UpdatePassword();
         } else {
-            $UsersController->MyAccountPage();
+            $MyAccountController->MyAccountPage();
         }
         break;
     
     case 'profile/toggle_notif':
-         $UsersController->ToggleNotif();
+         $MyAccountController->ToggleNotif();
 
     case 'wishlist':
         $UsersController->MyWishListPage();
