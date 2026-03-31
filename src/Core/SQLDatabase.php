@@ -34,17 +34,34 @@ class SQLDatabase implements Database {
         }
     }
 
-    public function getAllCompany()
-    {
-        $stmt = $this->database->query("SELECT * FROM company");
-        $liste = $stmt->fetchAll();
-        return $liste;
-    }
+    public function setQuery($query, $location, $sector, $type) {
+        $sql = "SELECT * FROM job_offers WHERE 1=1";
+        $params = [];
 
-    public function getAllJobApplication(){
-        $stmt = $this->database->query("SELECT * FROM job_offers");
-        $liste = $stmt->fetchAll();
-        return $liste;
+        if (!empty($query)) {
+            $sql .= " AND title LIKE :query";
+            $params['query'] = "%" . $query . "%";
+        }
+
+        if (!empty($location)) {
+            $sql .= " AND location LIKE :location";
+            $params['location'] = "%" . $location . "%";
+        }
+
+        if (!empty($sector)) {
+            $sql .= " AND sector LIKE :sector";
+            $params['sector'] = "%" . $sector . "%";
+        }
+
+        if (!empty($type)) {
+            $sql .= " AND type LIKE :type";
+            $params['type'] = "%" . $type . "%";
+        }
+
+        $stmt = $this->database->prepare($sql);
+        $stmt->execute($params);
+
+        return $stmt->fetchAll();
     }
 
     public function getUserInfoByMail($userEmail){

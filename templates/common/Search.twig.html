@@ -36,6 +36,17 @@
             </select>
         </div>
 
+        <div class="search-group">
+            <i class="fas fa-file icon"></i>
+            <select name="type">
+                <option value="" {{ (type|default('')) == '' ? 'selected' : '' }}>Tous les emplois</option>
+                <option value="CDI" {{ type == 'CDI' ? 'selected' : '' }}>CDI</option>
+                <option value="CDD" {{ type == 'CDD' ? 'selected' : '' }}>CDD</option>
+                <option value="Alternance" {{ type == 'Alternance' ? 'selected' : '' }}>Alternance</option>
+                <option value="Stage" {{ type == 'Stage' ? 'selected' : '' }}>Stage</option>
+            </select>
+        </div>
+
         <button type="submit" class="search-btn">Rechercher</button>
     </form>
 </section>
@@ -51,6 +62,7 @@
                     <h3>{{ application.title }}</h3>
                     <p class="sector">Secteur : {{ application.sector }}</p>
                     <p class="location">📍 {{ application.location }}</p>
+                    <p class="sector">{{ application.type }}</p>
                     <a href="#" class="view-btn">Voir les offres</a>
                 </div>
             </div>

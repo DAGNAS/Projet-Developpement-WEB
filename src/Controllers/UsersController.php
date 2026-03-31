@@ -17,7 +17,12 @@ class UsersController extends Controller {
     }
 
     public function SearchPage() {
-        if (session_status() === PHP_SESSION_NONE) session_start();    
+        if (session_status() === PHP_SESSION_NONE) session_start();
+        
+        $_SESSION['search_query'] = $_GET['q'] ?? $_SESSION['search_query'] ?? '';
+        $_SESSION['search_location'] = $_GET['loc'] ?? $_SESSION['search_location'] ?? '';
+        $_SESSION['search_sector'] = $_GET['cat'] ?? $_SESSION['search_sector'] ?? '';
+        $_SESSION['search_type'] = $_GET['type'] ?? $_SESSION['search_type'] ?? '';
 
         $page = $_GET['page'] ?? 1;
         $page = (int)$page;
@@ -25,21 +30,22 @@ class UsersController extends Controller {
         $limit = 8;
         $offset = ($page - 1) * $limit;
 
-        $total = $this->SearchModel->countJobApplication();
+        $personalQuery = $this->SearchModel->PersonalQuery(
+            $_SESSION['search_query'], $_SESSION['search_location'], $_SESSION['search_sector'], $_SESSION['search_type'],
+            $limit, $offset
+        );
+        
+        $total = $personalQuery['count'];
         $totalPages = ceil($total / $limit);
 
-        $_SESSION['search_query'] = $_GET['q'] ?? $_SESSION['search_query'] ?? '';
-        $_SESSION['search_location'] = $_GET['loc'] ?? $_SESSION['search_location'] ?? '';
-        $_SESSION['search_category'] = $_GET['cat'] ?? $_SESSION['search_category'] ?? '';
-
         $nav = $this->Dashboard();
-        $JobApplication = $this->SearchModel->getAllJobApplicationPaginated($limit, $offset);
         echo $this->templateEngine->render('common/Search.twig.html', [
             'nav' => $nav, 
-            'JobApplication' => $JobApplication, 
+            'JobApplication' => $personalQuery['query'], 
             'query' => $_SESSION['search_query'],
             'location' => $_SESSION['search_location'],
-            'category' => $_SESSION['search_category'],
+            'category' => $_SESSION['search_sector'],
+            'type' => $_SESSION['search_type'],
             'page' => $page,
             'totalPages' => $totalPages
         ]);
