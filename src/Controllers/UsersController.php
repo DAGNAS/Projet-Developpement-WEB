@@ -144,6 +144,15 @@ class UsersController extends Controller {
         session_destroy();
         header('Location: index.php?uri=/');
     }
+    public function ChangeAccountPage() {
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('admin/ChangeAccount.twig.html', ['nav' => $nav]);
+    }
+
+    public function CreateAccountPage() {
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('admin/CreateAccount.twig.html', ['nav' => $nav]);
+    }
 }
 
 ?>
