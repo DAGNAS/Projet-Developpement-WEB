@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Champs supplémentaires
         const promotion = document.getElementById('promotion').value.trim();
         const company_name = document.getElementById('company_name').value.trim();
-        const department = document.getElementById('department').value.trim();
+        const department = document.getElementById('school').value.trim();
 
         // Validation générale
         if(!nom) errors.push("Le champ Nom * est obligatoire.");
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Validation selon rôle
         if(role === "student" && !promotion) errors.push("Le champ Promotion * est obligatoire.");
         if(role === "company" && !company_name) errors.push("Le champ Nom * de l'entreprise est obligatoire.");
-        if(role === "pilote" && !department) errors.push("Le champ Département * est obligatoire.");
+        if(role === "pilote" && !department) errors.push("Le champ École * est obligatoire.");
 
         const errorDiv = document.getElementById('errors');
         if(errors.length > 0){

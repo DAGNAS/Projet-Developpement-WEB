@@ -44,6 +44,27 @@ switch ($uri) {
         $AuthController->submitLogin();
         break;
 
+    // Changement de profile
+    case 'autoLogin':
+
+        if (!isset($_GET['type'])) {
+            header('Location: ?uri=/');
+            exit;
+        }
+
+        $type = $_GET['type'];
+        $allowedRoles = ['admin', 'company', 'pilote', 'student'];
+
+        if (!in_array($type, $allowedRoles)) {
+            die('Rôle invalide');
+        }
+
+        $_SESSION['user_role'] = $type;
+        $_SESSION['is_logged'] = true;
+
+        header('Location: ?uri=search');
+        exit;
+
     // SPECIFIED
     case 'search':
         $UsersController->SearchPage();
@@ -99,46 +120,5 @@ switch ($uri) {
     default:
         echo '404 Not Found';
         break;
-}
 
-
-if (isset($_GET['uri']) && $_GET['uri'] === 'autoLogin') {
-
-    $type = $_GET['type'] ?? null;
-
-    // Choix d’un utilisateur par défaut selon le rôle
-    switch ($type) {
-        case 'admin':
-            $email = "admin@cesi.fr";
-            break;
-
-        case 'company':
-            $email = "company@cesi.fr";
-            break;
-
-        case 'pilote':
-            $email = "pilote@cesi.fr";
-            break;
-
-        case 'student':
-            $email = "student@cesi.fr";
-            break;
-
-        default:
-            die("Profil inconnu.");
-    }
-
-    // Charger cet utilisateur dans ta base
-    $user = $UsersController->getUserByEmail($email);
-
-    if (!$user) {
-        die("Utilisateur introuvable en base : $email");
-    }
-
-    // Connexion
-    $_SESSION['user'] = $user;
-
-    // Redirection à son dashboard
-    header("Location: index.php?uri=dashboard");
-    exit;
 }
