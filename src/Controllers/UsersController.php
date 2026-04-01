@@ -16,59 +16,47 @@ class UsersController extends Controller {
         $this->templateEngine = $templateEngine;
     }
 
-    public function Dashboard() {
-        $user = $_SESSION['user_role'];
-        return $this->UsersModel->getNavLinks($user);
-    }
-
     public function SearchPage() {
-        
-        $page = $_GET['page'] ?? 1;
+        if (session_status() === PHP_SESSION_NONE) session_start();
+
+        if (isset($_GET['reset']) && $_GET['reset'] === '1') {
+            $_SESSION['search_query'] = '';
+            $_SESSION['search_location'] = '';
+            $_SESSION['search_sector'] = '';
+            $_SESSION['search_type'] = '';
+            $_SESSION['current_page'] = 1;
+        } else {
+            $_SESSION['search_query'] = $_GET['q'] ?? $_SESSION['search_query'] ?? '';
+            $_SESSION['search_location'] = $_GET['loc'] ?? $_SESSION['search_location'] ?? '';
+            $_SESSION['search_sector'] = $_GET['cat'] ?? $_SESSION['search_sector'] ?? '';
+            $_SESSION['search_type'] = $_GET['type'] ?? $_SESSION['search_type'] ?? '';
+            $_SESSION['current_page'] = $_GET['page'] ?? $_SESSION['current_page'] ?? 1;
+        }
+
+        $page = $_GET['page'] ?? $_SESSION['current_page'];
         $page = (int)$page;
 
         $limit = 8;
         $offset = ($page - 1) * $limit;
 
-        $total = $this->SearchModel->countJobApplication();
+        $personalQuery = $this->SearchModel->PersonalQuery(
+            $_SESSION['search_query'], $_SESSION['search_location'], $_SESSION['search_sector'], $_SESSION['search_type'],
+            $limit, $offset
+        );
+
+        $total = $personalQuery['count'];
         $totalPages = ceil($total / $limit);
-    
+
         $nav = $this->Dashboard();
-        $JobApplication = $this->SearchModel->getAllJobApplicationPaginated($limit, $offset);
-        echo $this->templateEngine->render('common/Search.twig.html', ['nav' => $nav, 'JobApplication' => $JobApplication, 'page' => $page,
-        'totalPages' => $totalPages]);
-    }
-    
-    public function MyAccountPage() {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        $userInfo = $this->UsersModel->getUserInfo($_SESSION['user_id']);
-
-        $passwordMessage = null;
-        if (isset($_GET['status'])) {
-            if ($_GET['status'] == 'success'){
-                $passwordMessage = ['type' => 'success', 'text' => 'Mot de passe mis à jour !'];
-            } else {
-                $passwordMessage = ['type' => 'error', 'text' => 'Mot de passe non identique'];
-            }
-        }
-
-        $mois = ["", "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
-        $date_brute = new DateTime($userInfo['date_login']);
-        $num_mois = $date_brute->format('n'); // Récupère le numéro du mois sans le zéro
-
-        $date_fr = $date_brute->format('d ') . $mois[$num_mois] . $date_brute->format(' Y à H:i');
-
-        $action = $_GET['action'] ?? null;
-        echo $this->templateEngine->render('common/MyAccount.twig.html', [
-            'nav'               => $this->Dashboard(),
-            'userInfo'          => $userInfo,
-            'editPassword'      => ($action === 'editPassword'), // Vrai si ?action=editPassword
-            'passwordMessage'   => $passwordMessage,
-            'stats'             => ['applications' => 5, 'favorites' => 1, 'saved_offers' => 2],
-            'activities'        => [],
-            'last_login_fr'     => $date_fr
+        echo $this->templateEngine->render('common/Search.twig.html', [
+            'nav' => $nav,
+            'JobApplication' => $personalQuery['query'],
+            'query' => $_SESSION['search_query'],
+            'location' => $_SESSION['search_location'],
+            'category' => $_SESSION['search_sector'],
+            'type' => $_SESSION['search_type'],
+            'page' => $page,
+            'totalPages' => $totalPages
         ]);
     }
 
@@ -116,10 +104,15 @@ class UsersController extends Controller {
         echo $this->templateEngine->render('student/MyApplications.twig.html', ['nav' => $nav, 'application' => $application]);
     }
 
-    public function MyStudentPage() {
+    public function ViewOfferPage() {
         $nav = $this->Dashboard();
-        echo $this->templateEngine->render('pilote/MyStudent.twig.html', ['nav' => $nav]);
+        echo $this->templateEngine->render('common/JobView.twig.html', [
+            'nav' => $nav,
+            'offer' => $this->JobApplicationModel->GetOfferById($_GET['id'])
+        ]);
     }
+
+
 
     public function MyPostPage() {
         $nav = $this->Dashboard();
@@ -143,6 +136,17 @@ class UsersController extends Controller {
         $this->UsersModel->SaveTimeLastConnexion($_SESSION['user_id']);
         session_destroy();
         header('Location: index.php?uri=/');
+    }
+    public function MyStudentPage() {
+
+    $nav = $this->Dashboard();
+
+    $students = $this->SearchModel->getAllStudents();
+
+    echo $this->templateEngine->render('pilote/MyStudent.twig.html', [
+        'nav' => $nav,
+        'students' => $students
+    ]);
     }
     public function ChangeAccountPage() {
         $nav = $this->Dashboard();

@@ -4,16 +4,52 @@
     <link rel="stylesheet" href="assets/style/pages/Search.css">
 {% endblock %}
 
-
 {% block content %}
 
 <section class="search-section">
     <h1>Trouvez votre future entreprise</h1>
-    <div class="search-bar">
-        <input type="text" placeholder="Nom de l'entreprise, secteur...">
-        <input type="text" placeholder="Localisation (ex: La Rochelle)">
-        <button class="search-btn">Rechercher</button>
-    </div>
+    <form action="?uri=search" method="GET" class="search-form">
+        <div class="search-bar">
+            {# On garde l'URI pour le routeur PHP #}
+            <input type="hidden" name="uri" value="search">
+
+            <div class="search-group">
+                <i class="fas fa-search icon"></i>
+                <input type="text" name="q" placeholder="Metier, entreprise..." value="{{ query|default('') }}">
+            </div>
+
+            <div class="search-group">
+                <i class="fas fa-map-marker-alt icon"></i>
+                <input type="text" name="loc" placeholder="Ville ou Code Postal" value="{{ location|default('') }}">
+            </div>
+
+            <div class="search-group">
+                <i class="fas fa-briefcase icon"></i>
+                <select name="cat">
+                    <option value="" {{ (category|default('')) == '' ? 'selected' : '' }}>Tous les secteurs</option>
+                    <option value="Informatique" {{ category == 'Informatique' ? 'selected' : '' }}>Informatique</option>
+                    <option value="Construction" {{ category == 'Construction' ? 'selected' : '' }}>Construction</option>
+                    <option value="Marketing" {{ category == 'Marketing' ? 'selected' : '' }}>Marketing</option>
+                    <option value="Design" {{ category == 'Design' ? 'selected' : '' }}>Design</option>
+                </select>
+            </div>
+
+            <div class="search-group">
+                <i class="fas fa-file icon"></i>
+                <select name="type">
+                    <option value="" {{ (type|default('')) == '' ? 'selected' : '' }}>Tous les emplois</option>
+                    <option value="CDI" {{ type == 'CDI' ? 'selected' : '' }}>CDI</option>
+                    <option value="CDD" {{ type == 'CDD' ? 'selected' : '' }}>CDD</option>
+                    <option value="Alternance" {{ type == 'Alternance' ? 'selected' : '' }}>Alternance</option>
+                    <option value="Stage" {{ type == 'Stage' ? 'selected' : '' }}>Stage</option>
+                </select>
+            </div>
+        </div>
+        <div class="search-actions">
+            <button type="submit" class="search-btn">Rechercher</button>
+            <a href="?uri=search&reset=1" class="search-btn search-btn-secondary">Reinitialiser</a>
+        </div>
+    </form>
 </section>
 
 <section class="results-container">
@@ -25,51 +61,50 @@
                 </div>
                 <div class="company-info">
                     <h3>{{ application.title }}</h3>
-                    <p class="sector">Secteur : </p>
-                    <p class="location">📍 {{ application.location }}</p>
-                    <a href="#" class="view-btn">Voir les offres</a>
+                    <p class="sector">Secteur : {{ application.sector }}</p>
+                    <p class="location">{{ application.location }}</p>
+                    <p class="sector">{{ application.type }}</p>
+                    <a href="?uri=view_offer&id={{ application.id }}" class="view-btn">Voir l'offre</a>
                 </div>
             </div>
         </div>
     {% endfor %}
 </section>
 <div class="pagination">
-        {# Aller au début #}
-        <a href="?uri=search&page=1" class="page-link {{ page <= 1 ? 'disabled' : '' }}" title="Début">«</a>
+    {# Aller au debut #}
+    <a href="?uri=search&page=1" class="page-link {{ page <= 1 ? 'disabled' : '' }}" title="Debut"><<</a>
 
-        {# Page précédente #}
-        {% if page - 1 > 1 %}
-            <a href="?uri=search&page={{ page - 1 }}" class="page-link {{ page <= 1 ? 'disabled' : '' }}" title="Précédent">‹</a>
-        {% else %}
-            <a href="?uri=search&page={{ page }}" class="page-link {{ page <= 1 ? 'disabled' : '' }}" title="Précédent">‹</a>
+    {# Page precedente #}
+    {% if page - 1 > 1 %}
+        <a href="?uri=search&page={{ page - 1 }}" class="page-link {{ page <= 1 ? 'disabled' : '' }}" title="Precedent"><</a>
+    {% else %}
+        <a href="?uri=search&page={{ page }}" class="page-link {{ page <= 1 ? 'disabled' : '' }}" title="Precedent"><</a>
+    {% endif %}
+
+    {# Pages numerotees autour de la page actuelle #}
+    {% for i in (page - 2)..(page + 2) %}
+        {% if i >= 1 and i <= totalPages %}
+            <a href="?uri=search&page={{ i }}" class="page-link {{ i == page ? 'active' : '' }}">
+                {{ i }}
+            </a>
         {% endif %}
+    {% endfor %}
 
-        {# Pages numérotées (autour de la page actuelle) #}
-        {% for i in (page - 2)..(page + 2) %}
-            {% if i >= 1 and i <= totalPages %}
-                <a href="?uri=search&page={{ i }}" 
-                   class="page-link {{ i == page ? 'active' : '' }}">
-                    {{ i }}
-                </a>
-            {% endif %}
-        {% endfor %}
+    {# Page suivante #}
+    {% if page + 1 < totalPages %}
+        <a href="?uri=search&page={{ page + 1 }}" class="page-link {{ page >= totalPages ? 'disabled' : '' }}" title="Suivant">></a>
+    {% else %}
+        <a href="?uri=search&page={{ page }}" class="page-link {{ page >= totalPages ? 'disabled' : '' }}" title="Suivant">></a>
+    {% endif %}
 
-        {# Page suivante #}
-        {% if page + 1 < totalPages %}
-            <a href="?uri=search&page={{ page + 1 }}" class="page-link {{ page >= totalPages ? 'disabled' : '' }}" title="Suivant">›</a>
-        {% else %}
-            <a href="?uri=search&page={{ page }}" class="page-link {{ page >= totalPages ? 'disabled' : '' }}" title="Suivant">›</a>
-        {% endif %}
+    {# Aller a la fin #}
+    <a href="?uri=search&page={{ totalPages }}" class="page-link {{ page >= totalPages ? 'disabled' : '' }}" title="Fin">>></a>
+</div>
 
-        {# Aller à la fin #}
-        <a href="?uri=search&page={{ totalPages }}" class="page-link {{ page >= totalPages ? 'disabled' : '' }}" title="Fin">»</a>
-    </div>
-
-    {# Formulaire de saut rapide #}
-    <form method="get" class="pagination-jump">
-        <input type="hidden" name="uri" value="search">
-        <input type="number" name="page" min="1" max="{{ totalPages }}" placeholder="{{ page }} / {{ totalPages }}">
-        <button type="submit">Go</button>
-    </form>
+{# Formulaire de saut rapide #}
+<form method="get" class="pagination-jump">
+    <input type="hidden" name="uri" value="search">
+    <input type="number" name="page" min="1" max="{{ totalPages }}" placeholder="{{ page }} / {{ totalPages }}">
+    <button type="submit">Go</button>
+</form>
 {% endblock %}
-

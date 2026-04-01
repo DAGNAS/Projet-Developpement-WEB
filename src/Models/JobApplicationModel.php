@@ -19,5 +19,7 @@ class JobApplicationModel extends Model {
         return $this->database->GetAllApplicationByMail($email);
     }
 
-
+    public function GetOfferById($id) {
+        return $this->database->GetOfferById($id);
+    }
 }

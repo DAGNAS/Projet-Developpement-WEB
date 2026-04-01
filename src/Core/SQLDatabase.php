@@ -2,7 +2,6 @@
 
 namespace App\Core;
 
-// 1. IMPORT des classes natives PHP (indispensable quand on a un namespace)
 use PDO;
 use PDOException;
 
@@ -15,7 +14,7 @@ class SQLDatabase implements Database {
 
     public function __construct() {
         
-        $env = parse_ini_file(".env");
+        $env = parse_ini_file(__DIR__ . "/../../.env", false, INI_SCANNER_RAW);
     
         try {
             $this->database = new PDO("mysql:
@@ -35,20 +34,40 @@ class SQLDatabase implements Database {
         }
     }
 
-    /**
-     * Exemple de méthode pour récupérer la connexion dans tes Models
-     */
-    public function getAllCompany()
-    {
-        $stmt = $this->database->query("SELECT * FROM company");
-        $liste = $stmt->fetchAll();
-        return $liste;
+    public function setQuery($query, $location, $sector, $type) {
+        $sql = "SELECT * FROM job_offers WHERE 1=1";
+        $params = [];
+
+        if (!empty($query)) {
+            $sql .= " AND title LIKE :query";
+            $params['query'] = "%" . $query . "%";
+        }
+
+        if (!empty($location)) {
+            $sql .= " AND location LIKE :location";
+            $params['location'] = "%" . $location . "%";
+        }
+
+        if (!empty($sector)) {
+            $sql .= " AND sector LIKE :sector";
+            $params['sector'] = "%" . $sector . "%";
+        }
+
+        if (!empty($type)) {
+            $sql .= " AND type LIKE :type";
+            $params['type'] = "%" . $type . "%";
+        }
+
+        $stmt = $this->database->prepare($sql);
+        $stmt->execute($params);
+
+        return $stmt->fetchAll();
     }
 
-    public function getAllJobApplication(){
-        $stmt = $this->database->query("SELECT * FROM job_offers");
-        $liste = $stmt->fetchAll();
-        return $liste;
+    public function GetOfferById($id) {
+        $stmt = $this->database->prepare("SELECT * FROM job_offers JOIN company ON job_offers.id_company = company.id WHERE job_offers.id = :id");
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch();
     }
 
     public function getUserInfoByMail($userEmail){
@@ -95,5 +114,9 @@ class SQLDatabase implements Database {
             'id_student'    => $tmp_data['id']
         ]);
         return $stmt->fetchAll();
+    }
+    public function getAllStudents() {
+    $stmt = $this->database->query("SELECT * FROM users WHERE role = 'student'");
+    return $stmt->fetchAll();
     }
 }

@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+
+
 use App\Core\SQLDatabase;
 
 class SearchModel extends Model {
@@ -13,32 +15,12 @@ class SearchModel extends Model {
         }
     }
 
-    public function ListAllCompany(){
-        return $this->database->getAllCompany();
+    public function PersonalQuery($query, $location, $sector, $type, $limit, $offset) {
+        $querys = $this->database->setQuery($query, $location, $sector, $type);
+        return ['query' => array_slice($querys, $offset, $limit), 'count' => count($querys)];
     }
-
-    public function ListAllJobApplication(){
-        return $this->database->getAllJobApplication();
-    }
-    
-    public function getCompaniesPaginated($limit, $offset) {
-        $companies = $this->ListAllCompany();
-        return array_slice($companies, $offset, $limit);
-    }
-
-    public function getAllJobApplicationPaginated($limit, $offset) {
-        $jobApplication = $this->ListAllJobApplication();
-        return array_slice($jobApplication, $offset, $limit);
-    }
-
-    public function countCompanies() {
-        $companies = $this->database->getAllCompany();
-        return count($companies);
-    }
-
-    public function countJobApplication() {
-        $jobApplication = $this->ListAllJobApplication();
-        return count($jobApplication);
+    public function getAllStudents() {
+    return $this->database->getAllStudents();
     }
 }
 
