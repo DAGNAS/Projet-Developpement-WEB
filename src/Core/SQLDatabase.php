@@ -115,4 +115,8 @@ class SQLDatabase implements Database {
         ]);
         return $stmt->fetchAll();
     }
+    public function getAllStudents() {
+    $stmt = $this->database->query("SELECT * FROM users WHERE role = 'student'");
+    return $stmt->fetchAll();
+    }
 }

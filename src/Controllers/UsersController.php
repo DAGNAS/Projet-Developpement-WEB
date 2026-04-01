@@ -81,10 +81,7 @@ class UsersController extends Controller {
         ]);
     }
 
-    public function MyStudentPage() {
-        $nav = $this->Dashboard();
-        echo $this->templateEngine->render('pilote/MyStudent.twig.html', ['nav' => $nav]);
-    }
+    
 
     public function MyPostPage() {
         $nav = $this->Dashboard();
@@ -108,6 +105,17 @@ class UsersController extends Controller {
         $this->UsersModel->SaveTimeLastConnexion($_SESSION['user_id']);
         session_destroy();
         header('Location: index.php?uri=/');
+    }
+    public function MyStudentPage() {
+
+    $nav = $this->Dashboard();
+
+    $students = $this->SearchModel->getAllStudents();
+
+    echo $this->templateEngine->render('pilote/MyStudent.twig.html', [
+        'nav' => $nav,
+        'students' => $students
+    ]);
     }
 }
 
