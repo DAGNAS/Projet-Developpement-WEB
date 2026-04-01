@@ -103,12 +103,6 @@ class UsersController extends Controller {
         $this->ApplyOffer();
     }
 
-
-    public function MyStudentPage() {
-        $nav = $this->Dashboard();
-        echo $this->templateEngine->render('pilote/MyStudent.twig.html', ['nav' => $nav]);
-    }
-
     public function MyPostPage() {
         $nav = $this->Dashboard();
         echo $this->templateEngine->render('company/MyPost.twig.html', ['nav' => $nav]);
@@ -132,16 +126,16 @@ class UsersController extends Controller {
         session_destroy();
         header('Location: index.php?uri=/');
     }
+
     public function MyStudentPage() {
+        $nav = $this->Dashboard();
 
-    $nav = $this->Dashboard();
+        $students = $this->SearchModel->getAllStudents();
 
-    $students = $this->SearchModel->getAllStudents();
-
-    echo $this->templateEngine->render('pilote/MyStudent.twig.html', [
-        'nav' => $nav,
-        'students' => $students
-    ]);
+        echo $this->templateEngine->render('pilote/MyStudent.twig.html', [
+            'nav' => $nav,
+            'students' => $students
+        ]);
     }
 }
 
