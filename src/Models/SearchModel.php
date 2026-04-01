@@ -19,6 +19,9 @@ class SearchModel extends Model {
         $querys = $this->database->setQuery($query, $location, $sector, $type);
         return ['query' => array_slice($querys, $offset, $limit), 'count' => count($querys)];
     }
+    public function getAllStudents() {
+    return $this->database->getAllStudents();
+    }
 }
 
 ?>

@@ -1,1 +1,28 @@
 {% extends "LoggedBase.twig.html" %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="assets/style/pages/MyStudents.css">
+{% endblock %}
+
+{% block content %}
+
+<h2 style="text-align:center; color:#ffa500;">Mes étudiants</h2>
+
+<div class="students-list">
+
+    {% for student in students %}
+        <div class="student-row">
+
+            <a href="?uri=student&id={{ student.id }}" class="student-name">
+                {{ student.prenom }} {{ student.nom }}
+            </a>
+
+            <span class="student-email">{{ student.email }}</span>
+            <span class="student-city">{{ student.ville }}</span>
+
+        </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}
