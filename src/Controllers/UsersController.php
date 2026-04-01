@@ -24,14 +24,16 @@ class UsersController extends Controller {
             $_SESSION['search_location'] = '';
             $_SESSION['search_sector'] = '';
             $_SESSION['search_type'] = '';
+            $_SESSION['current_page'] = 1;
         } else {
             $_SESSION['search_query'] = $_GET['q'] ?? $_SESSION['search_query'] ?? '';
             $_SESSION['search_location'] = $_GET['loc'] ?? $_SESSION['search_location'] ?? '';
             $_SESSION['search_sector'] = $_GET['cat'] ?? $_SESSION['search_sector'] ?? '';
             $_SESSION['search_type'] = $_GET['type'] ?? $_SESSION['search_type'] ?? '';
+            $_SESSION['current_page'] = $_GET['page'] ?? $_SESSION['current_page'] ?? 1;
         }
 
-        $page = $_GET['page'] ?? 1;
+        $page = $_GET['page'] ?? $_SESSION['current_page'];
         $page = (int)$page;
 
         $limit = 8;
@@ -73,7 +75,10 @@ class UsersController extends Controller {
 
     public function ViewOfferPage() {
         $nav = $this->Dashboard();
-        echo $this->templateEngine->render('common/JobView.twig.html', ['nav' => $nav]);
+        echo $this->templateEngine->render('common/JobView.twig.html', [
+            'nav' => $nav,
+            'offer' => $this->JobApplicationModel->GetOfferById($_GET['id'])
+        ]);
     }
 
     public function MyStudentPage() {

@@ -64,6 +64,12 @@ class SQLDatabase implements Database {
         return $stmt->fetchAll();
     }
 
+    public function GetOfferById($id) {
+        $stmt = $this->database->prepare("SELECT * FROM job_offers JOIN company ON job_offers.id_company = company.id WHERE job_offers.id = :id");
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch();
+    }
+
     public function getUserInfoByMail($userEmail){
         $stmt = $this->database->prepare("SELECT * FROM users WHERE email = :email");
         $stmt->execute(['email' => $userEmail]);
