@@ -94,6 +94,9 @@ switch ($uri) {
     case 'logout':
         $UsersController->Logout();
         break;
+    case 'students':
+    $controller->MyStudentPage();
+        break;
 
     default:
         echo '404 Not Found';
