@@ -1,0 +1,52 @@
+{% extends "LoggedBase.twig.html" %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="assets/style/pages/Apply.css">
+{% endblock %}
+
+{% block content %}
+<div class="apply-container">
+    <div class="apply-box">
+        <header class="apply-header">
+            <h1>Candidature pour le poste de :</h1>
+            <h2 class="job-title">{{ offer.title }}</h2>
+            <p class="company-name">chez <strong>{{ offer.nom }}</strong></p>
+        </header>
+
+        <form action="?uri=submit_application" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id_job_offer" value="{{ offer.id }}">
+
+            <div class="form-section">
+                <h3><i class="fas fa-user"></i> Vos coordonnées</h3>
+                <div class="user-summary">
+                    <p><strong>Nom :</strong> <span>{{ user.prenom }} {{ user.nom }}</span></p>
+                    <p><strong>Email :</strong> <span>{{ user.email }}</span></p>
+                    <span class="info-note">Ces informations sont tirées de votre profil.</span>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3><i class="fas fa-file-alt"></i> Message de motivation (Optionnel)</h3>
+                <textarea name="motivation" placeholder="Expliquez en quelques lignes pourquoi vous êtes le candidat idéal..." rows="6"></textarea>
+            </div>
+
+            <div class="form-section">
+                <label class="section-label"><i class="fa-solid fa-cloud-arrow-up"></i> Votre CV (Format PDF)</label>
+                <div class="file-drop-area">
+                    <input type="file" name="resume" id="resume" accept=".pdf" required class="file-input">
+                    <div class="file-dummy">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span class="default-msg">Cliquez ou glissez votre CV ici</span>
+                        <span class="success-msg">Fichier prêt !</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apply-actions">
+                <a href="?uri=job_view&id={{ offer.id }}" class="btn-cancel">Annuler</a>
+                <button type="submit" class="btn-submit">Envoyer ma candidature</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

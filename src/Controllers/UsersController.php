@@ -81,6 +81,29 @@ class UsersController extends Controller {
         ]);
     }
 
+    public function ApplyOffer() {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('student/Apply.twig.html', [
+            'nav' => $nav,
+            'user' => $this->UsersModel->getUserInfo($_SESSION['user_id'])
+        ]);
+    }
+
+    public function SubmitApplication() {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+
+        $this->JobApplicationModel->SubmitApplication([
+            'id_user' => $_SESSION['user_id'],
+            'id_offer' => $_POST['id_offer'],
+            'cover_letter' => $_POST['cover_letter']
+        ]);
+
+        $this->ApplyOffer();
+    }
+
+
     public function MyStudentPage() {
         $nav = $this->Dashboard();
         echo $this->templateEngine->render('pilote/MyStudent.twig.html', ['nav' => $nav]);

@@ -53,6 +53,14 @@ switch ($uri) {
         $UsersController->ViewOfferPage();
         break;
     
+    case 'apply':
+        $UsersController->ApplyOffer();
+        break;
+    
+    case 'submit_application':
+        $UsersController->SubmitApplication();
+        break;
+    
     // --- ROUTES PROFIL --- //
     case 'profile':                 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
