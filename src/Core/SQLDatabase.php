@@ -7,6 +7,29 @@ use PDO;
 use PDOException;
 
 class SQLDatabase implements Database {
+    public function getCompanyIdByUserEmail($email) {
+    $stmt = $this->database->prepare("SELECT id FROM company WHERE email = :email LIMIT 1");
+    $stmt->execute([
+        'email' => $email
+    ]);
+    return $stmt->fetch();
+}
+
+public function createOffer($idCompany, $title, $sector, $type, $description, $location) {
+    $stmt = $this->database->prepare("
+        INSERT INTO job_offers (id_company, title, sector, type, description, location)
+        VALUES (:id_company, :title, :sector, :type, :description, :location)
+    ");
+
+    $stmt->execute([
+        'id_company' => $idCompany,
+        'title' => $title,
+        'sector' => $sector,
+        'type' => $type,
+        'description' => $description,
+        'location' => $location
+    ]);
+}
 
     /**
      * @var PDO La connexion à la base de données
@@ -59,6 +82,11 @@ public function updatePassword($email, $hash) {
     ]);
 }
 
+public function getFirstCompany() {
+    $stmt = $this->database->query("SELECT id FROM company LIMIT 1");
+    return $stmt->fetch();
+}
+
 public function SaveTimeLastConnexion($email) {
     $stmt = $this->database->prepare("UPDATE users SET date_login = NOW() WHERE email = :email");
     $stmt->execute([
@@ -72,4 +100,39 @@ public function toggleEmailNotifications($email) {
         'email' => $email
     ]);
 }
+public function getAllOffers() {
+    $stmt = $this->database->query("
+        SELECT job_offers.*, company.nom AS company_name
+        FROM job_offers
+        LEFT JOIN company ON company.id = job_offers.id_company
+        ORDER BY created_at DESC
+    ");
+    return $stmt->fetchAll();
+}
+
+public function prepare($sql) {
+    return $this->database->prepare($sql);
+}
+
+public function getOffersPaginated($limit, $offset) {
+    $stmt = $this->database->prepare("
+        SELECT job_offers.*, company.nom AS company_name
+        FROM job_offers
+        LEFT JOIN company ON company.id = job_offers.id_company
+        ORDER BY created_at DESC
+        LIMIT :limit OFFSET :offset
+    ");
+
+    $stmt->bindValue(':limit', (int)$limit, \PDO::PARAM_INT);
+    $stmt->bindValue(':offset', (int)$offset, \PDO::PARAM_INT);
+    $stmt->execute();
+
+    return $stmt->fetchAll();
+}
+
+public function countOffers() {
+    $stmt = $this->database->query("SELECT COUNT(*) as total FROM job_offers");
+    return $stmt->fetch();
+}
+
 }

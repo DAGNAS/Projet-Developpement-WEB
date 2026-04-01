@@ -1,23 +1,18 @@
 <?php
 
-
 namespace App\Models;
-
-use App\Core\SQLDatabase;
 
 class SearchModel extends Model {
 
     public function __construct($database = null) {
-        if(is_null($database)) {
-            $this->database = new SQLDatabase();
+        if (is_null($database)) {
+            $this->database = new \App\Core\SQLDatabase();
         } else {
             $this->database = $database;
         }
     }
 
-    public function ListAllCompany(){
+    public function ListAllCompany() {
         return $this->database->getAllCompany();
     }
 }
-
-?>

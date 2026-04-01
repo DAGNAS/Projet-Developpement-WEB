@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\UsersModel;
 use App\Models\SearchModel;
+use App\Core\SQLDatabase;
 use DateTime;
 
 class UsersController extends Controller {
@@ -12,6 +13,7 @@ class UsersController extends Controller {
         $this->UsersModel = new UsersModel();
         $this->SearchModel = new SearchModel();
         $this->templateEngine = $templateEngine;
+        $this->SQLDatabase = new SQLDatabase();
     }
 
     public function Dashboard() {
@@ -19,21 +21,15 @@ class UsersController extends Controller {
         return $this->UsersModel->getNavLinks($user);
     }
 
-    public function SearchPage() {
-        $nav = $this->Dashboard();
+ public function SearchPage() {
+    $nav = $this->Dashboard();
+    $companies = $this->SearchModel->ListAllCompany();
 
-         $page = $_GET['page'] ?? 1;
-        $page = (int)$page;
-
-        $limit = 10;
-        $offset = ($page - 1) * $limit;
-
-        $companies = $this->SearchModel->ListAllCompany();
-
-
-        echo $this->templateEngine->render('common/Search.twig.html', ['nav' => $nav, 'companies' => $companies]);
-        
-    }
+    echo $this->templateEngine->render('common/Search.twig.html', [
+        'nav' => $nav,
+        'companies' => $companies
+    ]);
+}
     
     public function MyAccountPage() {
         if (session_status() === PHP_SESSION_NONE) {
@@ -116,8 +112,33 @@ class UsersController extends Controller {
     }
 
     public function MyPostPage() {
-        $nav = $this->Dashboard();
-        echo $this->templateEngine->render('company/MyPost.twig.html', ['nav' => $nav]);
+    $nav = $this->Dashboard();
+
+    $page = $_GET['page'] ?? 1;
+    $page = (int)$page;
+
+    if ($page < 1) {
+        $page = 1;
+    }
+
+    $limit = 8;
+    $offset = ($page - 1) * $limit;
+
+    $offers = $this->SQLDatabase->getOffersPaginated($limit, $offset);
+    $totalOffers = $this->SQLDatabase->countOffers()['total'];
+    $totalPages = ceil($totalOffers / $limit);
+
+    echo $this->templateEngine->render('company/MyPost.twig.html', [
+        'nav' => $nav,
+        'offers' => $offers,
+        'currentPage' => $page,
+        'totalPages' => $totalPages
+    ]);
+}
+
+    public function CreateOfferPage() {
+    $nav = $this->Dashboard();
+    echo $this->templateEngine->render('company/CreateOffer.twig.html', ['nav' => $nav]);
     }
 
     public function SystemInfoPage() {
@@ -138,6 +159,50 @@ class UsersController extends Controller {
         session_destroy();
         header('Location: index.php?uri=/');
     }
+    public function StoreOffer() {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        header('Location: ?uri=create-offer');
+        exit;
+    }
+
+    $userEmail = $_SESSION['user_id'] ?? null;
+
+    if (!$userEmail) {
+        header('Location: ?uri=login');
+        exit;
+    }
+
+    $company = $this->SQLDatabase->getFirstCompany();
+
+    if (!$company) {
+        die("Aucune entreprise trouvée.");
+    }
+
+    $title = trim($_POST['title'] ?? '');
+    $sector = trim($_POST['sector'] ?? '');
+    $type = trim($_POST['type'] ?? '');
+    $description = trim($_POST['description'] ?? '');
+    $location = trim($_POST['location'] ?? '');
+
+    if (!$title || !$sector || !$type || !$description || !$location) {
+        die("Tous les champs sont obligatoires.");
+    }
+
+    $this->SQLDatabase->createOffer(
+        $company['id'],
+        $title,
+        $sector,
+        $type,
+        $description,
+        $location
+    );
+
+   header('Location: ?uri=my-posts');
+    exit;
+
+    }
+
 }
 
-?>
+
+

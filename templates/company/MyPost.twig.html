@@ -1,1 +1,92 @@
 {% extends "LoggedBase.twig.html" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="assets/style/pages/MyPost.css">
+{% endblock %}
+
+{% block content %}
+<section class="my-posts-page">
+    <div class="my-posts-wrapper">
+        <div class="my-posts-header">
+            <div>
+                <p class="my-posts-subtitle">Espace entreprise</p>
+                <h1>Mes Offres</h1>
+                <p class="my-posts-text">
+                    Gérez vos offres publiées et créez de nouvelles opportunités pour les étudiants.
+                </p>
+            </div>
+
+            <a href="?uri=create-offer" class="create-offer-btn">
+                Poster une offre
+            </a>
+        </div>
+
+        <div class="my-posts-content">
+            {% if offers is not empty %}
+                <div class="offers-grid">
+                    {% for offer in offers %}
+                        <article class="offer-card">
+                            <div class="offer-card-top">
+                                <span class="offer-type">{{ offer.type }}</span>
+                                <span class="offer-sector">{{ offer.sector }}</span>
+                            </div>
+
+                            <h2 class="offer-title">{{ offer.title }}</h2>
+
+                            <p class="offer-company">
+                                {{ offer.company_name ?? 'Entreprise' }}
+                            </p>
+
+                            <p class="offer-location">📍 {{ offer.location }}</p>
+
+                            <p class="offer-description">
+                                {{ offer.description }}
+                            </p>
+
+                            <p class="offer-date">
+                                Publiée le {{ offer.created_at }}
+                            </p>
+                        </article>
+                    {% endfor %}
+                </div>
+
+                {% if totalPages > 1 %}
+                    <div class="posts-pagination">
+                        {% if currentPage > 1 %}
+                            <a href="?uri=my-posts&page={{ currentPage - 1 }}" class="posts-pagination-btn arrow">
+                                ←
+                            </a>
+                        {% endif %}
+
+                        {% for i in 1..totalPages %}
+                            <a href="?uri=my-posts&page={{ i }}"
+                               class="posts-pagination-btn {% if i == currentPage %}active{% endif %}">
+                                {{ i }}
+                            </a>
+                        {% endfor %}
+
+                        {% if currentPage < totalPages %}
+                            <a href="?uri=my-posts&page={{ currentPage + 1 }}" class="posts-pagination-btn arrow">
+                                →
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="empty-state-card">
+                    <div class="empty-icon">📄</div>
+                    <h2>Aucune offre pour le moment</h2>
+                    <p>
+                        Vous n’avez encore publié aucune offre. Commencez dès maintenant
+                        en créant votre première annonce.
+                    </p>
+
+                    <a href="?uri=create-offer" class="create-offer-btn secondary">
+                        Créer ma première offre
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
