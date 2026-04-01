@@ -22,10 +22,10 @@ Pour atteindre cette finalité, plusieurs objectifs intermédiaires doivent êtr
 
 ## Effectif :
 Notre groupe projet se compose de quatre personnes :
-- Kaëlig CLENET, Product Owner, développeur
+- Kaëlig CLENET, développeur
 - Anthony MOIZANT, développeur
-- Mohamed SALL, développeur
-- Swan DAGNAS, Scrum Master, développeur
+- Mohamed SALL, Product Owner, développeur
+- Swan DAGNAS, Product Master, développeur
 
 ## Matrice des permissions :
 La matrice des permissions est également un élément important dans la gestion du développement de notre site web, car elle permet de définir les actions que peuvent effectuer les différents utilisateurs durant leur navigation. Elle garantit ainsi un accès réservé et contrôlé, tout en s’assurant que chaque utilisateur possède uniquement les fonctionnalités dont il a besoin.
