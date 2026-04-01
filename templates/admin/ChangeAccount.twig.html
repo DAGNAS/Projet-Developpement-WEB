@@ -1,44 +1,43 @@
 {% extends "LoggedBase.twig.html" %}
 
-{% block stylesheets %}
-<link rel="stylesheet" href="assets/style/pages/MyApplications.css">
-<link rel="stylesheet" href="assets/style/pages/homepage.css">
-{% endblock %}
-
 {% block content %}
 <div class="app-container">
 
     <section class="login" id="login-box">
-        <h2>Changer de profile utilisateur</h2>
+        <h2>Changer de profil utilisateur</h2>
+
         <div class="cards">
-            <form action="?uri=login" method="post">
-                <input type="hidden" name="login" value="admin">
-                <button type="submit" class="card">
-                    <div class="img"><img src="assets/images/menu/body/admin-icone.png" alt="admin-icone">ADMIN</div>
-                </button>
-            </form>
 
-            <form action="?uri=login" method="post">
-                <input type="hidden" name="login" value="company">
-                <button type="submit" class="card">
-                    <div class="img"><img src="assets/images/menu/body/enterprise-icone.png" alt="enterprise-icone">ENTREPRISE</div>
-                </button>
-            </form>
+            <a href="index.php?uri=autoLogin&type=admin" class="card">
+                <div class="img">
+                    <img src="assets/images/menu/body/admin-icone.png" alt="admin">
+                    ADMIN
+                </div>
+            </a>
 
-            <form action="?uri=login" method="post">
-                <input type="hidden" name="login" value="pilote">
-                <button type="submit" class="card">
-                    <div class="img"><img src="assets/images/menu/body/teacher-icone.png" alt="teacher-icone">PILOTE</div>
-                </button>
-            </form>
+            <a href="index.php?uri=autoLogin&type=company" class="card">
+                <div class="img">
+                    <img src="assets/images/menu/body/enterprise-icone.png" alt="company">
+                    ENTREPRISE
+                </div>
+            </a>
 
-            <form action="?uri=login" method="post">
-                <input type="hidden" name="login" value="student">
-                <button type="submit" class="card">
-                    <div class="img"><img src="assets/images/menu/body/student-icone.png" alt="student-icone">ÉTUDIANT</div>
-                </button>
-            </form>
+            <a href="index.php?uri=autoLogin&type=pilote" class="card">
+                <div class="img">
+                    <img src="assets/images/menu/body/teacher-icone.png" alt="pilote">
+                    PILOTE
+                </div>
+            </a>
+
+            <a href="index.php?uri=autoLogin&type=student" class="card">
+                <div class="img">
+                    <img src="assets/images/menu/body/student-icone.png" alt="student">
+                    ÉTUDIANT
+                </div>
+            </a>
+
         </div>
     </section>
+
 </div>
 {% endblock %}
