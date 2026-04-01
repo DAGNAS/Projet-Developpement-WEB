@@ -1,5 +1,8 @@
 <?php
 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 session_start([
     'cookie_httponly' => true,
     'cookie_secure' => false,
@@ -10,6 +13,7 @@ require "vendor/autoload.php";
 
 use App\Controllers\AuthController;
 use App\Controllers\UsersController;
+use App\Controllers\MyAccountController;
 
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment($loader, [
@@ -20,6 +24,7 @@ $uri = $_GET['uri'] ?? '/';
 
 $AuthController = new AuthController($twig);
 $UsersController = new UsersController($twig);
+$MyAccountController = new MyAccountController($twig);
 
 switch ($uri) {
     case '/':
@@ -38,16 +43,20 @@ switch ($uri) {
         $UsersController->SearchPage();
         break;
 
+    case 'view_offer':
+        $UsersController->ViewOfferPage();
+        break;
+
     case 'profile':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $UsersController->UpdatePassword();
+            $MyAccountController->UpdatePassword();
         } else {
-            $UsersController->MyAccountPage();
+            $MyAccountController->MyAccountPage();
         }
         break;
 
     case 'profile/toggle_notif':
-        $UsersController->ToggleNotif();
+        $MyAccountController->ToggleNotif();
         break;
 
     case 'wishlist':
@@ -73,7 +82,7 @@ switch ($uri) {
     case 'store-offer':
         $UsersController->StoreOffer();
         break;
-        
+
     case 'system':
         $UsersController->SystemInfoPage();
         break;

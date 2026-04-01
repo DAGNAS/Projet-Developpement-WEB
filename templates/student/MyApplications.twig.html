@@ -1,1 +1,66 @@
 {% extends "LoggedBase.twig.html" %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="assets/style/pages/MyApplications.css">
+{% endblock %}
+
+
+
+{% block content %}
+<div class="app-container">
+    <div class="app-header">
+        <h1>Mes Candidatures</h1>
+        <p>Visualisez l'avancé de vos candidature</p>
+    </div>
+
+    <div class="app-grid">
+        <div class="column col-accepted">
+            <div class="col-header">✅ Acceptées</div>
+            {% for apps in application %}
+            {% if apps.status == 'accepted' %} {# Attention aux guillemets ici ! #}
+            <div class="card">
+                <img src="assets/images/{{ apps.company_logo }}" alt="logo">
+                <div class="card-info">
+                    <h3>{{ apps.job_title }}</h3>
+                    <p>{{ apps.company_name }}</p>
+                    <span class="badge badge-success">Offre Reçue</span>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="column col-pending">
+            <div class="col-header">⏳ En Attente</div>
+            {% for apps in application %}
+            {% if apps.status == 'pending' %}
+            <div class="card">
+                <img src="assets/images/{{ apps.company_logo }}" alt="logo">
+                <div class="card-info">
+                    <h3>{{ apps.job_title }}</h3>
+                    <p>{{ apps.company_name }}</p>
+                    <span class="badge badge-warning">En examen</span>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="column col-rejected">
+            <div class="col-header">❌ Refusées</div>
+            {% for apps in application %}
+            {% if apps.status == 'rejected' %}
+            <div class="card">
+                <img src="assets/images/{{ apps.company_logo }}" alt="logo">
+                <div class="card-info">
+                    <h3>{{ apps.job_title }}</h3>
+                    <p>{{ apps.company_name }}</p>
+                    <span class="badge badge-danger">Refusé</span>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

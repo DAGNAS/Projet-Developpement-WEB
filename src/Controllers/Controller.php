@@ -11,6 +11,7 @@ abstract class Controller {
      * @var Model null
      */
     protected $UsersModel = null;
+    protected $JobApplicationModel = null;
     protected $SearchModel = null;
     protected $SecurityModel = null;
 
@@ -20,4 +21,9 @@ abstract class Controller {
      * @var  \Twig\Environment null
      */
     protected $templateEngine = null;
+
+    public function Dashboard() {
+        $user = $_SESSION['user_role'];
+        return $this->UsersModel->getNavLinks($user);
+    }
 }
