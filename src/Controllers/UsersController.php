@@ -115,7 +115,9 @@ class UsersController extends Controller {
         $totalPages = ceil($total / $limit);
 
         $nav = $this->Dashboard();
+         $liked = $this->SearchModel->getWishlistIds(1);
         echo $this->templateEngine->render('common/Search.twig.html', [
+           
             'nav' => $nav, 
             'JobApplication' => $personalQuery['query'], 
             'query' => $_SESSION['search_query'],
@@ -123,14 +125,11 @@ class UsersController extends Controller {
             'category' => $_SESSION['search_sector'],
             'type' => $_SESSION['search_type'],
             'page' => $page,
-            'totalPages' => $totalPages
+            'totalPages' => $totalPages,
+            'liked' => $liked,
         ]);
     }
 
-    public function MyWishListPage() {
-        $nav = $this->Dashboard();
-        echo $this->templateEngine->render('student/MyWishlist.twig.html', ['nav' => $nav]);
-    }
 
     public function MyApplicationsPage() {
         if (session_status() === PHP_SESSION_NONE) session_start();
@@ -148,7 +147,27 @@ class UsersController extends Controller {
         ]);
     }
 
-    
+    public function ApplyOffer() {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('student/Apply.twig.html', [
+            'nav' => $nav,
+            'user' => $this->UsersModel->getUserInfo($_SESSION['user_id'])
+        ]);
+    }
+
+    public function SubmitApplication() {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+
+        $this->JobApplicationModel->SubmitApplication([
+            'id_user' => $_SESSION['user_id'],
+            'id_offer' => $_POST['id_offer'],
+            'cover_letter' => $_POST['cover_letter']
+        ]);
+
+        $this->ApplyOffer();
+    }
 
 public function MyPostPage() {
    if (session_status() === PHP_SESSION_NONE) {
@@ -201,15 +220,59 @@ public function MyPostPage() {
         session_destroy();
         header('Location: index.php?uri=/');
     }
+
     public function MyStudentPage() {
+        $nav = $this->Dashboard();
+
+        $students = $this->SearchModel->getAllStudents();
+
+        echo $this->templateEngine->render('pilote/MyStudent.twig.html', [
+            'nav' => $nav,
+            'students' => $students
+        ]);
+    }
+    public function toggleWishlist() {
+
+
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    $profileId = 1;
+    $offreId = $data['offre_id'];
+
+    $this->SearchModel->toggleWishlist($profileId, $offreId);
+
+    echo json_encode(['status' => 'ok']);
+    }
+    public function MyWishListPage() {
+
+    $profileId = 1; // temporaire
+
+    $offers = $this->SearchModel->getWishlistOffers($profileId);
 
     $nav = $this->Dashboard();
 
-    $students = $this->SearchModel->getAllStudents();
-
-    echo $this->templateEngine->render('pilote/MyStudent.twig.html', [
+    echo $this->templateEngine->render('student/MyWishlist.twig.html', [
         'nav' => $nav,
-        'students' => $students
+        'JobApplication' => $offers
+    ]);
+}
+public function StudentWishlistPage() {
+
+    $studentId = $_GET['id'];
+
+    $profileId = 1; // temporaire
+
+    $offers = $this->SearchModel->getWishlistOffers($profileId);
+
+    
+    $student = $this->SearchModel->getStudentById($studentId);
+
+    $nav = $this->Dashboard();
+
+    echo $this->templateEngine->render('student/MyWishlist.twig.html', [
+        'nav' => $nav,
+        'JobApplication' => $offers,
+        'student' => $student 
     ]);
     }
 

@@ -49,21 +49,25 @@
 <section class="results-container">
 
     {% for application in JobApplication %}
-<div class="company-grid">
-<div class="company-card">
-<div class="company-logo">
-<img src="assets/images/menu/body/enterprise-icone.png" alt="Logo Entreprise">
-</div>
-<div class="company-info">
-<h3>{{ application.title }}</h3>
-<p class="sector">Secteur : {{ application.sector }}</p>
-<p class="location">{{ application.location }}</p>
-<p class="sector">{{ application.type }}</p>
-<a href="?uri=view_offer&id={{ application.id }}" class="view-btn">Voir l'offre</a>
-</div>
-</div>
-</div>
-
+        <div class="company-grid">
+            <div class="company-card">
+                <button class="wishlist-btn {{ application.id in liked ? 'active' : '' }}"
+        data-id="{{ application.id }}">
+    <span class="heart">❤️</span>
+</button>
+              
+                <div class="company-logo">
+                    <img src="assets/images/menu/body/enterprise-icone.png" alt="Logo Entreprise">
+                </div>
+                <div class="company-info">
+                    <h3>{{ application.title }}</h3>
+                    <p class="sector">Secteur : {{ application.sector }}</p>
+                    <p class="location">{{ application.location }}</p>
+                    <p class="sector">{{ application.type }}</p>
+                    <a href="?uri=view_offer&id={{ application.id }}" class="view-btn">Voir l'offre</a>
+                </div>
+            </div>
+        </div>
     {% endfor %}
 </section>
 <div class="pagination">
@@ -103,6 +107,37 @@
 <input type="number" name="page" min="1" max="{{ totalPages }}" placeholder="{{ page }} / {{ totalPages }}">
 <button type="submit">Go</button>
 </form>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
 
+
+    console.log("JS LOADED");
+
+    console.log(document.querySelectorAll('.wishlist-btn')); 
+
+    document.querySelectorAll('.wishlist-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+
+            console.log("CLICK ❤️", btn.dataset.id);
+
+            fetch('?uri=toggle-wishlist', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    offre_id: btn.dataset.id
+                })
+            })
+            .then(res => res.text())
+            .then(data => {
+                console.log("RESPONSE:", data);
+                btn.classList.toggle('active');
+            });
+
+        });
+    });
+   
+
+});
+</script>
 {% endblock %}
  

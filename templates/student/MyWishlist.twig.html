@@ -1,1 +1,108 @@
+
 {% extends "LoggedBase.twig.html" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="assets/style/pages/Search.css">
+{% endblock %}
+
+{% block content %}
+<div class="wishlist-header">
+    <h1 class="wishlist-title">
+    Wishlist de {{ student.prenom }}
+</h1>
+    <p>Retrouvez toutes les entreprises que vous avez ajoutées en favoris</p>
+</div>
+
+<section class="results-container">
+    {% for application in JobApplication %}
+        <div class="company-grid">
+            <div class="company-card">
+                <button class="wishlist-btn {{ application.id in liked ? 'active' : '' }}"
+        data-id="{{ application.id }}">
+    <span class="heart">❤️</span>
+</button>
+                
+                <div class="company-logo">
+                    <img src="assets/images/menu/body/enterprise-icone.png" alt="Logo Entreprise">
+                </div>
+                <div class="company-info">
+                    <h3>{{ application.title }}</h3>
+                    <p class="sector">Secteur : {{ application.sector }}</p>
+                    <p class="location">{{ application.location }}</p>
+                    <p class="sector">{{ application.type }}</p>
+                    <a href="?uri=view_offer&id={{ application.id }}" class="view-btn">Voir l'offre</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</section>
+<div class="pagination">
+    {# Aller au debut #}
+    <a href="?uri=search&page=1" class="page-link {{ page <= 1 ? 'disabled' : '' }}" title="Debut"><<</a>
+
+    {# Page precedente #}
+    {% if page - 1 > 1 %}
+        <a href="?uri=search&page={{ page - 1 }}" class="page-link {{ page <= 1 ? 'disabled' : '' }}" title="Precedent"><</a>
+    {% else %}
+        <a href="?uri=search&page={{ page }}" class="page-link {{ page <= 1 ? 'disabled' : '' }}" title="Precedent"><</a>
+    {% endif %}
+
+    {# Pages numerotees autour de la page actuelle #}
+    {% for i in (page - 2)..(page + 2) %}
+        {% if i >= 1 and i <= totalPages %}
+            <a href="?uri=search&page={{ i }}" class="page-link {{ i == page ? 'active' : '' }}">
+                {{ i }}
+            </a>
+        {% endif %}
+    {% endfor %}
+
+    {# Page suivante #}
+    {% if page + 1 < totalPages %}
+        <a href="?uri=search&page={{ page + 1 }}" class="page-link {{ page >= totalPages ? 'disabled' : '' }}" title="Suivant">></a>
+    {% else %}
+        <a href="?uri=search&page={{ page }}" class="page-link {{ page >= totalPages ? 'disabled' : '' }}" title="Suivant">></a>
+    {% endif %}
+
+    {# Aller a la fin #}
+    <a href="?uri=search&page={{ totalPages }}" class="page-link {{ page >= totalPages ? 'disabled' : '' }}" title="Fin">>></a>
+</div>
+
+{# Formulaire de saut rapide #}
+<form method="get" class="pagination-jump">
+    <input type="hidden" name="uri" value="search">
+    <input type="number" name="page" min="1" max="{{ totalPages }}" placeholder="{{ page }} / {{ totalPages }}">
+    <button type="submit">Go</button>
+</form>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+
+    console.log("JS LOADED");
+
+    console.log(document.querySelectorAll('.wishlist-btn')); 
+
+    document.querySelectorAll('.wishlist-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+
+            console.log("CLICK ❤️", btn.dataset.id);
+
+            fetch('?uri=toggle-wishlist', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    offre_id: btn.dataset.id
+                })
+            })
+            .then(res => res.text())
+            .then(data => {
+                console.log("RESPONSE:", data);
+                btn.classList.toggle('active');
+            });
+
+        });
+    });
+   
+
+});
+</script>
+{% endblock %}

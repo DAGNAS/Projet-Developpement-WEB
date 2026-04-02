@@ -46,8 +46,17 @@ switch ($uri) {
     case 'view_offer':
         $UsersController->ViewOfferPage();
         break;
-
-    case 'profile':
+    
+    case 'apply':
+        $UsersController->ApplyOffer();
+        break;
+    
+    case 'submit_application':
+        $UsersController->SubmitApplication();
+        break;
+    
+    // --- ROUTES PROFIL --- //
+    case 'profile':                 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $MyAccountController->UpdatePassword();
         } else {
@@ -95,8 +104,20 @@ switch ($uri) {
         $UsersController->Logout();
         break;
     case 'students':
-    $controller->MyStudentPage();
-        break;
+    $UsersController->MyStudentPage();
+    break;
+
+    case 'toggle-wishlist':
+    $UsersController->toggleWishlist();
+    break;
+
+    case 'wishlist':
+    $UsersController->MyWishListPage();
+    break;
+   
+    case 'student-wishlist':
+    $UsersController->StudentWishlistPage();
+    break;
 
     case 'edit-offer':
     $UsersController->EditOfferPage();

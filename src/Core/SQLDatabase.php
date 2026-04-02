@@ -59,9 +59,9 @@ class SQLDatabase implements Database {
     }
 
     public function setQuery($query, $location, $sector, $type) {
-
-        $sql = "SELECT * FROM job_offers WHERE 1=1";
-
+        $sql = "SELECT id_offre AS id, titre, description, type_contrat AS type 
+FROM job_offers 
+WHERE 1=1";
         $params = [];
 
         if (!empty($query)) {
