@@ -136,7 +136,7 @@ Le modèle MVC (Model-View-Controller) est un concept clé en développement web
 - La view : vue
 - Le controller : contrôleur
 
-L’utilisation de cette architecture nous permet de mieux visualiser l’organisation du programme ains que  d’améliorer l’efficacité du développement de notre plateforme, en séparant clairement les tâches selon des besoins.
+L’utilisation de cette architecture nous permet de mieux visualiser l’organisation du programme ainsi que  d’améliorer l’efficacité du développement de notre plateforme, en séparant clairement les tâches selon des besoins.
 
 ## Models :
 Les models représentent la structure des données ainsi que la logique métier de la plateforme. 
