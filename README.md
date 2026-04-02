@@ -81,9 +81,7 @@ De plus, cette organisation simplifie grandement la correction de problèmes ain
 
 Pour notre cas présent, l'architecture que nous avons établie a été choisie en fonction du travail réalisé en amont et le résultat est le suivant :
 
-<img width="726" height="500" alt="image" src="https://github.com/user-attachments/assets/022439fd-cdcb-4c26-a8f4-651b39505f18" />
-
-
+<img width="500" height="474" alt="image" src="https://github.com/user-attachments/assets/99384f29-88b9-4aaa-8362-e879da89b7fd" />
 
 ## Base de données :
 Pour notre plateforme de recherche de stage, l'implémentation d'une base de données est obligatoire afin de stocker, organiser et gérer les informations nécessaires au bon fonctionnement de celle-ci.
