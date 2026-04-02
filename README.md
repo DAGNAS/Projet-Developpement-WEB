@@ -152,14 +152,14 @@ Les views représentent l'affichage des informations à l'utilisateur. Pour simp
 - Elles gèrent seulement l'affichage des informations demandées.
 
 ## Controllers :
-Les controllers sont responsables de la gestion des requêtes de l'utilisateur ainsi que des réponses convenues. ils s'agissent comme des intermédiaires entre les mdodels et les views en créant un lien logique.
+Les controllers sont responsables de la gestion des requêtes de l'utilisateur ainsi que des réponses convenues. Ils s'agissent comme des intermédiaires entre les models et les views en créant un lien logique.
 - Le modèle : Il permet de gérer les données ainsi que la logique métier (Exemple : Récupérer des informations provenant d'une BDD).
 - La vue : Elle permet d'afficher correctements les donées à l'utilisateur par le biais du graphisme (Exemple : HTML, templates, ...).
 
 Dans un cas concret, lors de l'authentification d'un utilisateur :
 1. L’utilisateur sélectionne son type de profil et renseigne ses informations personnelles (email, mot de passe, ...).
 2. Une fois le formulaire envoyé, le contrôleur chargé de la connexion récupère ces données et vérifie via la base de données si elles sont correctes.
-3. Si elle le sont, alors le contrôleur redirige l'utilisateur vers la page appropriée de son profil grâce à la view avec les informations corresdantes affichées.
+3. Si elle le sont, alors le contrôleur redirige l'utilisateur vers la page appropriée de son profil grâce à la view avec les informations correspondantes affichées.
 
 ## Javascript :
 L'utiliastion de Javascript joue un rôle essentiel dans le développement de notre site web, puisqu'il permet d'ajouter de l'interraction et d'améliorer l'expérience utilisateur lors de sa navigation.
