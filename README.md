@@ -3,7 +3,7 @@
 </p>
 
 ## Contexte :
-Dans le cadre de notre formation nous devons réaliser un stage en entreprise en fin d'année afin de valider notre parcours. pour cela, il nous est nécessaire d'effectuer des recherches afin de trouver une offre correspondant à certains critères, tels que le secteur d’activité, la durée ou encore la localisation. Ces recherches reposent principalement sur la mise en service de nos réseaux personnels et professionels (LinkedIN, GitHub, famille, proches, amis) ainsi que sur la consultation d'offres en lignes publiées sur des plateformes spécialisées (Hellowork, Welcome to the Jungle, Indeed). Dans cette continuité, notre équipe incarne le rôle de prestataire Web4All chargé de concevoir un site web dédié à la recherche de stages pour notre client, le porteur du projet.
+Dans le cadre de notre formation nous devons réaliser un stage en entreprise en fin d'année afin de valider notre parcours. Pour cela, il nous est nécessaire d'effectuer des recherches afin de trouver une offre correspondant à certains critères, tels que le secteur d’activité, la durée ou encore la localisation. Ces recherches reposent principalement sur la mise en service de nos réseaux personnels et professionnels (LinkedIN, GitHub, famille, proches, amis) ainsi que sur la consultation d'offres en lignes publiées sur des plateformes spécialisées (Hellowork, Welcome to the Jungle, Indeed). Dans cette continuité, notre équipe incarne le rôle de prestataire Web4All chargé de concevoir un site web dédié à la recherche de stages pour notre client, le porteur du projet.
 
 ## Présentation du projet :
 "CHERCHE STAGE" est un projet visant à concevoir un site web entièrement dédié à la recherche de stage. Notre plateforme, nommée "Job's Horizon", doit intégrer un ensemble de fonctionnalités demandées par notre client tout au long du développement. L’objectif finale est de proposer un outil complet, intuitif et accessible, offrant aux étudiants un espace de confort leurs permettant de gérer et de consulter des opportunités de stage. Les entreprises disposent également de leur propre espace leur permettant de publier ou de retirer leurs offres. Les pilotes peuvent, quant à eux, gérer les promotions composées de leurs étudiants, tous rattachés à un même établissement. Enfin, les administrateurs disposent de l’ensemble des droits afin de superviser et arbitrer l’intégralité du système. Pour assurer le bon fonctionnement de notre site web, une base de données est mise en place afin de stocker toutes les informations nécessaires, qu’elles soient confidentielles, professionnelles ou personnelles.
@@ -22,10 +22,10 @@ Pour atteindre cette finalité, plusieurs objectifs intermédiaires doivent êtr
 
 ## Effectif :
 Notre groupe projet se compose de quatre personnes :
-- Kaëlig CLENET, Product Owner, développeur
+- Kaëlig CLENET, développeur
 - Anthony MOIZANT, développeur
-- Mohamed SALL, développeur
-- Swan DAGNAS, Scrum Master, développeur
+- Mohamed SALL, Product Owner, développeur
+- Swan DAGNAS, Product Master, développeur
 
 ## Matrice des permissions :
 La matrice des permissions est également un élément important dans la gestion du développement de notre site web, car elle permet de définir les actions que peuvent effectuer les différents utilisateurs durant leur navigation. Elle garantit ainsi un accès réservé et contrôlé, tout en s’assurant que chaque utilisateur possède uniquement les fonctionnalités dont il a besoin.
@@ -81,8 +81,7 @@ De plus, cette organisation simplifie grandement la correction de problèmes ain
 
 Pour notre cas présent, l'architecture que nous avons établie a été choisie en fonction du travail réalisé en amont et le résultat est le suivant :
 
-<img width="526" height="500" alt="image" src="https://github.com/user-attachments/assets/fab215a8-46e7-4d01-a87e-7cacdfd463fb" />
-
+<img width="500" height="474" alt="image" src="https://github.com/user-attachments/assets/99384f29-88b9-4aaa-8362-e879da89b7fd" />
 
 ## Base de données :
 Pour notre plateforme de recherche de stage, l'implémentation d'une base de données est obligatoire afin de stocker, organiser et gérer les informations nécessaires au bon fonctionnement de celle-ci.

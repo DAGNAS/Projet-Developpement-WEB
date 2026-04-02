@@ -1,0 +1,99 @@
+{% extends "LoggedBase.twig.html" %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="assets/style/pages/CreateOffer.css">
+
+{% endblock %}
+
+{% block content %}
+<section class="create-offer-page">
+<div class="create-offer-wrapper">
+<div class="create-offer-header">
+<p class="create-offer-subtitle">Espace entreprise</p>
+<h1>Modifier une offre</h1>
+<p class="create-offer-text">
+
+                Mettez à jour les informations de votre offre.
+</p>
+</div>
+<div class="create-offer-card">
+<form action="?uri=update-offer" method="POST" class="create-offer-form">
+<input type="hidden" name="id" value="{{ offer.id }}">
+<div class="form-group">
+<label for="title">Titre de l'offre</label>
+<input
+
+                        type="text"
+
+                        id="title"
+
+                        name="title"
+
+                        value="{{ offer.title }}"
+
+                        required
+>
+</div>
+<div class="form-row">
+<div class="form-group">
+<label for="sector">Secteur</label>
+<select id="sector" name="sector" required>
+<option value="">Choisir un secteur</option>
+<option value="Informatique" {{ offer.sector == 'Informatique' ? 'selected' : '' }}>Informatique</option>
+<option value="Construction" {{ offer.sector == 'Construction' ? 'selected' : '' }}>Construction</option>
+<option value="Marketing" {{ offer.sector == 'Marketing' ? 'selected' : '' }}>Marketing</option>
+<option value="Finance" {{ offer.sector == 'Finance' ? 'selected' : '' }}>Finance</option>
+<option value="Santé" {{ offer.sector == 'Santé' ? 'selected' : '' }}>Santé</option>
+<option value="Design" {{ offer.sector == 'Design' ? 'selected' : '' }}>Design</option>
+</select>
+</div>
+<div class="form-group">
+<label for="type">Type</label>
+<select id="type" name="type" required>
+<option value="">Choisir un type</option>
+<option value="Stage" {{ offer.type == 'Stage' ? 'selected' : '' }}>Stage</option>
+<option value="Alternance" {{ offer.type == 'Alternance' ? 'selected' : '' }}>Alternance</option>
+<option value="CDI" {{ offer.type == 'CDI' ? 'selected' : '' }}>CDI</option>
+<option value="CDD" {{ offer.type == 'CDD' ? 'selected' : '' }}>CDD</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label for="location">Localisation</label>
+<input
+
+                        type="text"
+
+                        id="location"
+
+                        name="location"
+
+                        value="{{ offer.location }}"
+
+                        required
+>
+</div>
+<div class="form-group">
+<label for="description">Description</label>
+<textarea
+
+                        id="description"
+
+                        name="description"
+
+                        rows="6"
+
+                        required
+>{{ offer.description }}</textarea>
+</div>
+<div class="form-actions">
+<a href="?uri=my-posts" class="btn-secondary">Annuler</a>
+<button type="submit" class="btn-primary">Enregistrer les modifications</button>
+</div>
+</form>
+</div>
+</div>
+</section>
+
+{% endblock %}
+ 
