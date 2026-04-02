@@ -35,7 +35,9 @@ class SQLDatabase implements Database {
     }
 
     public function setQuery($query, $location, $sector, $type) {
-        $sql = "SELECT * FROM job_offers WHERE 1=1";
+        $sql = "SELECT id_offre AS id, titre, description, type_contrat AS type 
+FROM job_offers 
+WHERE 1=1";
         $params = [];
 
         if (!empty($query)) {
@@ -119,4 +121,7 @@ class SQLDatabase implements Database {
     $stmt = $this->database->query("SELECT * FROM users WHERE role = 'student'");
     return $stmt->fetchAll();
     }
+    public function getPDO() {
+    return $this->database;
+}
 }
