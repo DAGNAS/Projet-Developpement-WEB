@@ -7,27 +7,27 @@
 * {
     outline: 2px solid red;
     outline-offset: -1px;
-
+ 
 }
 */
-
+ 
 html, body {
     overflow-x: hidden;
     margin: 0;
     padding: 0;
 }
-
+ 
 .overlay {
     height: 100%;
     display: flex;
 }
-
+ 
 .hero {
     position: relative;
     padding-top: 50px;
     padding-bottom: 100px;
 }
-
+ 
 .hero h1 {
     font-size: clamp(10px, 8vw, 80px);
     text-align: center;
@@ -36,7 +36,7 @@ html, body {
     margin: 40px;
 
 }
-
+ 
 .login {
     width: min(90%, 90%);
     height: min(90%, 90%);
@@ -47,7 +47,7 @@ html, body {
     background: #0075a2;
     overflow: clip;
 }
-
+ 
 .login h2 {
     margin: 0 0 clamp(24px, 5vw, 60px) 0;
     font-size: clamp(60px, 6vw, 82px);
@@ -58,66 +58,77 @@ html, body {
     word-wrap: break-word;
     overflow-wrap: anywhere;
 }
-
+ 
 .cards {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
+    grid-template-columns: repeat(4, 1fr);
     gap: 5px;
     width: 100%;
     padding: 5px;
     box-sizing: border-box;
 }
-
-
+ 
+ 
 .cards > form {
     width: 100%;
     display: flex;
 }
-
+ 
 .card {
     width: 100%;
     aspect-ratio: 1 / 1;
-
+ 
     background: #020424;
     color: #ffffff;
-
+ 
     border-radius: 20px;
     border: none;
-
+ 
     cursor: pointer;
-
+ 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+ 
     text-transform: uppercase;
     font-weight: 800;
     font-size: clamp(1rem, 2vw, 1.5rem);
-
+ 
     transition: transform .2s ease, box-shadow .2s ease;
     box-shadow: 0 4px 14px rgba(0,0,0,0.25);
 }
-
+ 
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 24px rgba(0,0,0,0.3);
 }
-
+ 
 .cards img,
 .cards svg {
     max-width: 60%;
     height: auto;
     margin-bottom: 10px;
 }
-
+ 
+@media (max-width: 1527px) {
+ 
+    .cards {
+        gap: clamp(15px, 3vw, 30px);
+    }
+ 
+    .cards > * {
+        width: clamp(120px, 40vw, 295px);
+    }
+}
+ 
 @media (max-width: 1020px) {
     .cards {
         grid-template-columns: repeat(2, 1fr);
     }
 }
-
-
+ 
+ 
 .about {
     background: white;
     width: 90%;
@@ -125,8 +136,8 @@ html, body {
     margin: 50px auto;
     border-radius: 20px;
 }
-
-
+ 
+ 
 .about-text {
     width: 60%;
     background: #4b9ad6;
@@ -135,18 +146,18 @@ html, body {
     margin: 0 auto;
     color: #fff;
 }
-
+ 
 .about-text h2 {
     font-size: clamp(24px, 4.5vw, 40px);
     margin-bottom: 20px;
 }
-
+ 
 @media (max-width: 900px) {
     .about-text {
         width: 100%;
     }
 }
-
+ 
 .lign {
     display: flex;
     justify-content: space-around;
@@ -154,7 +165,7 @@ html, body {
     gap: 30px;
     flex-wrap: wrap;
 }
-
+ 
 .stat-circle {
     display: flex;
     align-items: center;
@@ -162,7 +173,7 @@ html, body {
     flex-wrap: wrap;
     justify-content: center;
 }
-
+ 
 .circle {
     background: #0b7ea4;
     width: clamp(160px, 28vw, 250px);
@@ -176,12 +187,12 @@ html, body {
     color: #ffffff;
     padding: 10px;
 }
-
+ 
 .circle span {
     font-size: clamp(24px, 5vw, 48px);
     font-weight: bold;
 }
-
+ 
 .stat {
     background: white;
     width: 90%;
@@ -189,7 +200,7 @@ html, body {
     margin: auto;
     border-radius: 20px;
 }
-
+ 
 .stat-dashboard {
     background: white;
     width: 90%;
@@ -199,25 +210,25 @@ html, body {
     color: #020424;
     box-shadow: 0 15px 40px rgba(0,0,0,0.1);
 }
-
+ 
 .stat-header {
     text-align: center;
     margin-bottom: 50px;
 }
-
+ 
 .stat-header h2 {
     font-size: clamp(28px, 5.5vw, 56px);
     color: #0075a2;
     margin-bottom: 15px;
 }
-
+ 
 .stat-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 30px;
     margin-bottom: 50px;
 }
-
+ 
 .stat-item {
     text-align: center;
     padding: 30px;
@@ -225,39 +236,39 @@ html, body {
     border-radius: 20px;
     transition: transform .3s ease, box-shadow .3s ease;
 }
-
+ 
 .stat-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.05);
 }
-
+ 
 .stat-item.highlight {
     background: #0075a2;
     color: white;
 }
-
+ 
 .stat-value {
     font-size: clamp(28px, 5vw, 56px);
     font-weight: 800;
     color: orange;
     margin-bottom: 10px;
 }
-
+ 
 .stat-item.highlight .stat-value {
     color: #fff;
 }
-
+ 
 .stat-label {
     font-size: 1.2rem;
     font-weight: 600;
     text-transform: uppercase;
 }
-
+ 
 .stat-footer {
     max-width: 80%;
     margin: 0 auto;
 }
-
+ 
 .progress-container span {
     display: block;
     margin-bottom: 15px;
@@ -265,14 +276,14 @@ html, body {
     font-size: 1.5rem;
     text-align: center;
 }
-
+ 
 .progress-bar {
     background: #e9ecef;
     border-radius: 50px;
     height: 50px;
     overflow: hidden;
 }
-
+ 
 .progress-fill {
     background: linear-gradient(90deg, #0075a2, orange);
     height: 100%;
@@ -284,3 +295,4 @@ html, body {
     font-weight: bold;
     border-radius: 50px;
 }
+ 
