@@ -154,53 +154,41 @@ class UsersController extends Controller {
     }
 
 public function MyPostPage() {
-
-    $nav = $this->Dashboard();
-
-    $page = $_GET['page'] ?? 1;
-
-    $page = (int)$page;
-
-    if ($page < 1) {
-
-        $page = 1;
-
-    }
-
-    $limit = 8;
-
-    $offset = ($page - 1) * $limit;
-
-    $offers = $this->SQLDatabase->getOffersPaginated($limit, $offset);
-
-    $total = $this->SQLDatabase->countOffers()['total'];
-
-    $totalPages = (int) ceil($total / $limit);
-
-    if ($totalPages < 1) {
-
-        $totalPages = 1;
-
-    }
-
-    if ($page > $totalPages) {
-
-        $page = $totalPages;
-
-    }
-
-    echo $this->templateEngine->render('company/MyPost.twig.html', [
-
-        'nav' => $nav,
-
-        'offers' => $offers,
-
-        'page' => $page,
-
-        'totalPages' => $totalPages
-
-    ]);
-
+   if (session_status() === PHP_SESSION_NONE) {
+       session_start();
+   }
+   $nav = $this->Dashboard();
+   $userEmail = $_SESSION['user_id'] ?? null;
+   if (!$userEmail) {
+       header('Location: ?uri=login');
+       exit;
+   }
+   $company = $this->SQLDatabase->getCompanyByUserEmail($userEmail);
+   if (!$company) {
+       die("Entreprise introuvable.");
+   }
+   $page = $_GET['page'] ?? 1;
+   $page = (int)$page;
+   if ($page < 1) {
+       $page = 1;
+   }
+   $limit = 8;
+   $offset = ($page - 1) * $limit;
+   $offers = $this->SQLDatabase->getOffersPaginatedByCompany($company['id'], $limit, $offset);
+   $total = $this->SQLDatabase->countOffersByCompany($company['id'])['total'];
+   $totalPages = (int) ceil($total / $limit);
+   if ($totalPages < 1) {
+       $totalPages = 1;
+   }
+   if ($page > $totalPages) {
+       $page = $totalPages;
+   }
+   echo $this->templateEngine->render('company/MyPost.twig.html', [
+       'nav' => $nav,
+       'offers' => $offers,
+       'page' => $page,
+       'totalPages' => $totalPages
+   ]);
 }
  
 
@@ -215,83 +203,68 @@ public function MyPostPage() {
 }
 
 public function EditOfferPage() {
-
-    $nav = $this->Dashboard();
-
-    $id = $_GET['id'] ?? null;
-
-    if (!$id) {
-
-        die("Offre introuvable.");
-
-    }
-
-    $offer = $this->SQLDatabase->getOfferById($id);
-
-    if (!$offer) {
-
-        die("Offre inexistante.");
-
-    }
-
-    echo $this->templateEngine->render('company/EditOffer.twig.html', [
-
-        'nav' => $nav,
-
-        'offer' => $offer
-
-    ]);
-
+   if (session_status() === PHP_SESSION_NONE) {
+       session_start();
+   }
+   $nav = $this->Dashboard();
+   $userEmail = $_SESSION['user_id'] ?? null;
+   $id = $_GET['id'] ?? null;
+   if (!$userEmail || !$id) {
+       die("Accès refusé.");
+   }
+   $company = $this->SQLDatabase->getCompanyByUserEmail($userEmail);
+   if (!$company) {
+       die("Entreprise introuvable.");
+   }
+   $offer = $this->SQLDatabase->getOfferByIdAndCompany($id, $company['id']);
+   if (!$offer) {
+       die("Cette offre ne vous appartient pas.");
+   }
+   echo $this->templateEngine->render('company/EditOffer.twig.html', [
+       'nav' => $nav,
+       'offer' => $offer
+   ]);
 }
 
 public function UpdateOffer() {
-
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-
-        header('Location: ?uri=my-posts');
-
-        exit;
-
-    }
-
-    $id = $_POST['id'] ?? null;
-
-    $title = trim($_POST['title'] ?? '');
-
-    $sector = trim($_POST['sector'] ?? '');
-
-    $type = trim($_POST['type'] ?? '');
-
-    $description = trim($_POST['description'] ?? '');
-
-    $location = trim($_POST['location'] ?? '');
-
-    if (!$id || !$title || !$sector || !$type || !$description || !$location) {
-
-        die("Tous les champs sont obligatoires.");
-
-    }
-
-    $this->SQLDatabase->updateOffer(
-
-        $id,
-
-        $title,
-
-        $sector,
-
-        $type,
-
-        $description,
-
-        $location
-
-    );
-
-    header('Location: ?uri=my-posts');
-
-    exit;
-
+   if (session_status() === PHP_SESSION_NONE) {
+       session_start();
+   }
+   if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+       header('Location: ?uri=my-posts');
+       exit;
+   }
+   $userEmail = $_SESSION['user_id'] ?? null;
+   if (!$userEmail) {
+       die("Accès refusé.");
+   }
+   $company = $this->SQLDatabase->getCompanyByUserEmail($userEmail);
+   if (!$company) {
+       die("Entreprise introuvable.");
+   }
+   $id = $_POST['id'] ?? null;
+   $title = trim($_POST['title'] ?? '');
+   $sector = trim($_POST['sector'] ?? '');
+   $type = trim($_POST['type'] ?? '');
+   $description = trim($_POST['description'] ?? '');
+   $location = trim($_POST['location'] ?? '');
+   if (!$id || !$title || !$sector || !$type || !$description || !$location) {
+       die("Tous les champs sont obligatoires.");
+   }
+   $offer = $this->SQLDatabase->getOfferByIdAndCompany($id, $company['id']);
+   if (!$offer) {
+       die("Cette offre ne vous appartient pas.");
+   }
+   $this->SQLDatabase->updateOffer(
+       $id,
+       $title,
+       $sector,
+       $type,
+       $description,
+       $location
+   );
+   header('Location: ?uri=my-posts');
+   exit;
 }
 
 public function SystemInfoPage() {
@@ -346,7 +319,7 @@ public function StoreOffer() {
 
     }
 
-    $company = $this->SQLDatabase->getFirstCompany();
+    $company = $this->SQLDatabase->getCompanyByUserEmail($userEmail);
 
     if (!$company) {
 
@@ -392,11 +365,23 @@ public function StoreOffer() {
 
 }
 public function DeleteOffer() {
-   $id = $_GET['id'] ?? null;
-   if (!$id) {
-       die("Offre introuvable.");
+   if (session_status() === PHP_SESSION_NONE) {
+       session_start();
    }
-   $this->SQLDatabase->deleteOffer($id);
+   $userEmail = $_SESSION['user_id'] ?? null;
+   $id = $_GET['id'] ?? null;
+   if (!$userEmail || !$id) {
+       die("Accès refusé.");
+   }
+   $company = $this->SQLDatabase->getCompanyByUserEmail($userEmail);
+   if (!$company) {
+       die("Entreprise introuvable.");
+   }
+   $offer = $this->SQLDatabase->getOfferByIdAndCompany($id, $company['id']);
+   if (!$offer) {
+       die("Cette offre ne vous appartient pas.");
+   }
+   $this->SQLDatabase->deleteOfferByCompany($id, $company['id']);
    header('Location: ?uri=my-posts');
    exit;
 }

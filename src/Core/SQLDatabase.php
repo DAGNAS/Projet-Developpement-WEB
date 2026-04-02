@@ -363,5 +363,80 @@ class SQLDatabase implements Database {
    ]);
 }
 
+public function getUserByEmail($email) {
+   $stmt = $this->database->prepare("SELECT * FROM users WHERE email = :email");
+   $stmt->execute([
+       'email' => $email
+   ]);
+   return $stmt->fetch();
+}
+public function getCompanyByUserEmail($email) {
+   $user = $this->getUserByEmail($email);
+   if (!$user) {
+       return false;
+   }
+   $stmt = $this->database->prepare("
+       SELECT * FROM company
+       WHERE id_contact = :id_contact
+       LIMIT 1
+   ");
+   $stmt->execute([
+       'id_contact' => $user['id']
+   ]);
+   return $stmt->fetch();
+}
+public function getOffersPaginatedByCompany($companyId, $limit, $offset) {
+   $stmt = $this->database->prepare("
+       SELECT job_offers.*, company.nom AS company_name
+       FROM job_offers
+       LEFT JOIN company ON company.id = job_offers.id_company
+       WHERE job_offers.id_company = :company_id
+       ORDER BY created_at DESC
+       LIMIT :limit OFFSET :offset
+   ");
+   $stmt->bindValue(':company_id', (int)$companyId, PDO::PARAM_INT);
+   $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+   $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
+   $stmt->execute();
+   return $stmt->fetchAll();
+}
+public function countOffersByCompany($companyId) {
+   $stmt = $this->database->prepare("
+       SELECT COUNT(*) as total
+       FROM job_offers
+       WHERE id_company = :company_id
+   ");
+   $stmt->execute([
+       'company_id' => $companyId
+   ]);
+   return $stmt->fetch();
+}
+public function getOfferByIdAndCompany($offerId, $companyId) {
+   $stmt = $this->database->prepare("
+       SELECT job_offers.*, company.nom AS company_name
+       FROM job_offers
+       LEFT JOIN company ON company.id = job_offers.id_company
+       WHERE job_offers.id = :offer_id
+         AND job_offers.id_company = :company_id
+       LIMIT 1
+   ");
+   $stmt->execute([
+       'offer_id' => $offerId,
+       'company_id' => $companyId
+   ]);
+   return $stmt->fetch();
+}
+public function deleteOfferByCompany($offerId, $companyId) {
+   $stmt = $this->database->prepare("
+       DELETE FROM job_offers
+       WHERE id = :offer_id
+         AND id_company = :company_id
+   ");
+   $stmt->execute([
+       'offer_id' => $offerId,
+       'company_id' => $companyId
+   ]);
+}
+
 }
  
