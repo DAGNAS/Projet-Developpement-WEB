@@ -146,7 +146,7 @@ Les models représentent la structure des données ainsi que la logique métier 
 
 
 ## Views ou templates :
-Les views représentent l'affichage des informations à l'utilisateur. Pour simplifier, Elle permet d'afficher correctements les donées à l'utilisateur par le biais du graphisme 
+Les views représentent l'affichage des informations à l'utilisateur. Pour simplifier, elle permet d'afficher correctement les données à l'utilisateur par le biais du graphisme.
 - Elles reçoivent les données préparées par le controller et affiches les bons éléments en fonction.
 - Elles permettent alors d'adapter l'interface de l'utilisateur selon son type (étudiant, pilote, ...) ou ses choix réalisés.
 - Elles gèrent seulement l'affichage des informations demandées.
