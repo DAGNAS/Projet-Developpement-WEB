@@ -86,7 +86,8 @@ Pour notre cas présent, l'architecture que nous avons établie a été choisie 
 ## Base de données :
 Pour notre plateforme de recherche de stage, l'implémentation d'une base de données est obligatoire afin de stocker, organiser et gérer les informations nécessaires au bon fonctionnement de celle-ci.
 Pour ce faire, nous utilisons une base de données en localhost grâce à "PhpMyAdmin", que nous avons déjà utilisé dans un prosit précédent. Cet outil nous permet de créer, gérer et administrer facilement notre base de données MySQL.
-La génération de nos données sont réaliser principalement avec le site internet "MOCKAROO", qui permet de créer rapidement des données fictives pour nos différentes tables. Ces données sont ensuite importées dans notre base de données afin de simuler un environnement réel ainsi que de tester les fonctionnalités de la plateforme.
+
+La génération de nos données est réaliser principalement avec le site internet "MOCKAROO", qui permet de créer rapidement des données fictives pour nos différentes tables. Ces données sont ensuite importées dans notre base de données afin de simuler un environnement réel ainsi que de tester les fonctionnalités de la plateforme.
 
 Lien vers MOCKAROO : https://mockaroo.com/
 
