@@ -95,6 +95,17 @@ switch ($uri) {
         $UsersController->Logout();
         break;
 
+    case 'edit-offer':
+    $UsersController->EditOfferPage();
+    break;
+
+    case 'update-offer':
+        $UsersController->UpdateOffer();
+        break;    
+    
+    case 'delete-offer':
+        $UsersController->DeleteOffer();
+        break;
     default:
         echo '404 Not Found';
         break;
