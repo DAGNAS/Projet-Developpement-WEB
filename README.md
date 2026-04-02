@@ -140,9 +140,9 @@ L’utilisation de cette architecture nous permet de mieux visualiser l’organi
 
 ## Models :
 Les models représentent la structure des données ainsi que la logique métier de la plateforme. 
-- Ils intérragissent avec la base de données pour récupérer, créer, modifier ou supprimer des informations.
+- Ils intéragissent avec la base de données pour récupérer, créer, modifier ou supprimer des informations.
 - Ils peuvent effectuer des calculs ou du traitement sur ces données.
-- Ils ne s'occupent pas de l'affchage mais prépare seulement les informations que les controllers pourront envoyer aux views. 
+- Ils ne s'occupent pas de l'affichage mais prépare seulement les informations que les controllers pourront envoyer aux views. 
 
 
 ## Views ou templates :
