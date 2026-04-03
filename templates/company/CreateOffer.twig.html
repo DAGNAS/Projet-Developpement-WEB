@@ -1,0 +1,68 @@
+{% extends "LoggedBase.twig.html" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="assets/style/pages/CreateOffer.css">
+{% endblock %}
+
+{% block content %}
+<section class="create-offer-page">
+    <div class="create-offer-wrapper">
+        <div class="create-offer-header">
+            <p class="create-offer-subtitle">Espace entreprise</p>
+            <h1>Poster une offre</h1>
+            <p class="create-offer-text">
+                Créez une nouvelle offre dans un format cohérent avec la recherche du site.
+            </p>
+        </div>
+
+        <div class="create-offer-card">
+            <form action="?uri=store-offer" method="POST" class="create-offer-form">
+                <div class="form-group">
+                    <label for="title">Titre de l'offre</label>
+                    <input type="text" id="title" name="title" placeholder="Ex : Développeur Fullstack PHP" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sector">Secteur</label>
+                        <select id="sector" name="sector" required>
+                            <option value="">Choisir un secteur</option>
+                            <option value="Informatique">Informatique</option>
+                            <option value="Construction">Construction</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Santé">Santé</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <select id="type" name="type" required>
+                            <option value="">Choisir un type</option>
+                            <option value="Stage">Stage</option>
+                            <option value="Alternance">Alternance</option>
+                            <option value="CDI">CDI</option>
+                            <option value="CDD">CDD</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Localisation</label>
+                    <input type="text" id="location" name="location" placeholder="Ex : La Rochelle" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="6" placeholder="Décrivez l'offre..." required></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <a href="?uri=my-posts" class="btn-secondary">Retour</a>
+                    <button type="submit" class="btn-primary">Publier l’offre</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

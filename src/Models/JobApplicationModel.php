@@ -22,4 +22,8 @@ class JobApplicationModel extends Model {
     public function GetOfferById($id) {
         return $this->database->GetOfferById($id);
     }
+
+    public function SubmitApplication($email, $offerId, $coverLetter) {
+        $this->database->SubmitApplication($email, $offerId, $coverLetter);
+    }
 }

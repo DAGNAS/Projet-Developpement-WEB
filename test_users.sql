@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `test_users`
 --
 
-CREATE TABLE `test_users` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `nom` varchar(50) DEFAULT NULL,
   `prenom` varchar(50) DEFAULT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE `test_users` (
 -- Dumping data for table `test_users`
 --
 
-INSERT INTO `test_users` (`id`, `nom`, `prenom`, `role`, `email`, `password`, `ville`, `competences`, `date_create`, `date_login`, `email_notif`) VALUES
+INSERT INTO `users` (`id`, `nom`, `prenom`, `role`, `email`, `password`, `ville`, `competences`, `date_create`, `date_login`, `email_notif`) VALUES
 (0, 'Dupont', 'Marc', 'student', 'marc@test.fr', '$2y$10$6GsRbRfZpcqDa9SWsaXe2e.gVkugfz6gzauN2gPOKPuZu.WfheNh.', 'Saint-Nazaire', 'PHP, SQL, HTML', '2026-03-16 11:00:13', '2026-03-25 10:37:58', 0),
 (2, 'Martin', 'Sophie', 'pilote', 'sophie@test.fr', 'test123', 'Nantes', 'Gestion de projet, Coaching', '2026-03-16 11:00:13', NULL, 0),
 (3, 'Admin', 'Gérard', 'company', 'admin@test.fr', 'admin123', 'Paris', 'Sécurité, Infrastructure', '2026-03-16 11:00:13', NULL, 0),
@@ -58,7 +58,7 @@ INSERT INTO `test_users` (`id`, `nom`, `prenom`, `role`, `email`, `password`, `v
 --
 -- Indexes for table `test_users`
 --
-ALTER TABLE `test_users`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
@@ -69,7 +69,7 @@ ALTER TABLE `test_users`
 --
 -- AUTO_INCREMENT for table `test_users`
 --
-ALTER TABLE `test_users`
+ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
