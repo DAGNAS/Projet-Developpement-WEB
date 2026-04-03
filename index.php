@@ -75,14 +75,14 @@ switch ($uri) {
         break;
 
     // --- ROUTES PROFIL --- //
-    case 'profile':                 
+    case 'profile':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $MyAccountController->UpdatePassword();
         } else {
             $MyAccountController->MyAccountPage();
         }
         break;
-    
+
     case 'profile/toggle_notif':
          $MyAccountController->ToggleNotif();
 
@@ -115,6 +115,9 @@ switch ($uri) {
         break;
     case 'create-account':
         $UsersController->CreateAccountPage();
+        break;
+    case 'students':
+    $UsersController->MyStudentPage();
         break;
 
     default:
