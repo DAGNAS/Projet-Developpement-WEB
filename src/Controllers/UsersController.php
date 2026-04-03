@@ -404,25 +404,30 @@ class UsersController extends Controller {
     }
 
     public function DeleteOffer() {
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-    $userEmail = $_SESSION['user_id'] ?? null;
-    $id = $_GET['id'] ?? null;
-    if (!$userEmail || !$id) {
-        die("Accès refusé.");
-    }
-    $company = $this->UsersModel->getCompanyByUserEmail($userEmail);
-    if (!$company) {
-        die("Entreprise introuvable.");
-    }
-    $offer = $this->UsersModel->getOfferByIdAndCompany($id, $company['id']);
-    if (!$offer) {
-        die("Cette offre ne vous appartient pas.");
-    }
-    $this->UsersModel->deleteOfferByCompany($id, $company['id']);
-    header('Location: ?uri=my-posts');
-    exit;
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $userEmail = $_SESSION['user_id'] ?? null;
+        $id = $_GET['id'] ?? null;
+        if (!$userEmail || !$id) {
+            die("Accès refusé.");
+        }
+
+        $company = $this->UsersModel->getCompanyByUserEmail($userEmail);
+        if (!$company) {
+            die("Entreprise introuvable.");
+        }
+
+        $offer = $this->UsersModel->getOfferByIdAndCompany($id, $company['id']);
+        if (!$offer) {
+            die("Cette offre ne vous appartient pas.");
+        }
+
+        $this->UsersModel->deleteOfferByCompany($id, $company['id']);
+        
+        header('Location: ?uri=my-posts');
+        exit;
     }
 
 }

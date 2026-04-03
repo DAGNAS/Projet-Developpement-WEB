@@ -309,5 +309,21 @@ class SQLDatabase implements Database {
     ]);
     }
 
+    public function SubmitApplication($email, $offerId) {
+        $user = $this->getUserByEmail($email);
+        if (!$user) {
+            die("Utilisateur introuvable.");
+        }
+
+        $stmt = $this->database->prepare("
+            INSERT INTO applications (id_student, id_job_offer, status, apply_date)
+            VALUES (:id_student, :id_job_offer, 'En attente', NOW())
+        ");
+
+        $stmt->execute([
+            'id_student' => $user['id'],
+            'id_job_offer' => $offerId
+        ]);
+    }
 }
  
