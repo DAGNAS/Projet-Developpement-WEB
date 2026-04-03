@@ -59,6 +59,11 @@ class UsersModel extends Model {
     public function toggleEmailNotifications($email){
         $this->database->toggleEmailNotifications($email);
     }
+
+    public function getCompanyByUserEmail($email) {
+        return $this->database->getCompanyByUserEmail($email);
+    }
+
 }
 
 ?>

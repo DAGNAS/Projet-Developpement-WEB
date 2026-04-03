@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Models\UsersModel;
 use App\Models\JobApplicationModel;
 use App\Models\SearchModel;
-use App\Core\SQLDatabase;
 use DateTime;
 
 class UsersController extends Controller {
@@ -15,7 +14,6 @@ class UsersController extends Controller {
         $this->JobApplicationModel = new JobApplicationModel();
         $this->SearchModel = new SearchModel();
         $this->templateEngine = $templateEngine;
-        $this->SQLDatabase = new SQLDatabase();
     }
 
 
@@ -80,8 +78,18 @@ class UsersController extends Controller {
     }
 
     public function ToggleNotif() {
+         if (session_status() === PHP_SESSION_NONE) session_start();
 
+        if (isset($_SESSION['user_id'])) {
+            // On demande au modèle d'inverser le statut actuel
+            $this->UsersModel->toggleEmailNotifications($_SESSION['user_id']);
+        }
+
+        header('Location: ?uri=profile');
+        exit;
     }
+
+
     public function SearchPage() {
 
         if (session_status() === PHP_SESSION_NONE) session_start();
@@ -127,11 +135,6 @@ class UsersController extends Controller {
         ]);
     }
 
-    public function MyWishListPage() {
-        $nav = $this->Dashboard();
-        echo $this->templateEngine->render('student/MyWishlist.twig.html', ['nav' => $nav]);
-    }
-
     public function MyApplicationsPage() {
         if (session_status() === PHP_SESSION_NONE) session_start();
 
@@ -170,57 +173,50 @@ class UsersController extends Controller {
         $this->ApplyOffer();
     }
 
-public function MyPostPage() {
-   if (session_status() === PHP_SESSION_NONE) {
-       session_start();
-   }
-   $nav = $this->Dashboard();
-   $userEmail = $_SESSION['user_id'] ?? null;
-   if (!$userEmail) {
-       header('Location: ?uri=login');
-       exit;
-   }
-   $company = $this->SQLDatabase->getCompanyByUserEmail($userEmail);
-   if (!$company) {
-       die("Entreprise introuvable.");
-   }
-   $page = $_GET['page'] ?? 1;
-   $page = (int)$page;
-   if ($page < 1) {
-       $page = 1;
-   }
-   $limit = 8;
-   $offset = ($page - 1) * $limit;
-   $offers = $this->SQLDatabase->getOffersPaginatedByCompany($company['id'], $limit, $offset);
-   $total = $this->SQLDatabase->countOffersByCompany($company['id'])['total'];
-   $totalPages = (int) ceil($total / $limit);
-   if ($totalPages < 1) {
-       $totalPages = 1;
-   }
-   if ($page > $totalPages) {
-       $page = $totalPages;
-   }
-   echo $this->templateEngine->render('company/MyPost.twig.html', [
-       'nav' => $nav,
-       'offers' => $offers,
-       'page' => $page,
-       'totalPages' => $totalPages
-   ]);
-}
- 
-
-
-
-
-    public function Logout() {
+    public function MyPostPage() {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        
-        $this->UsersModel->SaveTimeLastConnexion($_SESSION['user_id']);
-        session_destroy();
-        header('Location: index.php?uri=/');
+
+        $nav = $this->Dashboard();
+        $userEmail = $_SESSION['user_id'] ?? null;
+        if (!$userEmail) {
+            header('Location: ?uri=login');
+            exit;
+        }
+
+        $company = $this->SQLDatabase->getCompanyByUserEmail($userEmail);
+        if (!$company) {
+            die("Entreprise introuvable.");
+        }
+
+        $page = $_GET['page'] ?? 1;
+        $page = (int)$page;
+        if ($page < 1) {
+            $page = 1;
+        }
+
+        $limit = 8;
+        $offset = ($page - 1) * $limit;
+        $offers = $this->SQLDatabase->getOffersPaginatedByCompany($company['id'], $limit, $offset);
+        $total = $this->SQLDatabase->countOffersByCompany($company['id'])['total'];
+        $totalPages = (int) ceil($total / $limit);
+
+        if ($totalPages < 1) {
+            $totalPages = 1;
+        }
+        if ($page > $totalPages) {
+            $page = $totalPages;
+        }
+
+        echo $this->templateEngine->render('company/MyPost.twig.html', [
+            'nav' => $nav,
+            'offers' => $offers,
+            'page' => $page,
+            'totalPages' => $totalPages
+        ]);
     }
+ 
 
     public function MyStudentPage() {
         $nav = $this->Dashboard();
@@ -232,86 +228,74 @@ public function MyPostPage() {
             'students' => $students
         ]);
     }
-<<<<<<< HEAD
+
     public function toggleWishlist() {
+        $data = json_decode(file_get_contents("php://input"), true);
 
+        $profileId = 1;
+        $offreId = $data['offre_id'];
 
-    $data = json_decode(file_get_contents("php://input"), true);
+        $this->SearchModel->toggleWishlist($profileId, $offreId);
 
-    $profileId = 1;
-    $offreId = $data['offre_id'];
-
-    $this->SearchModel->toggleWishlist($profileId, $offreId);
-
-    echo json_encode(['status' => 'ok']);
+        echo json_encode(['status' => 'ok']);
     }
+
     public function MyWishListPage() {
+        $profileId = 1; // temporaire
+        $offers = $this->SearchModel->getWishlistOffers($profileId);
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('student/MyWishlist.twig.html', [
+            'nav' => $nav,
+            'JobApplication' => $offers
+        ]);
+    }
 
-    $profileId = 1; // temporaire
+    public function StudentWishlistPage() {
 
-    $offers = $this->SearchModel->getWishlistOffers($profileId);
+        $studentId = $_GET['id'];
+        $profileId = 1; // temporaire
+        $offers = $this->SearchModel->getWishlistOffers($profileId);
 
-    $nav = $this->Dashboard();
+        $student = $this->SearchModel->getStudentById($studentId);
+        $nav = $this->Dashboard();
 
-    echo $this->templateEngine->render('student/MyWishlist.twig.html', [
-        'nav' => $nav,
-        'JobApplication' => $offers
-    ]);
-}
-public function StudentWishlistPage() {
-
-    $studentId = $_GET['id'];
-
-    $profileId = 1; // temporaire
-
-    $offers = $this->SearchModel->getWishlistOffers($profileId);
-
-    
-    $student = $this->SearchModel->getStudentById($studentId);
-
-    $nav = $this->Dashboard();
-
-    echo $this->templateEngine->render('student/MyWishlist.twig.html', [
-        'nav' => $nav,
-        'JobApplication' => $offers,
-        'student' => $student 
-    ]);
+        echo $this->templateEngine->render('student/MyWishlist.twig.html', [
+            'nav' => $nav,
+            'JobApplication' => $offers,
+            'student' => $student 
+        ]);
     }
 
     public function CreateOfferPage() {
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('company/CreateOffer.twig.html', ['nav' => $nav]);
+}
+
+    public function EditOfferPage() {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    $userEmail = $_SESSION['user_id'] ?? null;
+    $id = $_GET['id'] ?? null;
+    if (!$userEmail || !$id) {
+        die("Accès refusé.");
+    }
+    $company = $this->UsersModel->getCompanyByUserEmail($userEmail);
+    if (!$company) {
+        die("Entreprise introuvable.");
+    }
+    $offer = $this->SQLDatabase->getOfferByIdAndCompany($id, $company['id']);
+    if (!$offer) {
+        die("Cette offre ne vous appartient pas.");
+    }
 
     $nav = $this->Dashboard();
-
-    echo $this->templateEngine->render('company/CreateOffer.twig.html', ['nav' => $nav]);
-
-
-=======
->>>>>>> parent of 468f248 (AJout Wishlist + Pilote peut voir la wishlist)
-}
-
-public function EditOfferPage() {
-   if (session_status() === PHP_SESSION_NONE) {
-       session_start();
-   }
-   $nav = $this->Dashboard();
-   $userEmail = $_SESSION['user_id'] ?? null;
-   $id = $_GET['id'] ?? null;
-   if (!$userEmail || !$id) {
-       die("Accès refusé.");
-   }
-   $company = $this->SQLDatabase->getCompanyByUserEmail($userEmail);
-   if (!$company) {
-       die("Entreprise introuvable.");
-   }
-   $offer = $this->SQLDatabase->getOfferByIdAndCompany($id, $company['id']);
-   if (!$offer) {
-       die("Cette offre ne vous appartient pas.");
-   }
-   echo $this->templateEngine->render('company/EditOffer.twig.html', [
-       'nav' => $nav,
-       'offer' => $offer
-   ]);
-}
+    echo $this->templateEngine->render('company/EditOffer.twig.html', [
+        'nav' => $nav,
+        'offer' => $offer
+    ]);
+    }
 
 public function UpdateOffer() {
    if (session_status() === PHP_SESSION_NONE) {
@@ -368,7 +352,23 @@ public function LegalMentionPage() {
 
 }
 
+public function Logout() {
 
+    if (session_status() === PHP_SESSION_NONE) {
+
+        session_start();
+
+    }
+
+    $this->UsersModel->SaveTimeLastConnexion($_SESSION['user_id']);
+
+    session_destroy();
+
+    header('Location: index.php?uri=/');
+
+    exit;
+
+}
 
 public function StoreOffer() {
 
