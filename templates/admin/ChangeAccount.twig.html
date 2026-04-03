@@ -1,0 +1,47 @@
+{% extends "LoggedBase.twig.html" %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/assets/style/pages/homepage.css">
+{% endblock %}
+
+{% block content %}
+<div class="app-container">
+
+    <section class="login" id="login-box">
+        <h2>Changer de profil utilisateur</h2>
+
+        <div class="cards">
+
+            <a href="index.php?uri=autoLogin&type=admin" class="card">
+                <div class="img">
+                    <img src="assets/images/menu/body/admin-icone.png" alt="admin">
+                    ADMIN
+                </div>
+            </a>
+
+            <a href="index.php?uri=autoLogin&type=company" class="card">
+                <div class="img">
+                    <img src="assets/images/menu/body/enterprise-icone.png" alt="company">
+                    ENTREPRISE
+                </div>
+            </a>
+
+            <a href="index.php?uri=autoLogin&type=pilote" class="card">
+                <div class="img">
+                    <img src="assets/images/menu/body/teacher-icone.png" alt="pilote">
+                    PILOTE
+                </div>
+            </a>
+
+            <a href="index.php?uri=autoLogin&type=student" class="card">
+                <div class="img">
+                    <img src="assets/images/menu/body/student-icone.png" alt="student">
+                    ÉTUDIANT
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+</div>
+{% endblock %}

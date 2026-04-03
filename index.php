@@ -1,8 +1,4 @@
 <?php
-
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
 session_start([
     'cookie_httponly' => true,
     'cookie_secure' => false,
@@ -39,6 +35,28 @@ switch ($uri) {
         $AuthController->submitLogin();
         break;
 
+    // Changement de profile
+    case 'autoLogin':
+
+        if (!isset($_GET['type'])) {
+            header('Location: ?uri=/');
+            exit;
+        }
+
+        $type = $_GET['type'];
+        $allowedRoles = ['admin', 'company', 'pilote', 'student'];
+
+        if (!in_array($type, $allowedRoles)) {
+            die('Rôle invalide');
+        }
+
+        $_SESSION['user_role'] = $type;
+        $_SESSION['is_logged'] = true;
+
+        header('Location: ?uri=search');
+        exit;
+
+    // SPECIFIED
     case 'search':
         $UsersController->SearchPage();
         break;
@@ -56,7 +74,7 @@ switch ($uri) {
         break;
     
     // --- ROUTES PROFIL --- //
-    case 'profile':                 
+    case 'profile':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $MyAccountController->UpdatePassword();
         } else {
@@ -103,8 +121,14 @@ switch ($uri) {
     case 'logout':
         $UsersController->Logout();
         break;
+    case 'change-account':
+        $UsersController->ChangeAccountPage();
+        break;
+    case 'create-account':
+        $UsersController->CreateAccountPage();
+        break;
     case 'students':
-    $controller->MyStudentPage();
+    $UsersController->MyStudentPage();
         break;
 
     case 'edit-offer':
@@ -121,4 +145,5 @@ switch ($uri) {
     default:
         echo '404 Not Found';
         break;
+
 }

@@ -118,14 +118,14 @@ class UsersController extends Controller {
             $_SESSION['search_query'], $_SESSION['search_location'], $_SESSION['search_sector'], $_SESSION['search_type'],
             $limit, $offset
         );
-        
+
         $total = $personalQuery['count'];
         $totalPages = ceil($total / $limit);
 
         $nav = $this->Dashboard();
         echo $this->templateEngine->render('common/Search.twig.html', [
-            'nav' => $nav, 
-            'JobApplication' => $personalQuery['query'], 
+            'nav' => $nav,
+            'JobApplication' => $personalQuery['query'],
             'query' => $_SESSION['search_query'],
             'location' => $_SESSION['search_location'],
             'category' => $_SESSION['search_sector'],
@@ -133,6 +133,42 @@ class UsersController extends Controller {
             'page' => $page,
             'totalPages' => $totalPages
         ]);
+    }
+
+    public function UpdatePassword() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (
+            isset($_POST['new_password'], $_POST['confirm_password'], $_SESSION['user_id']) &&
+            $_POST['new_password'] === $_POST['confirm_password']
+        ) {
+            $this->UsersModel->updatePassword([
+                'email' => $_SESSION['user_id'],
+                'password' => $_POST['new_password']
+            ]);
+        }
+
+        header('Location: ?uri=profile');
+        exit;
+    }
+
+    public function ToggleNotif() {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+
+        if (isset($_SESSION['user_id'])) {
+            // On demande au modèle d'inverser le statut actuel
+            $this->UsersModel->toggleEmailNotifications($_SESSION['user_id']);
+        }
+
+        header('Location: ?uri=profile');
+        exit;
+    }
+
+    public function MyWishListPage() {
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('student/MyWishlist.twig.html', ['nav' => $nav]);
     }
 
     public function MyApplicationsPage() {
@@ -429,5 +465,15 @@ class UsersController extends Controller {
         header('Location: ?uri=my-posts');
         exit;
     }
+    public function ChangeAccountPage() {
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('admin/ChangeAccount.twig.html', ['nav' => $nav]);
+    }
+
+    public function CreateAccountPage() {
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('admin/CreateAccount.twig.html', ['nav' => $nav]);
+    }
+}
 
 }
