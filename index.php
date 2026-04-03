@@ -104,20 +104,8 @@ switch ($uri) {
         $UsersController->Logout();
         break;
     case 'students':
-    $UsersController->MyStudentPage();
-    break;
-
-    case 'toggle-wishlist':
-    $UsersController->toggleWishlist();
-    break;
-
-    case 'wishlist':
-    $UsersController->MyWishListPage();
-    break;
-   
-    case 'student-wishlist':
-    $UsersController->StudentWishlistPage();
-    break;
+    $controller->MyStudentPage();
+        break;
 
     case 'edit-offer':
     $UsersController->EditOfferPage();

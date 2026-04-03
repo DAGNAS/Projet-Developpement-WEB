@@ -39,30 +39,18 @@ class AuthController extends Controller {
 
     public function submitLogin() {
 
-    if(!isset($_POST['login'])) {
-        header('Location: ?uri=login');
-        return;
+        if(!isset($_POST['login'])) {
+            header('Location: ?uri=login');
+            return;
+        }
+
+        if($this->SecurityModel->authenticate($_POST['login'],$_POST['email'], $_POST['password'])) {
+            header('Location: ?uri=search');
+        } else {
+            header('Location: ?uri=login');
+        }
+
     }
-
-    $user = $this->SecurityModel->authenticate(
-        $_POST['login'],
-        $_POST['email'],
-        $_POST['password']
-    );
-
-    if($user) {
-
-        
-        $_SESSION['id'] = $user['id'];
-        $_SESSION['email'] = $user['email'];
-        $_SESSION['role'] = $user['role'];
-
-        header('Location: ?uri=search');
-
-    } else {
-        header('Location: ?uri=login');
-    }
-}
 }
 
 

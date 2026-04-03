@@ -59,9 +59,7 @@ class SQLDatabase implements Database {
     }
 
     public function setQuery($query, $location, $sector, $type) {
-        $sql = "SELECT id_offre AS id, titre, description, type_contrat AS type 
-FROM job_offers 
-WHERE 1=1";
+        $sql = "SELECT * FROM job_offers WHERE 1=1";
         $params = [];
 
         if (!empty($query)) {
@@ -360,6 +358,7 @@ WHERE 1=1";
     $stmt = $this->database->query("SELECT * FROM users WHERE role = 'student'");
     return $stmt->fetchAll();
     }
+<<<<<<< HEAD
 
 
 
@@ -448,3 +447,6 @@ public function deleteOfferByCompany($offerId, $companyId) {
 }
  
 
+=======
+}
+>>>>>>> parent of 468f248 (AJout Wishlist + Pilote peut voir la wishlist)

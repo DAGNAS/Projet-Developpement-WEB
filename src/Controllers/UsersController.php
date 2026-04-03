@@ -115,9 +115,7 @@ class UsersController extends Controller {
         $totalPages = ceil($total / $limit);
 
         $nav = $this->Dashboard();
-         $liked = $this->SearchModel->getWishlistIds(1);
         echo $this->templateEngine->render('common/Search.twig.html', [
-           
             'nav' => $nav, 
             'JobApplication' => $personalQuery['query'], 
             'query' => $_SESSION['search_query'],
@@ -125,11 +123,14 @@ class UsersController extends Controller {
             'category' => $_SESSION['search_sector'],
             'type' => $_SESSION['search_type'],
             'page' => $page,
-            'totalPages' => $totalPages,
-            'liked' => $liked,
+            'totalPages' => $totalPages
         ]);
     }
 
+    public function MyWishListPage() {
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('student/MyWishlist.twig.html', ['nav' => $nav]);
+    }
 
     public function MyApplicationsPage() {
         if (session_status() === PHP_SESSION_NONE) session_start();
@@ -231,6 +232,7 @@ public function MyPostPage() {
             'students' => $students
         ]);
     }
+<<<<<<< HEAD
     public function toggleWishlist() {
 
 
@@ -283,6 +285,8 @@ public function StudentWishlistPage() {
     echo $this->templateEngine->render('company/CreateOffer.twig.html', ['nav' => $nav]);
 
 
+=======
+>>>>>>> parent of 468f248 (AJout Wishlist + Pilote peut voir la wishlist)
 }
 
 public function EditOfferPage() {

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Core\SQLDatabase;
- 
+
 class SecurityModel extends Model {
 
     public function __construct($database = null) {
@@ -17,7 +17,6 @@ class SecurityModel extends Model {
     public function authenticate($login, $email, $password) {
         $code = $this->database->getUserInfoByMail($email);
 
-
         if (!$code) {
             return false;
         }
@@ -29,16 +28,16 @@ class SecurityModel extends Model {
         
         $passwordIsValid = password_verify($password, $code['password']) || $password === $code['password'];
 
-       if ($passwordIsValid && $login === $code['prenom'] && $_SESSION['user_role'] === $code['role']) {
-    
-    $_SESSION['user_email'] = $code['email'];
-    $_SESSION['user_prenom'] = $code['prenom'];
-    $_SESSION['user_role'] = $code['role'];
-    
-    $_SESSION['id'] = $code['id']; 
-   
-    return true;
-}
+        if ($passwordIsValid && $login === $code['prenom'] && $_SESSION['user_role'] === $code['role']) {
+            
+            $_SESSION['user_email'] = $code['email'];
+            $_SESSION['user_prenom'] = $code['prenom'];
+            $_SESSION['user_role'] = $code['role'];
+            
+            $_SESSION['user_id'] = $email;
+
+            return true;
+        } 
 
         return false;
     }
