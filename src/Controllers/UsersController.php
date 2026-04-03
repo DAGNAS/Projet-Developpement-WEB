@@ -166,8 +166,8 @@ class UsersController extends Controller {
 
         $this->JobApplicationModel->SubmitApplication([
             'id_user' => $_SESSION['user_id'],
-            'id_offer' => $_POST['id_offer'],
-            'cover_letter' => $_POST['cover_letter']
+            'id_offer' => $_GET['id_offer'],
+            'cover_letter' => $_GET['cover_letter']
         ]);
 
         $this->ApplyOffer();
@@ -425,7 +425,7 @@ class UsersController extends Controller {
         }
 
         $this->UsersModel->deleteOfferByCompany($id, $company['id']);
-        
+
         header('Location: ?uri=my-posts');
         exit;
     }

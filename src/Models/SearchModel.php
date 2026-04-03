@@ -35,7 +35,7 @@ class SearchModel extends Model {
     }
    
     public function countOffers() {
-     $stmt = $this->database->query("SELECT COUNT(*) as total FROM job_offers");
-    return $stmt->fetch();
-}
+        $stmt = $this->database->query("SELECT COUNT(*) as total FROM job_offers");
+        return $stmt->fetch();
+    }
 }
