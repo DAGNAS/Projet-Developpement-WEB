@@ -185,7 +185,7 @@ class UsersController extends Controller {
             exit;
         }
 
-        $company = $this->SQLDatabase->getCompanyByUserEmail($userEmail);
+        $company = $this->UsersModel->getCompanyByUserEmail($userEmail);
         if (!$company) {
             die("Entreprise introuvable.");
         }
@@ -198,8 +198,8 @@ class UsersController extends Controller {
 
         $limit = 8;
         $offset = ($page - 1) * $limit;
-        $offers = $this->SQLDatabase->getOffersPaginatedByCompany($company['id'], $limit, $offset);
-        $total = $this->SQLDatabase->countOffersByCompany($company['id'])['total'];
+        $offers = $this->UsersModel->getOffersPaginatedByCompany($company['id'], $limit, $offset);
+        $total = $this->UsersModel->countOffersByCompany($company['id'])['total'];
         $totalPages = (int) ceil($total / $limit);
 
         if ($totalPages < 1) {
@@ -269,13 +269,144 @@ class UsersController extends Controller {
     public function CreateOfferPage() {
         $nav = $this->Dashboard();
         echo $this->templateEngine->render('company/CreateOffer.twig.html', ['nav' => $nav]);
-}
+    }
 
     public function EditOfferPage() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $userEmail = $_SESSION['user_id'] ?? null;
+        $id = $_GET['id'] ?? null;
+        if (!$userEmail || !$id) {
+            die("Accès refusé.");
+        }
+        $company = $this->UsersModel->getCompanyByUserEmail($userEmail);
+        if (!$company) {
+            die("Entreprise introuvable.");
+        }
+        $offer = $this->UsersModel->getOfferByIdAndCompany($id, $company['id']);
+        if (!$offer) {
+            die("Cette offre ne vous appartient pas.");
+        }
+
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('company/EditOffer.twig.html', [
+            'nav' => $nav,
+            'offer' => $offer
+        ]);
+    }
+
+    public function UpdateOffer() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: ?uri=my-posts');
+            exit;
+        }
+        $userEmail = $_SESSION['user_id'] ?? null;
+        if (!$userEmail) {
+            die("Accès refusé.");
+        }
+        $company = $this->UsersModel->getCompanyByUserEmail($userEmail);
+        if (!$company) {
+            die("Entreprise introuvable.");
+        }
+        $id = $_POST['id'] ?? null;
+        $title = trim($_POST['title'] ?? '');
+        $sector = trim($_POST['sector'] ?? '');
+        $type = trim($_POST['type'] ?? '');
+        $description = trim($_POST['description'] ?? '');
+        $location = trim($_POST['location'] ?? '');
+        if (!$id || !$title || !$sector || !$type || !$description || !$location) {
+            die("Tous les champs sont obligatoires.");
+        }
+        $offer = $this->UsersModel->getOfferByIdAndCompany($id, $company['id']);
+        if (!$offer) {
+            die("Cette offre ne vous appartient pas.");
+        }
+        $this->UsersModel->updateOffer(
+            $id,
+            $title,
+            $sector,
+            $type,
+            $description,
+            $location
+        );
+        header('Location: ?uri=my-posts');
+        exit;
+    }
+
+    public function SystemInfoPage() {
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('admin/SystemInfo.twig.html', ['nav' => $nav]);
+    }
+
+    public function LegalMentionPage() {
+        echo $this->templateEngine->render('common/LegalMention.twig.html');
+    }
+
+    public function Logout() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $this->UsersModel->SaveTimeLastConnexion($_SESSION['user_id']);
+        session_destroy();
+        header('Location: index.php?uri=/');
+        exit;
+    }
+
+    public function StoreOffer() {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+
+            header('Location: ?uri=create-offer');
+
+            exit;
+
+        }
+
+        $userEmail = $_SESSION['user_id'] ?? null;
+
+        if (!$userEmail) {
+            header('Location: ?uri=login');
+            exit;
+        }
+
+        $company = $this->UsersModel->getCompanyByUserEmail($userEmail);
+        if (!$company) {
+            die("Aucune entreprise trouvée.");
+        }
+
+        $title = trim($_POST['title'] ?? '');
+        $sector = trim($_POST['sector'] ?? '');
+        $type = trim($_POST['type'] ?? '');
+        $description = trim($_POST['description'] ?? '');
+        $location = trim($_POST['location'] ?? '');
+
+        if (!$title || !$sector || !$type || !$description || !$location) {
+            die("Tous les champs sont obligatoires.");
+        }
+
+        $this->UsersModel->createOffer(
+            $company['id'],
+            $title,
+            $sector,
+            $type,
+            $description,
+            $location
+        );
+
+        header('Location: ?uri=my-posts');
+        exit;
+    }
+
+    public function DeleteOffer() {
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-
     $userEmail = $_SESSION['user_id'] ?? null;
     $id = $_GET['id'] ?? null;
     if (!$userEmail || !$id) {
@@ -285,176 +416,13 @@ class UsersController extends Controller {
     if (!$company) {
         die("Entreprise introuvable.");
     }
-    $offer = $this->SQLDatabase->getOfferByIdAndCompany($id, $company['id']);
+    $offer = $this->UsersModel->getOfferByIdAndCompany($id, $company['id']);
     if (!$offer) {
         die("Cette offre ne vous appartient pas.");
     }
-
-    $nav = $this->Dashboard();
-    echo $this->templateEngine->render('company/EditOffer.twig.html', [
-        'nav' => $nav,
-        'offer' => $offer
-    ]);
-    }
-
-public function UpdateOffer() {
-   if (session_status() === PHP_SESSION_NONE) {
-       session_start();
-   }
-   if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-       header('Location: ?uri=my-posts');
-       exit;
-   }
-   $userEmail = $_SESSION['user_id'] ?? null;
-   if (!$userEmail) {
-       die("Accès refusé.");
-   }
-   $company = $this->SQLDatabase->getCompanyByUserEmail($userEmail);
-   if (!$company) {
-       die("Entreprise introuvable.");
-   }
-   $id = $_POST['id'] ?? null;
-   $title = trim($_POST['title'] ?? '');
-   $sector = trim($_POST['sector'] ?? '');
-   $type = trim($_POST['type'] ?? '');
-   $description = trim($_POST['description'] ?? '');
-   $location = trim($_POST['location'] ?? '');
-   if (!$id || !$title || !$sector || !$type || !$description || !$location) {
-       die("Tous les champs sont obligatoires.");
-   }
-   $offer = $this->SQLDatabase->getOfferByIdAndCompany($id, $company['id']);
-   if (!$offer) {
-       die("Cette offre ne vous appartient pas.");
-   }
-   $this->SQLDatabase->updateOffer(
-       $id,
-       $title,
-       $sector,
-       $type,
-       $description,
-       $location
-   );
-   header('Location: ?uri=my-posts');
-   exit;
-}
-
-public function SystemInfoPage() {
-
-    $nav = $this->Dashboard();
-
-    echo $this->templateEngine->render('admin/SystemInfo.twig.html', ['nav' => $nav]);
-
-}
-
-public function LegalMentionPage() {
-
-    echo $this->templateEngine->render('common/LegalMention.twig.html');
-
-}
-
-public function Logout() {
-
-    if (session_status() === PHP_SESSION_NONE) {
-
-        session_start();
-
-    }
-
-    $this->UsersModel->SaveTimeLastConnexion($_SESSION['user_id']);
-
-    session_destroy();
-
-    header('Location: index.php?uri=/');
-
-    exit;
-
-}
-
-public function StoreOffer() {
-
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-
-        header('Location: ?uri=create-offer');
-
-        exit;
-
-    }
-
-    $userEmail = $_SESSION['user_id'] ?? null;
-
-    if (!$userEmail) {
-
-        header('Location: ?uri=login');
-
-        exit;
-
-    }
-
-    $company = $this->SQLDatabase->getCompanyByUserEmail($userEmail);
-
-    if (!$company) {
-
-        die("Aucune entreprise trouvée.");
-
-    }
-
-    $title = trim($_POST['title'] ?? '');
-
-    $sector = trim($_POST['sector'] ?? '');
-
-    $type = trim($_POST['type'] ?? '');
-
-    $description = trim($_POST['description'] ?? '');
-
-    $location = trim($_POST['location'] ?? '');
-
-    if (!$title || !$sector || !$type || !$description || !$location) {
-
-        die("Tous les champs sont obligatoires.");
-
-    }
-
-    $this->SQLDatabase->createOffer(
-
-        $company['id'],
-
-        $title,
-
-        $sector,
-
-        $type,
-
-        $description,
-
-        $location
-
-    );
-
+    $this->UsersModel->deleteOfferByCompany($id, $company['id']);
     header('Location: ?uri=my-posts');
-
     exit;
-
-}
-public function DeleteOffer() {
-   if (session_status() === PHP_SESSION_NONE) {
-       session_start();
-   }
-   $userEmail = $_SESSION['user_id'] ?? null;
-   $id = $_GET['id'] ?? null;
-   if (!$userEmail || !$id) {
-       die("Accès refusé.");
-   }
-   $company = $this->SQLDatabase->getCompanyByUserEmail($userEmail);
-   if (!$company) {
-       die("Entreprise introuvable.");
-   }
-   $offer = $this->SQLDatabase->getOfferByIdAndCompany($id, $company['id']);
-   if (!$offer) {
-       die("Cette offre ne vous appartient pas.");
-   }
-   $this->SQLDatabase->deleteOfferByCompany($id, $company['id']);
-   header('Location: ?uri=my-posts');
-   exit;
-}
+    }
 
 }

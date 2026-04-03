@@ -64,6 +64,37 @@ class UsersModel extends Model {
         return $this->database->getCompanyByUserEmail($email);
     }
 
+    public function getOffersPaginatedByCompany($id_company, $limit, $offset) {
+        return $this->database->getOffersPaginatedByCompany($id_company, $limit, $offset);
+    }
+
+    public function countOffersByCompany($id_company) {
+        return $this->database->countOffersByCompany($id_company);
+    }
+
+    public function getOfferByIdAndCompany($id_offer, $id_company) {
+        return $this->database->getOfferByIdAndCompany($id_offer, $id_company);
+    }
+
+    public function getApplicationsByOffer($id_offer) {
+        return $this->database->getApplicationsByOffer($id_offer);
+    }
+
+    public function deleteOffer($id) {
+        $this->database->deleteOffer($id);
+    }
+
+    public function updateOffer($id,$title,$sector,$type,$description,$location){
+        $this->database->updateOffer($id,$title,$sector,$type,$description,$location);
+    }
+
+    public function createOffer($id_company, $title, $sector, $type, $description, $location) {
+        $this->database->createOffer($id_company, $title, $sector, $type, $description, $location);
+    }
+
+    public function deleteOfferByCompany($id_offer, $id_company) {
+        $this->database->deleteOfferByCompany($id_offer, $id_company);
+    }
 }
 
 ?>
