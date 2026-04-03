@@ -135,42 +135,6 @@ class UsersController extends Controller {
         ]);
     }
 
-    public function UpdatePassword() {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        if (
-            isset($_POST['new_password'], $_POST['confirm_password'], $_SESSION['user_id']) &&
-            $_POST['new_password'] === $_POST['confirm_password']
-        ) {
-            $this->UsersModel->updatePassword([
-                'email' => $_SESSION['user_id'],
-                'password' => $_POST['new_password']
-            ]);
-        }
-
-        header('Location: ?uri=profile');
-        exit;
-    }
-
-    public function ToggleNotif() {
-        if (session_status() === PHP_SESSION_NONE) session_start();
-
-        if (isset($_SESSION['user_id'])) {
-            // On demande au modèle d'inverser le statut actuel
-            $this->UsersModel->toggleEmailNotifications($_SESSION['user_id']);
-        }
-
-        header('Location: ?uri=profile');
-        exit;
-    }
-
-    public function MyWishListPage() {
-        $nav = $this->Dashboard();
-        echo $this->templateEngine->render('student/MyWishlist.twig.html', ['nav' => $nav]);
-    }
-
     public function MyApplicationsPage() {
         if (session_status() === PHP_SESSION_NONE) session_start();
 
@@ -476,4 +440,4 @@ class UsersController extends Controller {
     }
 }
 
-}
+?>
