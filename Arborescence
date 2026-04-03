@@ -21,8 +21,9 @@
 │   ├── /auth                # connexion.twig.html
 │   ├── /student             # mes-candidatures, wishlist
 │   ├── /common              # recherche, homepage, mentions-legales, mon-compte
-│   │   /pilote              # mes-etudiants
+│   ├── /pilote              # mes-etudiants
 │   └── /admin               # info-systeme
 ├── /vendor             # Les dépendances (Twig, etc.)
 ├── index.php           # Le Routeur (le seul fichier accessible au début)
 └── .htaccess           # Pour rediriger proprement vers index.php
+

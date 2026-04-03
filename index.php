@@ -110,7 +110,7 @@ switch ($uri) {
         $UsersController->CreateAccountPage();
         break;
     case 'students':
-    $controller->MyStudentPage();
+    $UsersController->MyStudentPage();
         break;
 
     default:
