@@ -1,0 +1,577 @@
+.my-posts-page {
+
+    min-height: 70vh;
+
+    padding: 60px 20px 80px;
+
+}
+
+.my-posts-wrapper {
+
+    width: min(1200px, 92%);
+
+    margin: 0 auto;
+
+}
+
+.my-posts-header {
+
+    background: rgba(0, 117, 162, 0.95);
+
+    border-radius: 28px;
+
+    padding: 35px 40px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 30px;
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+
+    border: 2px solid rgba(255, 166, 0, 0.35);
+
+    margin-bottom: 35px;
+
+}
+
+.my-posts-subtitle {
+
+    color: #ffd166;
+
+    font-size: 1rem;
+
+    margin-bottom: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+}
+
+.my-posts-header h1 {
+
+    color: white;
+
+    font-size: clamp(2rem, 4vw, 3.5rem);
+
+    margin-bottom: 10px;
+
+}
+
+.my-posts-text {
+
+    color: rgba(255, 255, 255, 0.92);
+
+    max-width: 700px;
+
+    font-size: 1.05rem;
+
+    line-height: 1.6;
+
+}
+
+.create-offer-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: orange;
+
+    color: #010529;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    font-size: 1.05rem;
+
+    padding: 16px 28px;
+
+    border-radius: 16px;
+
+    min-width: 200px;
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+
+}
+
+.create-offer-btn:hover {
+
+    transform: translateY(-3px);
+
+    background: #ffb833;
+
+}
+
+.create-offer-btn.secondary {
+
+    margin-top: 10px;
+
+}
+
+.my-posts-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-height: 600px;
+
+}
+
+.empty-state-card {
+
+    width: min(760px, 100%);
+
+    background: rgba(1, 5, 41, 0.95);
+
+    border: 3px solid orange;
+
+    border-radius: 30px;
+
+    padding: 55px 35px;
+
+    text-align: center;
+
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+
+}
+
+.empty-state-card h2 {
+
+    color: orange;
+
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+
+    margin-bottom: 15px;
+
+}
+
+.empty-state-card p {
+
+    color: white;
+
+    font-size: 1.05rem;
+
+    line-height: 1.7;
+
+    max-width: 560px;
+
+    margin: 0 auto 24px;
+
+}
+
+.offers-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+    gap: 24px;
+
+    width: 100%;
+
+    margin-bottom: 8px;
+
+}
+
+.offer-card {
+
+    background: rgba(1, 5, 41, 0.95);
+
+    border: 2px solid orange;
+
+    border-radius: 24px;
+
+    padding: 24px;
+
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+
+    color: white;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+}
+
+.offer-card-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 18px;
+
+    flex-wrap: wrap;
+
+}
+
+.offer-type {
+
+    background: orange;
+
+    color: #010529;
+
+    font-weight: bold;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    font-size: 0.9rem;
+
+}
+
+.offer-sector {
+
+    background: rgba(255, 255, 255, 0.12);
+
+    color: white;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    font-size: 0.9rem;
+
+}
+
+.offer-title {
+
+    color: orange;
+
+    font-size: 1.8rem;
+
+    margin-bottom: 10px;
+
+    line-height: 1.2;
+
+}
+
+.offer-company {
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+
+    color: #7dd3fc;
+
+    font-size: 1.05rem;
+
+}
+
+.offer-location {
+
+    margin-bottom: 12px;
+
+    font-size: 0.98rem;
+
+}
+
+.offer-description {
+
+    line-height: 1.6;
+
+    margin-bottom: 18px;
+
+    color: rgba(255, 255, 255, 0.92);
+
+}
+
+.offer-date {
+
+    font-size: 0.9rem;
+
+    color: rgba(255, 255, 255, 0.7);
+
+    margin-bottom: 10px;
+
+}
+
+.offer-actions {
+
+    margin-top: auto;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding-top: 24px;
+
+}
+
+.offer-action-btn {
+
+    display: inline-flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    min-width: 180px;
+
+    padding: 12px 24px;
+
+    border-radius: 16px;
+
+    background: orange;
+
+    color: #010529;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    font-size: 1rem;
+
+    border: 2px solid orange;
+
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+
+    transition: 0.2s ease;
+
+}
+
+.offer-action-btn:hover {
+
+    background: #ffbc2b;
+
+    color: #010529;
+
+    transform: translateY(-2px);
+
+}
+
+.offer-action-btn:visited {
+
+    color: #010529;
+
+}
+
+.posts-pagination {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    margin-top: 30px;
+
+}
+
+.posts-pagination .page-link {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 52px;
+
+    height: 52px;
+
+    padding: 0 14px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    font-size: 1.05rem;
+
+    background: #010529;
+
+    color: orange;
+
+    border: 2px solid orange;
+
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+
+    transition: 0.2s ease;
+
+}
+
+.posts-pagination .page-link:hover {
+
+    background: orange;
+
+    color: #010529;
+
+    transform: translateY(-2px);
+
+}
+
+.posts-pagination .page-link.active {
+
+    background: orange;
+
+    color: #010529;
+
+}
+
+.posts-pagination .page-link.disabled {
+
+    opacity: 0.45;
+
+    pointer-events: none;
+
+}
+
+.posts-pagination-jump {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 10px;
+
+}
+
+.posts-pagination-jump input {
+
+    width: 95px;
+
+    height: 48px;
+
+    border-radius: 10px;
+
+    border: 2px solid orange;
+
+    background: #010529;
+
+    color: orange;
+
+    text-align: center;
+
+    font-weight: 700;
+
+    outline: none;
+
+}
+
+.posts-pagination-jump input::placeholder {
+
+    color: orange;
+
+    opacity: 0.8;
+
+}
+
+.posts-pagination-jump button {
+
+    height: 48px;
+
+    padding: 0 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: orange;
+
+    color: #010529;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+}
+
+.posts-pagination-jump button:hover {
+
+    transform: translateY(-2px);
+
+}
+
+.posts-pagination-jump input::-webkit-outer-spin-button,
+
+.posts-pagination-jump input::-webkit-inner-spin-button {
+
+    -webkit-appearance: none;
+
+    margin: 0;
+
+}
+
+.posts-pagination-jump input[type="number"] {
+
+    appearance: textfield;
+
+    -moz-appearance: textfield;
+
+}
+
+@media (max-width: 900px) {
+
+    .my-posts-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        padding: 28px 24px;
+
+    }
+
+    .create-offer-btn {
+
+        width: 100%;
+
+    }
+
+    .empty-state-card,
+
+    .offer-card {
+
+        padding: 24px 20px;
+
+    }
+
+    .offer-title {
+
+        font-size: 1.55rem;
+
+    }
+
+    .offer-action-btn {
+
+        width: 100%;
+
+        min-width: unset;
+
+    }
+
+ 
+}
+ 

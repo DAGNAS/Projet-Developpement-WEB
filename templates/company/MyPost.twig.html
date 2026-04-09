@@ -1,1 +1,90 @@
 {% extends "LoggedBase.twig.html" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="assets/style/pages/MyPost.css">
+{% endblock %}
+
+{% block content %}
+<section class="my-posts-page">
+    <div class="my-posts-wrapper">
+        <div class="my-posts-header">
+            <div>
+                <p class="my-posts-subtitle">Espace entreprise</p>
+                    <h1>Mes Offres</h1>
+                    <p class="my-posts-text"> Gérez vos offres publiées et créez de nouvelles opportunités pour les étudiants.
+                </p>
+            </div>
+
+            <a href="?uri=create-offer" class="create-offer-btn">Poster une offre</a>
+        </div>
+
+        <div class="my-posts-content">
+            {% if offers is not empty %}
+            <div class="offers-grid">
+                {% for offer in offers %}
+                <article class="offer-card">
+                    <div class="offer-card-top">
+                        <span class="offer-type">{{ offer.type }}</span>
+                        <span class="offer-sector">{{ offer.sector }}</span>
+                    </div>
+                    <h2 class="offer-title">{{ offer.title }}</h2>
+                    <p class="offer-company">{{ offer.company_name }}</p>
+                    <p class="offer-location">📍 {{ offer.location }}</p>
+                    <p class="offer-description">{{ offer.description }}</p>
+                    <p class="offer-date">Publiée le {{ offer.created_at }}</p>
+
+                    <div class="offer-actions" style="margin-top:auto; display:flex; flex-direction:column; align-items:center; gap:10px; padding-top:24px;">
+                        <a href="?uri=edit-offer&id={{ offer.id }}" style="display:inline-flex; justify-content:center; align-items:center; min-width:180px; padding:12px 24px; border-radius:16px; background:orange; color:#010529; text-decoration:none; font-weight:700;">
+                            Modifier
+                        </a>
+
+                        <a href="?uri=delete-offer&id={{ offer.id }}"onclick="return confirm('Supprimer cette offre ?');"style="display:inline-flex; justify-content:center; align-items:center; min-width:180px; padding:12px 24px; border-radius:16px; background:#ff4d4d; color:white; text-decoration:none; font-weight:700;">
+                            Supprimer
+                        </a>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+
+            <div class="posts-pagination">
+                <a href="?uri=my-posts&page=1" class="page-link {{ page <= 1 ? 'disabled' : '' }}">&lt;&lt;</a>
+                {% if page - 1 > 1 %}
+                    <a href="?uri=my-posts&page={{ page - 1 }}" class="page-link {{ page <= 1 ? 'disabled' : '' }}">&lt;</a>
+                {% else %}
+                <a href="?uri=my-posts&page={{ page }}" class="page-link {{ page <= 1 ? 'disabled' : '' }}">&lt;</a>
+                {% endif %}
+
+                {% for i in (page - 2)..(page + 2) %}
+                    {% if i >= 1 and i <= totalPages %}
+                        <a href="?uri=my-posts&page={{ i }}" class="page-link {{ i == page ? 'active' : '' }}">
+                            {{ i }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page + 1 < totalPages %}
+                    <a href="?uri=my-posts&page={{ page + 1 }}" class="page-link {{ page >= totalPages ? 'disabled' : '' }}">&gt;</a>
+                {% else %}
+                    <a href="?uri=my-posts&page={{ page }}" class="page-link {{ page >= totalPages ? 'disabled' : '' }}">&gt;</a>
+                {% endif %}
+            
+                <a href="?uri=my-posts&page={{ totalPages }}" class="page-link {{ page >= totalPages ? 'disabled' : '' }}">&gt;&gt;</a>
+            </div>
+
+            <form method="get" class="posts-pagination-jump">
+                <input type="hidden" name="uri" value="my-posts">
+                <input type="number" name="page" min="1" max="{{ totalPages }}" placeholder="{{ page }} / {{ totalPages }}">
+                <button type="submit">Go</button>
+            </form>
+        
+            {% else %}
+                <div class="empty-state-card">
+                    <h2>Aucune offre pour le moment</h2>
+                    <p>Vous n’avez encore publié aucune offre.</p>
+                    <a href="?uri=create-offer" class="create-offer-btn secondary">Créer une offre</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

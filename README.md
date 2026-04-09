@@ -3,7 +3,7 @@
 </p>
 
 ## Contexte :
-Dans le cadre de notre formation nous devons réaliser un stage en entreprise en fin d'année afin de valider notre parcours. pour cela, il nous est nécessaire d'effectuer des recherches afin de trouver une offre correspondant à certains critères, tels que le secteur d’activité, la durée ou encore la localisation. Ces recherches reposent principalement sur la mise en service de nos réseaux personnels et professionels (LinkedIN, GitHub, famille, proches, amis) ainsi que sur la consultation d'offres en lignes publiées sur des plateformes spécialisées (Hellowork, Welcome to the Jungle, Indeed). Dans cette continuité, notre équipe incarne le rôle de prestataire Web4All chargé de concevoir un site web dédié à la recherche de stages pour notre client, le porteur du projet.
+Dans le cadre de notre formation nous devons réaliser un stage en entreprise en fin d'année afin de valider notre parcours. Pour cela, il nous est nécessaire d'effectuer des recherches afin de trouver une offre correspondant à certains critères, tels que le secteur d’activité, la durée ou encore la localisation. Ces recherches reposent principalement sur la mise en service de nos réseaux personnels et professionnels (LinkedIN, GitHub, famille, proches, amis) ainsi que sur la consultation d'offres en lignes publiées sur des plateformes spécialisées (Hellowork, Welcome to the Jungle, Indeed). Dans cette continuité, notre équipe incarne le rôle de prestataire Web4All chargé de concevoir un site web dédié à la recherche de stages pour notre client, le porteur du projet.
 
 ## Présentation du projet :
 "CHERCHE STAGE" est un projet visant à concevoir un site web entièrement dédié à la recherche de stage. Notre plateforme, nommée "Job's Horizon", doit intégrer un ensemble de fonctionnalités demandées par notre client tout au long du développement. L’objectif finale est de proposer un outil complet, intuitif et accessible, offrant aux étudiants un espace de confort leurs permettant de gérer et de consulter des opportunités de stage. Les entreprises disposent également de leur propre espace leur permettant de publier ou de retirer leurs offres. Les pilotes peuvent, quant à eux, gérer les promotions composées de leurs étudiants, tous rattachés à un même établissement. Enfin, les administrateurs disposent de l’ensemble des droits afin de superviser et arbitrer l’intégralité du système. Pour assurer le bon fonctionnement de notre site web, une base de données est mise en place afin de stocker toutes les informations nécessaires, qu’elles soient confidentielles, professionnelles ou personnelles.
@@ -22,10 +22,10 @@ Pour atteindre cette finalité, plusieurs objectifs intermédiaires doivent êtr
 
 ## Effectif :
 Notre groupe projet se compose de quatre personnes :
-- Kaëlig CLENET, Product Owner, développeur
+- Kaëlig CLENET, développeur
 - Anthony MOIZANT, développeur
-- Mohamed SALL, développeur
-- Swan DAGNAS, Scrum Master, développeur
+- Mohamed SALL, Product Owner, développeur
+- Swan DAGNAS, Product Master, développeur
 
 ## Matrice des permissions :
 La matrice des permissions est également un élément important dans la gestion du développement de notre site web, car elle permet de définir les actions que peuvent effectuer les différents utilisateurs durant leur navigation. Elle garantit ainsi un accès réservé et contrôlé, tout en s’assurant que chaque utilisateur possède uniquement les fonctionnalités dont il a besoin.
@@ -81,13 +81,13 @@ De plus, cette organisation simplifie grandement la correction de problèmes ain
 
 Pour notre cas présent, l'architecture que nous avons établie a été choisie en fonction du travail réalisé en amont et le résultat est le suivant :
 
-<img width="526" height="500" alt="image" src="https://github.com/user-attachments/assets/fab215a8-46e7-4d01-a87e-7cacdfd463fb" />
-
+<img width="500" height="474" alt="image" src="https://github.com/user-attachments/assets/99384f29-88b9-4aaa-8362-e879da89b7fd" />
 
 ## Base de données :
 Pour notre plateforme de recherche de stage, l'implémentation d'une base de données est obligatoire afin de stocker, organiser et gérer les informations nécessaires au bon fonctionnement de celle-ci.
 Pour ce faire, nous utilisons une base de données en localhost grâce à "PhpMyAdmin", que nous avons déjà utilisé dans un prosit précédent. Cet outil nous permet de créer, gérer et administrer facilement notre base de données MySQL.
-La génération de nos données sont réaliser principalement avec le site internet "MOCKAROO", qui permet de créer rapidement des données fictives pour nos différentes tables. Ces données sont ensuite importées dans notre base de données afin de simuler un environnement réel ainsi que de tester les fonctionnalités de la plateforme.
+
+La génération de nos données est réalisée principalement avec le site internet "MOCKAROO", qui permet de créer rapidement des données fictives pour nos différentes tables. Ces données sont ensuite importées dans notre base de données afin de simuler un environnement réel ainsi que de tester les fonctionnalités de la plateforme.
 
 Lien vers MOCKAROO : https://mockaroo.com/
 
@@ -137,30 +137,30 @@ Le modèle MVC (Model-View-Controller) est un concept clé en développement web
 - La view : vue
 - Le controller : contrôleur
 
-L’utilisation de cette architecture nous permet de mieux visualiser l’organisation du programme ains que  d’améliorer l’efficacité du développement de notre plateforme, en séparant clairement les tâches selon des besoins.
+L’utilisation de cette architecture nous permet de mieux visualiser l’organisation du programme ainsi que  d’améliorer l’efficacité du développement de notre plateforme, en séparant clairement les tâches selon des besoins.
 
 ## Models :
 Les models représentent la structure des données ainsi que la logique métier de la plateforme. 
-- Ils intérragissent avec la base de données pour récupérer, créer, modifier ou supprimer des informations.
+- Ils intéragissent avec la base de données pour récupérer, créer, modifier ou supprimer des informations.
 - Ils peuvent effectuer des calculs ou du traitement sur ces données.
-- Ils ne s'occupent pas de l'affchage mais prépare seulement les informations que les controllers pourront envoyer aux views. 
+- Ils ne s'occupent pas de l'affichage mais prépare seulement les informations que les controllers pourront envoyer aux views. 
 
 
 ## Views ou templates :
-Les views représentent l'affichage des informations à l'utilisateur. Pour simplifier, Elle permet d'afficher correctements les donées à l'utilisateur par le biais du graphisme 
+Les views représentent l'affichage des informations à l'utilisateur. Pour simplifier, elle permet d'afficher correctement les données à l'utilisateur par le biais du graphisme.
 - Elles reçoivent les données préparées par le controller et affiches les bons éléments en fonction.
 - Elles permettent alors d'adapter l'interface de l'utilisateur selon son type (étudiant, pilote, ...) ou ses choix réalisés.
 - Elles gèrent seulement l'affichage des informations demandées.
 
 ## Controllers :
-Les controllers sont responsables de la gestion des requêtes de l'utilisateur ainsi que des réponses convenues. ils s'agissent comme des intermédiaires entre les mdodels et les views en créant un lien logique.
+Les controllers sont responsables de la gestion des requêtes de l'utilisateur ainsi que des réponses convenues. Ils s'agissent comme des intermédiaires entre les models et les views en créant un lien logique.
 - Le modèle : Il permet de gérer les données ainsi que la logique métier (Exemple : Récupérer des informations provenant d'une BDD).
 - La vue : Elle permet d'afficher correctements les donées à l'utilisateur par le biais du graphisme (Exemple : HTML, templates, ...).
 
 Dans un cas concret, lors de l'authentification d'un utilisateur :
 1. L’utilisateur sélectionne son type de profil et renseigne ses informations personnelles (email, mot de passe, ...).
 2. Une fois le formulaire envoyé, le contrôleur chargé de la connexion récupère ces données et vérifie via la base de données si elles sont correctes.
-3. Si elle le sont, alors le contrôleur redirige l'utilisateur vers la page appropriée de son profil grâce à la view avec les informations corresdantes affichées.
+3. Si elle le sont, alors le contrôleur redirige l'utilisateur vers la page appropriée de son profil grâce à la view avec les informations correspondantes affichées.
 
 ## Javascript :
 L'utiliastion de Javascript joue un rôle essentiel dans le développement de notre site web, puisqu'il permet d'ajouter de l'interraction et d'améliorer l'expérience utilisateur lors de sa navigation.
