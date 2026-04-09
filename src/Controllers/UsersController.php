@@ -22,8 +22,8 @@ class UsersController extends Controller {
         return $this->UsersModel->getNavLinks($user);
     }
 
- 
-    
+
+
     public function MyAccountPage() {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
@@ -216,7 +216,7 @@ class UsersController extends Controller {
             'totalPages' => $totalPages
         ]);
     }
- 
+
 
     public function MyStudentPage() {
         $nav = $this->Dashboard();
@@ -262,7 +262,7 @@ class UsersController extends Controller {
         echo $this->templateEngine->render('student/MyWishlist.twig.html', [
             'nav' => $nav,
             'JobApplication' => $offers,
-            'student' => $student 
+            'student' => $student
         ]);
     }
 
@@ -428,6 +428,15 @@ class UsersController extends Controller {
 
         header('Location: ?uri=my-posts');
         exit;
+    }
+    public function ChangeAccountPage() {
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('admin/ChangeAccount.twig.html', ['nav' => $nav]);
+    }
+
+    public function CreateAccountPage() {
+        $nav = $this->Dashboard();
+        echo $this->templateEngine->render('admin/CreateAccount.twig.html', ['nav' => $nav]);
     }
     public function ChangeAccountPage() {
         $nav = $this->Dashboard();

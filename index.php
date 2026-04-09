@@ -64,15 +64,16 @@ switch ($uri) {
     case 'view_offer':
         $UsersController->ViewOfferPage();
         break;
-    
+
     case 'apply':
         $UsersController->ApplyOffer();
         break;
-    
+
     case 'submit_application':
         $UsersController->SubmitApplication();
         break;
-    
+
+
     // --- ROUTES PROFIL --- //
     case 'profile':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -137,11 +138,21 @@ switch ($uri) {
 
     case 'update-offer':
         $UsersController->UpdateOffer();
-        break;    
-    
+        break;
+
     case 'delete-offer':
         $UsersController->DeleteOffer();
         break;
+    case 'change-account':
+        $UsersController->ChangeAccountPage();
+        break;
+    case 'create-account':
+        $UsersController->CreateAccountPage();
+        break;
+    case 'students':
+    $UsersController->MyStudentPage();
+        break;
+
     default:
         echo '404 Not Found';
         break;
